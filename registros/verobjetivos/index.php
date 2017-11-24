@@ -4,8 +4,8 @@
    	include("../../registros/Function.php");
 	$link=OpenConexion();
 	$idusuario=$_SESSION['id_usu'];
-	$rs=mysql_query("SELECT * FROM usuario u,area a,empresa e WHERE u.idarea=a.idarea and e.idempresa=u.idempresa and idusuario='$idusuario'",$link);
-	$filas =mysql_fetch_object($rs);
+	$rs=mysqli_query($link, "SELECT * FROM usuario u,area a,empresa e WHERE u.idarea=a.idarea and e.idempresa=u.idempresa and idusuario='$idusuario'");
+	$filas =mysqli_fetch_object($rs);
 	$nombres=$filas->nombres;
 	$apellidos=$filas->apellidos;
 	$usu=$nombres.' '.$apellidos;
@@ -14,8 +14,8 @@
 	$area=$filas->area;
 	$razon=$filas->razonsocial;
 	$direccion=$filas->direccion;
-	$rsf=mysql_query("SELECT * FROM uploadsperfil WHERE idusuario='$idusuario' order by id desc limit 1",$link);
-	$filasf =mysql_fetch_object($rsf);
+	$rsf=mysqli_query($link, "SELECT * FROM uploadsperfil WHERE idusuario='$idusuario' order by id desc limit 1");
+	$filasf =mysqli_fetch_object($rsf);
 	$foto=$filasf->name;
 	?>
 <!DOCTYPE html>
@@ -244,8 +244,8 @@
         <section class="content-header">
           <h1>
             Objetivos &Aacute;rea <?php
-	$rsa=mysql_query("SELECT * from area where idarea='$idarea'",$link);
-	$filaa=mysql_fetch_array($rsa);
+	$rsa=mysqli_query($link, "SELECT * from area where idarea='$idarea'");
+	$filaa=mysqli_fetch_array($rsa);
 	echo $filaa[1];
 	?>
           </h1>

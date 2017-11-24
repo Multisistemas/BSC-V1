@@ -5,8 +5,8 @@ $id = $_POST['id'];
 
 //OBTENEMOS LOS VALORES DEL PRODUCTO
 
-$valores = mysql_query("SELECT * FROM tipopersona WHERE idtipopersona = '$id'");
-$valores2 = mysql_fetch_array($valores);
+$valores = mysqli_query($link, "SELECT * FROM tipopersona WHERE idtipopersona = '$id'");
+$valores2 = mysqli_fetch_array($valores);
 
 $datos = array(
 				0 => $valores2['tipopersona'], 

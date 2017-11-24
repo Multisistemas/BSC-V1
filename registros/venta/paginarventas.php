@@ -4,7 +4,7 @@ $iduser=$_SESSION['id_usu'];
 	include('../conexion.php');
 	$paginaActual = $_POST['partida'];
 
-    $nroProductos = mysql_num_rows(mysql_query("select t.idproducto,p.producto,t.cantidad,p.precioventau from temporal t,producto p where t.idproducto=p.idproducto and t.idusuario='$iduser'"));
+    $nroProductos = mysqli_num_rows(mysqli_query($link, "select t.idproducto,p.producto,t.cantidad,p.precioventau from temporal t,producto p where t.idproducto=p.idproducto and t.idusuario='$iduser'"));
     $nroLotes = 10;
     $nroPaginas = ceil($nroProductos/$nroLotes);
     $lista = '';
@@ -30,7 +30,7 @@ $iduser=$_SESSION['id_usu'];
   		$limit = $nroLotes*($paginaActual-1);
   	}
 
-  	$registro = mysql_query("select t.idproducto,p.producto,t.cantidad,t.precio from temporal t,producto p where t.idproducto=p.idproducto and t.idusuario='$iduser' LIMIT $limit, $nroLotes ");
+  	$registro = mysqli_query($link, "select t.idproducto,p.producto,t.cantidad,t.precio from temporal t,producto p where t.idproducto=p.idproducto and t.idusuario='$iduser' LIMIT $limit, $nroLotes ");
 
 
   	$tabla = $tabla.'<table class="table table-striped table-condensed table-hover">
@@ -42,7 +42,7 @@ $iduser=$_SESSION['id_usu'];
 							<th width="50">Sub Total</th>
 						</tr>';
 		$x=0;		
-	while($registro2 = mysql_fetch_array($registro)){
+	while($registro2 = mysqli_fetch_array($registro)){
 		$subtotal=$registro2['cantidad']*$registro2['precio'];
 		$tabla = $tabla.'<tr>
 							<td><a href="javascript:eliminarproducto('.$registro2['idproducto'].');" class="glyphicon glyphicon-remove-circle"></a></td>

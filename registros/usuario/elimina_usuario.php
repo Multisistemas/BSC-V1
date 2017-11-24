@@ -7,11 +7,11 @@ $id = $_POST['id'];
 
 //ELIMINAMOS EL PRODUCTO
 
-mysql_query("DELETE FROM usuario WHERE idusuario = '$id'");
+mysqli_query($link, "DELETE FROM usuario WHERE idusuario = '$id'");
 
 //ACTUALIZAMOS LOS REGISTROS Y LOS OBTENEMOS
 
-$registro = mysql_query("SELECT * FROM usuario u,tipousuario tu,area a,empresa e where u.idtipousuario=tu.idtipousuario and u.idarea=a.idarea and u.idempresa=e.idempresa and u.idempresa='$idempresa' ORDER BY idusuario ASC");
+$registro = mysqli_query($link, "SELECT * FROM usuario u,tipousuario tu,area a,empresa e where u.idtipousuario=tu.idtipousuario and u.idarea=a.idarea and u.idempresa=e.idempresa and u.idempresa='$idempresa' ORDER BY idusuario ASC");
 
 //CREAMOS NUESTRA VISTA Y LA DEVOLVEMOS AL AJAX
 
@@ -27,7 +27,7 @@ echo '<table class="table table-striped table-condensed table-hover">
 							<th width="50">Empresa</th>
 			                <th width="50">Opciones</th>
 			            </tr>';
-	while($registro2 = mysql_fetch_array($registro)){
+	while($registro2 = mysqli_fetch_array($registro)){
 		echo '<tr>
 							<td>'.$registro2['login'].'</td>
 							<td>'.$registro2['dni'].'</td>

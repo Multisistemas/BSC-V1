@@ -13,25 +13,25 @@ $can = $_POST['can'];
 
 switch($proceso){
 	case 'Registro':
-		mysql_query("INSERT INTO objetivos (nombre,idperspectiva,idempresa,idarea)VALUES('$objetivos','$idperspectiva','$idempresa','$idarea')");
-		$registro = mysql_query("SELECT max(idobjetivo) as maxi FROM objetivos");
-		$registro2 = mysql_fetch_array($registro);
+		mysqli_query($link, "INSERT INTO objetivos (nombre,idperspectiva,idempresa,idarea)VALUES('$objetivos','$idperspectiva','$idempresa','$idarea')");
+		$registro = mysqli_query($link, "SELECT max(idobjetivo) as maxi FROM objetivos");
+		$registro2 = mysqli_fetch_array($registro);
 		$idobjetivo=$registro2['maxi'];
 		$numreg=count($chkmes);
 		for ($i=0;$i<=$numreg-1;$i++){
-		mysql_query("insert into detalle_objetivos(idobjetivo,cantidad,mes) values('$idobjetivo','$can[$i]','$chkmes[$i]')");
+		mysqli_query($link, "insert into detalle_objetivos(idobjetivo,cantidad,mes) values('$idobjetivo','$can[$i]','$chkmes[$i]')");
 		}
 	break;
 	
 	case 'Edicion':
-		mysql_query("UPDATE objetivos SET nombre = '$objetivos',idperspectiva='$idperspectiva',idempresa='$idempresa',idarea='$idarea' WHERE idobjetivo = '$id'");
+		mysqli_query($link, "UPDATE objetivos SET nombre = '$objetivos',idperspectiva='$idperspectiva',idempresa='$idempresa',idarea='$idarea' WHERE idobjetivo = '$id'");
 	break;
 }
 
 
 //ACTUALIZAMOS LOS REGISTROS Y LOS OBTENEMOS
 
-$registro = mysql_query("SELECT idobjetivo,o.nombre as objetivo,p.nombre as perspectiva,area FROM objetivos o,perspectivas p,area a where o.idperspectiva=p.idperspectiva and o.idarea=a.idarea and idempresa='$idempresa' ORDER BY idobjetivo desc limit 15");
+$registro = mysqli_query($link, "SELECT idobjetivo,o.nombre as objetivo,p.nombre as perspectiva,area FROM objetivos o,perspectivas p,area a where o.idperspectiva=p.idperspectiva and o.idarea=a.idarea and idempresa='$idempresa' ORDER BY idobjetivo desc limit 15");
 
 //CREAMOS NUESTRA VISTA Y LA DEVOLVEMOS AL AJAX
 
@@ -42,7 +42,7 @@ echo '<table class="table table-striped table-condensed table-hover">
 				<th width="100">Area</th>
 				<th width="50">Opciones</th>
             </tr>';
-	while($registro2 = mysql_fetch_array($registro)){
+	while($registro2 = mysqli_fetch_array($registro)){
 		echo '<tr>
 				<td>'.utf8_encode($registro2['objetivo']).'</td>
 				<td>'.utf8_encode($registro2['perspectiva']).'</td>

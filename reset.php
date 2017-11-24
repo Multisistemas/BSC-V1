@@ -7,7 +7,7 @@
 		$link=OpenConexion();
 		$con=md5($clave);
 		$sqli="update usuario set clave='".$con."' where idusuario='".$user."'";
-		mysql_query($sqli,$link);
+		mysqli_query($link, $sqli);
 		echo "<META http-equiv='refresh' content='0; url=index.php'>";
 		}
 ?>

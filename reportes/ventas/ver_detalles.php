@@ -5,7 +5,7 @@ $id = $_POST['id'];
 
 //ACTUALIZAMOS LOS REGISTROS Y LOS OBTENEMOS
 
-$registro = mysql_query("SELECT * FROM detalle_documentoventa dv,producto p where dv.idproducto=p.idproducto and iddocumento='$id'");
+$registro = mysqli_query($link, "SELECT * FROM detalle_documentoventa dv,producto p where dv.idproducto=p.idproducto and iddocumento='$id'");
 
 //CREAMOS NUESTRA VISTA Y LA DEVOLVEMOS AL AJAX
 
@@ -17,7 +17,7 @@ echo '<table class="table table-striped table-condensed table-hover">
 				<th width="50">Precio</th>
 				<th width="100">Sub Total</th>
             </tr>';
-	while($registro2 = mysql_fetch_array($registro)){
+	while($registro2 = mysqli_fetch_array($registro)){
 	$subtotal=$registro2['cantidad']*$registro2['precio'];
 	$total=$total+$subtotal;
 		echo '<tr>

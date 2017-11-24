@@ -2,7 +2,7 @@
 	include('../conexion.php');
 	$paginaActual = $_POST['partida'];
 
-    $nroProductos = mysql_num_rows(mysql_query("SELECT * FROM tipousuario"));
+    $nroProductos = mysqli_num_rows(mysqli_query($link, "SELECT * FROM tipousuario"));
     $nroLotes = 15;
     $nroPaginas = ceil($nroProductos/$nroLotes);
     $lista = '';
@@ -28,7 +28,7 @@
   		$limit = $nroLotes*($paginaActual-1);
   	}
 
-  	$registro = mysql_query("SELECT * FROM tipousuario LIMIT $limit, $nroLotes ");
+  	$registro = mysqli_query($link, "SELECT * FROM tipousuario LIMIT $limit, $nroLotes ");
 
 
   	$tabla = $tabla.'<table class="table table-striped table-condensed table-hover">
@@ -37,7 +37,7 @@
 			                <th width="50">Opciones</th>
 			            </tr>';
 				
-	while($registro2 = mysql_fetch_array($registro)){
+	while($registro2 = mysqli_fetch_array($registro)){
 		$tabla = $tabla.'<tr>
 							<td>'.$registro2['tipousuario'].'</td>
 							<td><a href="javascript:editartipousuario('.$registro2['idtipousuario'].');" class="glyphicon glyphicon-edit"></a> <a href="javascript:eliminartipousuario('.$registro2['idtipousuario'].');" class="glyphicon glyphicon-remove-circle"></a></td>

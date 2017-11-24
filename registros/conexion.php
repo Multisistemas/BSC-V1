@@ -1,6 +1,6 @@
 <?php
-$conexion = mysql_connect('localhost', 'root', '');
-mysql_select_db('bdbalancedscore', $conexion);
+$conexion = $link = mysqli_connect('localhost', 'root', 'toor');
+mysqli_select_db($conexion, 'bsc');
 
 function fechaNormal($fecha){
 		$nfecha = date('d/m/Y',strtotime($fecha));

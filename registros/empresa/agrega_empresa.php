@@ -14,18 +14,18 @@ $correo = $_POST['correo'];
 
 switch($proceso){
 	case 'Registro':
-		mysql_query("INSERT INTO empresa (ruc,razonsocial,direccion,telefono,movil,email)VALUES('$ruc','$rsocial','$direccion','$telefono','$celular','$correo')");
+		mysqli_query($link, "INSERT INTO empresa (ruc,razonsocial,direccion,telefono,movil,email)VALUES('$ruc','$rsocial','$direccion','$telefono','$celular','$correo')");
 	break;
 	
 	case 'Edicion':
-		mysql_query("UPDATE empresa SET ruc = '$ruc', razonsocial='$rsocial',direccion='$direccion',telefono='$telefono',movil='$celular',email='$correo' WHERE idempresa = '$id'");
+		mysqli_query($link, "UPDATE empresa SET ruc = '$ruc', razonsocial='$rsocial',direccion='$direccion',telefono='$telefono',movil='$celular',email='$correo' WHERE idempresa = '$id'");
 	break;
 }
 
 
 //ACTUALIZAMOS LOS REGISTROS Y LOS OBTENEMOS
 
-$registro = mysql_query("SELECT * FROM empresa where idempresa='$idempresa' ORDER BY idempresa ASC");
+$registro = mysqli_query($link, "SELECT * FROM empresa where idempresa='$idempresa' ORDER BY idempresa ASC");
 
 //CREAMOS NUESTRA VISTA Y LA DEVOLVEMOS AL AJAX
 
@@ -39,7 +39,7 @@ echo '<table class="table table-striped table-condensed table-hover">
 							<th width="50">Correo</th>
 			                <th width="50">Opciones</th>
 			            </tr>';
-	while($registro2 = mysql_fetch_array($registro)){
+	while($registro2 = mysqli_fetch_array($registro)){
 		echo '<tr>
 				<td>'.$registro2['ruc'].'</td>
 							<td>'.utf8_encode($registro2['razonsocial']).'</td>

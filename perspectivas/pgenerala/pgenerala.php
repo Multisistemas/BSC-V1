@@ -49,15 +49,15 @@ $(document).ready(function() {
  if ($mes==""){$mes='01';} else {
  $mes=$_REQUEST['mes'];}
  if ($idarea==5){
- $rs=mysql_query("SELECT * FROM objetivos o,detalle_objetivos do where o.idobjetivo=do.idobjetivo and mes='$mes' and idempresa='$idempresa' and idarea=3 and idperspectiva='1'",$link);
+ $rs=mysqli_query($link, "SELECT * FROM objetivos o,detalle_objetivos do where o.idobjetivo=do.idobjetivo and mes='$mes' and idempresa='$idempresa' and idarea=3 and idperspectiva='1'");
  }
  else
  {
-	$rs=mysql_query("SELECT * FROM objetivos o,detalle_objetivos do where o.idobjetivo=do.idobjetivo and mes='$mes' and idempresa='$idempresa' and idarea='$idarea' and idperspectiva='1'",$link);
+	$rs=mysqli_query($link, "SELECT * FROM objetivos o,detalle_objetivos do where o.idobjetivo=do.idobjetivo and mes='$mes' and idempresa='$idempresa' and idarea='$idarea' and idperspectiva='1'");
 	}
-	while ($fila=mysql_fetch_array($rs)){
+	while ($fila=mysqli_fetch_array($rs)){
 	$o=$o+1;
-	//$fila=mysql_fetch_array($rs);
+	//$fila=mysqli_fetch_array($rs);
 	$objetivo=$fila[1];
 	$meta=$fila[6];
 	?>
@@ -69,15 +69,15 @@ $(document).ready(function() {
  $totalv=0;
  $totalc=0;
  if ($o==1){
-	$rs2=mysql_query("SELECT sum(cantidad) as cantidad FROM documento_venta d,detalle_documentoventa dv where d.iddocumento=dv.iddocumento  and month(fecha)='$mes' and d.idempresa='$idempresa'",$link);
-	$fila3=mysql_fetch_array($rs2);
+	$rs2=mysqli_query($link, "SELECT sum(cantidad) as cantidad FROM documento_venta d,detalle_documentoventa dv where d.iddocumento=dv.iddocumento  and month(fecha)='$mes' and d.idempresa='$idempresa'");
+	$fila3=mysqli_fetch_array($rs2);
 	$totalv=$fila3[0];
 	$actual=$totalv;
 	if ($actual>0){
 	$porc=(($actual*100)/$meta);}
 	} else {if($o==2){
-	$rs2=mysql_query("SELECT sum(cantidad) as cantidad FROM documento_compra d,detalle_documentocompra dv where d.iddocumento=dv.iddocumento and month(fecha)='$mes' and d.idempresa='$idempresa'",$link);
-	$fila3=mysql_fetch_array($rs2);
+	$rs2=mysqli_query($link, "SELECT sum(cantidad) as cantidad FROM documento_compra d,detalle_documentocompra dv where d.iddocumento=dv.iddocumento and month(fecha)='$mes' and d.idempresa='$idempresa'");
+	$fila3=mysqli_fetch_array($rs2);
 	$totalc=$fila3[0];
 	$actual=$totalc;
 	if ($actual>0){
@@ -85,11 +85,11 @@ $(document).ready(function() {
 	}
 	else
 	{	
-	$rs2=mysql_query("select sum(total) as totalventas from documento_venta where month(fecha)='$mes' and idempresa='$idempresa'",$link);
-	$fila2=mysql_fetch_array($rs2);
+	$rs2=mysqli_query($link, "select sum(total) as totalventas from documento_venta where month(fecha)='$mes' and idempresa='$idempresa'");
+	$fila2=mysqli_fetch_array($rs2);
 	$totalv=$fila2[0];
-	$rs3=mysql_query("select sum(total) as totalcompras from documento_compra where month(fecha)='$mes' and idempresa='$idempresa'",$link);
-	$fila3=mysql_fetch_array($rs3);
+	$rs3=mysqli_query($link, "select sum(total) as totalcompras from documento_compra where month(fecha)='$mes' and idempresa='$idempresa'");
+	$fila3=mysqli_fetch_array($rs3);
 	$totalc=$fila3[0];
 	$actual=$totalv-$totalc;
 	if ($actual>0){
@@ -114,14 +114,14 @@ $(document).ready(function() {
  if ($mes==""){$mes='01';} else {
  $mes=$_REQUEST['mes'];}
  if ($idarea==5){
- $rs4=mysql_query("SELECT * FROM objetivos o,detalle_objetivos do where o.idobjetivo=do.idobjetivo and mes='$mes' and idempresa='$idempresa' and idarea=3 and idperspectiva='2'",$link);
+ $rs4=mysqli_query($link, "SELECT * FROM objetivos o,detalle_objetivos do where o.idobjetivo=do.idobjetivo and mes='$mes' and idempresa='$idempresa' and idarea=3 and idperspectiva='2'");
  }
  else
  {
-	$rs4=mysql_query("SELECT * FROM objetivos o,detalle_objetivos do where o.idobjetivo=do.idobjetivo and mes='$mes' and idempresa='$idempresa' and idarea='$idarea' and idperspectiva='2'",$link);
+	$rs4=mysqli_query($link, "SELECT * FROM objetivos o,detalle_objetivos do where o.idobjetivo=do.idobjetivo and mes='$mes' and idempresa='$idempresa' and idarea='$idarea' and idperspectiva='2'");
 	}
-	while ($fila4=mysql_fetch_array($rs4)){
-	//$fila4=mysql_fetch_array($rs4);
+	while ($fila4=mysqli_fetch_array($rs4)){
+	//$fila4=mysqli_fetch_array($rs4);
 	$p=$p+1;
 	$objetivoc=$fila4[1];
 	$metac=$fila4[6];
@@ -132,22 +132,22 @@ $(document).ready(function() {
  if ($mes==""){$mes='01';} else {
  $mes=$_REQUEST['mes'];}
  if ($p==1){
-	$rs5=mysql_query("select sum(cantidad) as cantidad from detalle_documentoventa dv,documento_venta d where dv.iddocumento=d.iddocumento and d.idempresa='$idempresa' and month(fecha)='$mes'",$link);
-	$fila5=mysql_fetch_array($rs5);
+	$rs5=mysqli_query($link, "select sum(cantidad) as cantidad from detalle_documentoventa dv,documento_venta d where dv.iddocumento=d.iddocumento and d.idempresa='$idempresa' and month(fecha)='$mes'");
+	$fila5=mysqli_fetch_array($rs5);
 	$totalcl=$fila5[0];
 	if ($totalcl>0){
 	$porcc=(($totalcl*100)/$metac);}
 	} else {if($p==2){
-	$rs5=mysql_query("select count(*) as cantidad from persona where idtipopersona='1' and idempresa='$idempresa' and month(fecharegistro)='$mes'",$link);
-	$fila5=mysql_fetch_array($rs5);
+	$rs5=mysqli_query($link, "select count(*) as cantidad from persona where idtipopersona='1' and idempresa='$idempresa' and month(fecharegistro)='$mes'");
+	$fila5=mysqli_fetch_array($rs5);
 	$totalcl=$fila5[0];
 	if ($totalcl>0){
 	$porcc=(($totalcl*100)/$metac);}
 	}
 	else
 	{
-	$rs5=mysql_query("select count(*) as cantidad from documento_venta where month(fecha)='$mes' and idempresa='$idempresa'",$link);
-	$fila5=mysql_fetch_array($rs5);
+	$rs5=mysqli_query($link, "select count(*) as cantidad from documento_venta where month(fecha)='$mes' and idempresa='$idempresa'");
+	$fila5=mysqli_fetch_array($rs5);
 	$totalcl=$fila5[0];
 	if ($totalcl>0){
 	$porcc=(($totalcl*100)/$metac);}
@@ -177,15 +177,15 @@ $(document).ready(function() {
  if ($mes==""){$mes='01';} else {
  $mes=$_REQUEST['mes'];}
  if ($idarea==5){
- $rs6=mysql_query("SELECT * FROM objetivos o,detalle_objetivos do where o.idobjetivo=do.idobjetivo and mes='$mes' and idempresa='$idempresa' and idarea=3 and idperspectiva='3'",$link);
+ $rs6=mysqli_query($link, "SELECT * FROM objetivos o,detalle_objetivos do where o.idobjetivo=do.idobjetivo and mes='$mes' and idempresa='$idempresa' and idarea=3 and idperspectiva='3'");
  }
  else
  {
-	$rs6=mysql_query("SELECT * FROM objetivos o,detalle_objetivos do where o.idobjetivo=do.idobjetivo and mes='$mes' and idempresa='$idempresa' and idarea='$idarea' and idperspectiva='3'",$link);
+	$rs6=mysqli_query($link, "SELECT * FROM objetivos o,detalle_objetivos do where o.idobjetivo=do.idobjetivo and mes='$mes' and idempresa='$idempresa' and idarea='$idarea' and idperspectiva='3'");
 	}
-	while ($fila6=mysql_fetch_array($rs6)){
+	while ($fila6=mysqli_fetch_array($rs6)){
 	$w=$w+1;
-	//$fila6=mysql_fetch_array($rs6);
+	//$fila6=mysqli_fetch_array($rs6);
 	$objetivopi=$fila6[1];
 	$metapi=$fila6[6];
 	?>
@@ -195,25 +195,25 @@ $(document).ready(function() {
  if ($mes==""){$mes='01';} else {
  $mes=$_REQUEST['mes'];}
   if ($w==1){
-	$rs7=mysql_query("SELECT COUNT( * ) AS cantidad FROM documento_venta WHERE idempresa='$idempresa' and month(fecha)='$mes'",$link);
-	$fila7=mysql_fetch_array($rs7);
+	$rs7=mysqli_query($link, "SELECT COUNT( * ) AS cantidad FROM documento_venta WHERE idempresa='$idempresa' and month(fecha)='$mes'");
+	$fila7=mysqli_fetch_array($rs7);
 	$totalpi=$fila7[0];
 	if ($totalpi>0){
 	$porcpi=(($totalpi*100)/$metapi);}
 	} else {if($w==2){
-	$rs7=mysql_query("SELECT sum(cantidad) as cantidad FROM documento_compra d,detalle_documentocompra dv where d.iddocumento=dv.iddocumento and d.idempresa='$idempresa' and month(fecha)='$mes'",$link);
-	$fila7=mysql_fetch_array($rs7);
+	$rs7=mysqli_query($link, "SELECT sum(cantidad) as cantidad FROM documento_compra d,detalle_documentocompra dv where d.iddocumento=dv.iddocumento and d.idempresa='$idempresa' and month(fecha)='$mes'");
+	$fila7=mysqli_fetch_array($rs7);
 	$totalpi=$fila7[0];
 	if ($totalpi>0){
 	$porcpi=(($totalpi*100)/$metapi);}
 	}
 	else
 	{
-	$rs7=mysql_query("select sum(cantidad) as cantidad from documento_venta d,detalle_documentoventa dv where d.iddocumento=dv.iddocumento and idempresa='$idempresa' and month(fecha)='$mes'",$link);
-	$fila7=mysql_fetch_array($rs7);
+	$rs7=mysqli_query($link, "select sum(cantidad) as cantidad from documento_venta d,detalle_documentoventa dv where d.iddocumento=dv.iddocumento and idempresa='$idempresa' and month(fecha)='$mes'");
+	$fila7=mysqli_fetch_array($rs7);
 	$totalvp=$fila7[0];
-	$rs77=mysql_query("select sum(cantidad) as cantidad from documento_compra d,detalle_documentocompra dc where d.iddocumento=dc.iddocumento and idempresa='$idempresa' and month(fecha)='$mes'",$link);
-	$fila77=mysql_fetch_array($rs77);
+	$rs77=mysqli_query($link, "select sum(cantidad) as cantidad from documento_compra d,detalle_documentocompra dc where d.iddocumento=dc.iddocumento and idempresa='$idempresa' and month(fecha)='$mes'");
+	$fila77=mysqli_fetch_array($rs77);
 	$totalcp=$fila77[0];
 	$totalpi=($totalcp+4500)-$totalvp;
 	if ($totalpi>0){
@@ -239,14 +239,14 @@ $(document).ready(function() {
  if ($mes==""){$mes='01';} else {
  $mes=$_REQUEST['mes'];}
  if ($idarea==5){
- $rs8=mysql_query("SELECT * FROM objetivos o,detalle_objetivos do where o.idobjetivo=do.idobjetivo and mes='$mes' and idempresa='$idempresa' and idarea=3 and idperspectiva='4'",$link);
+ $rs8=mysqli_query($link, "SELECT * FROM objetivos o,detalle_objetivos do where o.idobjetivo=do.idobjetivo and mes='$mes' and idempresa='$idempresa' and idarea=3 and idperspectiva='4'");
  }
  else
  {
-	$rs8=mysql_query("SELECT * FROM objetivos o,detalle_objetivos do where o.idobjetivo=do.idobjetivo and mes='$mes' and idempresa='$idempresa' and idarea='$idarea' and idperspectiva='4'",$link);
+	$rs8=mysqli_query($link, "SELECT * FROM objetivos o,detalle_objetivos do where o.idobjetivo=do.idobjetivo and mes='$mes' and idempresa='$idempresa' and idarea='$idarea' and idperspectiva='4'");
 	}
-	while ($fila8=mysql_fetch_array($rs8)){
-	//$fila8=mysql_fetch_array($rs8);
+	while ($fila8=mysqli_fetch_array($rs8)){
+	//$fila8=mysqli_fetch_array($rs8);
 	$q=$q+1;
 	$objetivoa=$fila8[1];
 	$metaa=$fila8[6];
@@ -257,22 +257,22 @@ $(document).ready(function() {
  if ($mes==""){$mes='01';} else {
  $mes=$_REQUEST['mes'];}
  if ($q==1){
-	$rs9=mysql_query("select count(*) as cantidad from asistencia a,usuario u where a.idusuario=u.idusuario and opcion='1' and u.idempresa='$idempresa' and month(fecha)='$mes'",$link);
-	$fila9=mysql_fetch_array($rs9);
+	$rs9=mysqli_query($link, "select count(*) as cantidad from asistencia a,usuario u where a.idusuario=u.idusuario and opcion='1' and u.idempresa='$idempresa' and month(fecha)='$mes'");
+	$fila9=mysqli_fetch_array($rs9);
 	$totala=$fila9[0];
 	if ($totala>0){
 	$porca=(($totala*100)/$metaa);}
 	} else {if($q==2){
-	$rs9=mysql_query("select count(idasistencia) as cantidad,area from asistencia asi,area a,usuario u where u.idusuario=asi.idusuario and u.idarea=a.idarea and asi.opcion='1' and idempresa='$idempresa' and month(fecha)='$mes' group by area",$link);
-	$fila9=mysql_fetch_array($rs9);
+	$rs9=mysqli_query($link, "select count(idasistencia) as cantidad,area from asistencia asi,area a,usuario u where u.idusuario=asi.idusuario and u.idarea=a.idarea and asi.opcion='1' and idempresa='$idempresa' and month(fecha)='$mes' group by area");
+	$fila9=mysqli_fetch_array($rs9);
 	$totala=$fila9[0];
 	if ($totala>0){
 	$porca=(($totala*100)/$metaa);}
 	}
 	else
 	{
-	$rs9=mysql_query("SELECT round(sum(total)/(select count(*) from usuario where idempresa='$idempresa')) as cantidad FROM documento_venta where idempresa='$idempresa' and month(fecha)='$mes'",$link);
-	$fila9=mysql_fetch_array($rs9);
+	$rs9=mysqli_query($link, "SELECT round(sum(total)/(select count(*) from usuario where idempresa='$idempresa')) as cantidad FROM documento_venta where idempresa='$idempresa' and month(fecha)='$mes'");
+	$fila9=mysqli_fetch_array($rs9);
 	$totala=$fila9[0];
 	if ($totala>0){
 	$porca=(($totala*100)/$metaa);}

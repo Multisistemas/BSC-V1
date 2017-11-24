@@ -2,7 +2,7 @@
 	include('../conexion.php');
 	$paginaActual = $_POST['partida'];
 
-    $nroProductos = mysql_num_rows(mysql_query("SELECT * FROM categoria"));
+    $nroProductos = mysqli_num_rows(mysqli_query($link, "SELECT * FROM categoria"));
     $nroLotes = 15;
     $nroPaginas = ceil($nroProductos/$nroLotes);
     $lista = '';
@@ -28,7 +28,7 @@
   		$limit = $nroLotes*($paginaActual-1);
   	}
 
-  	$registro = mysql_query("SELECT * FROM categoria LIMIT $limit, $nroLotes ");
+  	$registro = mysqli_query($link, "SELECT * FROM categoria LIMIT $limit, $nroLotes ");
 
 
   	$tabla = $tabla.'<table class="table table-striped table-condensed table-hover">
@@ -36,7 +36,7 @@
 			                <th width="300">Categoria</th>
 			            </tr>';
 				
-	while($registro2 = mysql_fetch_array($registro)){
+	while($registro2 = mysqli_fetch_array($registro)){
 		$tabla = $tabla.'<tr>
 							<td>'.$registro2['categoria'].'</td>
 						  </tr>';		

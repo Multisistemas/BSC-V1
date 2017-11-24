@@ -5,7 +5,7 @@ $id = $_POST['id'];
 
 //ACTUALIZAMOS LOS REGISTROS Y LOS OBTENEMOS
 
-$registro = mysql_query("SELECT k.fecha,k.serie,k.nrodocumento,k.cantidad,k.idtipod,k.idtipoo FROM kardex k WHERE idproducto='$id' ORDER BY fecha,idkardex");
+$registro = mysqli_query($link, "SELECT k.fecha,k.serie,k.nrodocumento,k.cantidad,k.idtipod,k.idtipoo FROM kardex k WHERE idproducto='$id' ORDER BY fecha,idkardex");
 
 //CREAMOS NUESTRA VISTA Y LA DEVOLVEMOS AL AJAX
 
@@ -19,7 +19,7 @@ echo '<table class="table table-striped table-condensed table-hover">
 	<td><b>SALIDAS</b></td>
 	<td><b>SALDO FINAL</b></td>
 	</tr>';
-	while($registro2 = mysql_fetch_array($registro)){
+	while($registro2 = mysqli_fetch_array($registro)){
 	$fecha = $registro2['fecha'];
 	$tipod = $registro2['idtipod'];
 	$serie = $registro2['serie'];

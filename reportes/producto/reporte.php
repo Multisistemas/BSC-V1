@@ -33,11 +33,11 @@ $pdf->Ln(8);
 $pdf->SetFont('Arial', '', 8);
 //CONSULTA
 if ($filtro!=""){
-$productos = mysql_query("SELECT * FROM producto p,categoria c WHERE p.idcategoria=c.idcategoria and p.idempresa='$idempresa' and producto like '%$filtro%'");
+$productos = mysqli_query($link, "SELECT * FROM producto p,categoria c WHERE p.idcategoria=c.idcategoria and p.idempresa='$idempresa' and producto like '%$filtro%'");
 } else {
-$productos = mysql_query("SELECT * FROM producto p,categoria c WHERE p.idcategoria=c.idcategoria and idempresa='$idempresa'");
+$productos = mysqli_query($link, "SELECT * FROM producto p,categoria c WHERE p.idcategoria=c.idcategoria and idempresa='$idempresa'");
 }
-while($productos2 = mysql_fetch_array($productos)){
+while($productos2 = mysqli_fetch_array($productos)){
 	$pdf->Cell(50, 8, $productos2['producto'], 0);
 	$pdf->Cell(20, 8, 'S/. '.$productos2['preciocompra'], 0);
 	$pdf->Cell(20, 8, 'S/. '.$productos2['precioventa'], 0);

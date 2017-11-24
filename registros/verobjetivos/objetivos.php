@@ -40,11 +40,11 @@ $(document).ready(function() {
 	</tr>
  <?php
  if ($idarea==5){
-	$rs=mysql_query("SELECT * FROM objetivos o,perspectivas p,area a where o.idperspectiva=p.idperspectiva and o.idarea=a.idarea and idempresa='$idempresa' order by area",$link);
+	$rs=mysqli_query($link, "SELECT * FROM objetivos o,perspectivas p,area a where o.idperspectiva=p.idperspectiva and o.idarea=a.idarea and idempresa='$idempresa' order by area");
 	} else {
-	$rs=mysql_query("SELECT * FROM objetivos o,perspectivas p,area a where o.idperspectiva=p.idperspectiva and o.idarea=a.idarea and idempresa='$idempresa' and o.idarea='$idarea' order by area",$link);
+	$rs=mysqli_query($link, "SELECT * FROM objetivos o,perspectivas p,area a where o.idperspectiva=p.idperspectiva and o.idarea=a.idarea and idempresa='$idempresa' and o.idarea='$idarea' order by area");
 	}
-	while ($fila=mysql_fetch_array($rs)){
+	while ($fila=mysqli_fetch_array($rs)){
 	$n=$n+1;
 	$total=0;
 	if ($k==3){$k=1;} else {$k=$k+1;}
@@ -55,8 +55,8 @@ $(document).ready(function() {
 		 <td class='chintabrescont'><?php echo $fila[8];?></td>
 		<?php 
 		$idobjetivo=$fila[0];
-		$rs2=mysql_query("SELECT * FROM detalle_objetivos where idobjetivo='$idobjetivo'",$link); 
-		while ($fila2=mysql_fetch_array($rs2)){?> 
+		$rs2=mysqli_query($link, "SELECT * FROM detalle_objetivos where idobjetivo='$idobjetivo'"); 
+		while ($fila2=mysqli_fetch_array($rs2)){?> 
          <td class='chintabrescont'><?php echo $fila2[1];?></td>
        <?php $total=$total+$fila2[1];} ?>
 	   <td class='chintabrescont'><?php echo $total;?></td>
@@ -86,11 +86,11 @@ $(document).ready(function() {
 	</tr>
  <?php
  if ($idarea==5){
-	$rs=mysql_query("SELECT * FROM objetivos o,perspectivas p,area a where o.idperspectiva=p.idperspectiva and o.idarea=a.idarea and idempresa='$idempresa' order by area",$link);
+	$rs=mysqli_query($link, "SELECT * FROM objetivos o,perspectivas p,area a where o.idperspectiva=p.idperspectiva and o.idarea=a.idarea and idempresa='$idempresa' order by area");
 	} else {
-	$rs=mysql_query("SELECT * FROM objetivos o,perspectivas p,area a where o.idperspectiva=p.idperspectiva and o.idarea=a.idarea and idempresa='$idempresa' and o.idarea='$idarea' order by area",$link);
+	$rs=mysqli_query($link, "SELECT * FROM objetivos o,perspectivas p,area a where o.idperspectiva=p.idperspectiva and o.idarea=a.idarea and idempresa='$idempresa' and o.idarea='$idarea' order by area");
 	}
-	while ($fila=mysql_fetch_array($rs)){
+	while ($fila=mysqli_fetch_array($rs)){
 $n=$n+1;
 	$total=0;
 	if ($k==3){$k=1;} else {$k=$k+1;}
@@ -101,8 +101,8 @@ $n=$n+1;
 		 <td class='chintabrescont'><?php echo $fila[8];?></td>
 		<?php 
 		$idobjetivo=$fila[0];
-		$rs2=mysql_query("SELECT * FROM detalle_objetivos where idobjetivo='$idobjetivo'",$link); 
-		while ($fila2=mysql_fetch_array($rs2)){?> 
+		$rs2=mysqli_query($link, "SELECT * FROM detalle_objetivos where idobjetivo='$idobjetivo'"); 
+		while ($fila2=mysqli_fetch_array($rs2)){?> 
          <td class='chintabrescont'><?php echo $fila2[1];?></td>
        <?php $total=$total+$fila2[1];} ?>
 	   <td class='chintabrescont'><?php echo $total;?></td>
@@ -132,11 +132,11 @@ $n=$n+1;
 	</tr>
  <?php
  if ($idarea==5){
-	$rs=mysql_query("SELECT * FROM objetivos o,perspectivas p,area a where o.idperspectiva=p.idperspectiva and o.idarea=a.idarea and idempresa='$idempresa' order by area",$link);
+	$rs=mysqli_query($link, "SELECT * FROM objetivos o,perspectivas p,area a where o.idperspectiva=p.idperspectiva and o.idarea=a.idarea and idempresa='$idempresa' order by area");
 	} else {
-	$rs=mysql_query("SELECT * FROM objetivos o,perspectivas p,area a where o.idperspectiva=p.idperspectiva and o.idarea=a.idarea and idempresa='$idempresa' and o.idarea='$idarea' order by area",$link);
+	$rs=mysqli_query($link, "SELECT * FROM objetivos o,perspectivas p,area a where o.idperspectiva=p.idperspectiva and o.idarea=a.idarea and idempresa='$idempresa' and o.idarea='$idarea' order by area");
 	}
-	while ($fila=mysql_fetch_array($rs)){
+	while ($fila=mysqli_fetch_array($rs)){
 $n=$n+1;
 	$total=0;
 	if ($k==3){$k=1;} else {$k=$k+1;}
@@ -147,8 +147,8 @@ $n=$n+1;
 		 <td class='chintabrescont'><?php echo $fila[8];?></td>
 		<?php 
 		$idobjetivo=$fila[0];
-		$rs2=mysql_query("SELECT * FROM detalle_objetivos where idobjetivo='$idobjetivo'",$link); 
-		while ($fila2=mysql_fetch_array($rs2)){?> 
+		$rs2=mysqli_query($link, "SELECT * FROM detalle_objetivos where idobjetivo='$idobjetivo'"); 
+		while ($fila2=mysqli_fetch_array($rs2)){?> 
          <td class='chintabrescont'><?php echo $fila2[1];?></td>
        <?php $total=$total+$fila2[1];} ?>
 	   <td class='chintabrescont'><?php echo $total;?></td>

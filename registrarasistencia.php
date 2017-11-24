@@ -4,15 +4,15 @@
 		if ($dni!=""){
 		$link=OpenConexion();
 		$sql="SELECT * FROM usuario WHERE dni='".$dni."'";
-		$rs=mysql_query($sql,$link);
-		$fila =mysql_fetch_object($rs);
+		$rs=mysqli_query($link, $sql);
+		$fila =mysqli_fetch_object($rs);
 		$id = $fila->idusuario;
 		if ($id!=""){
 		$fecha=date("Y-m-d h:m");
 		$tipo=$_REQUEST["tipo"];
 		$opc=$_REQUEST["opc"];
 		$sqli="insert into asistencia(fecha,tipo,opcion,idusuario) values('".$fecha."','".$tipo."','".$opc."','".$id."')";
-		mysql_query($sqli,$link);
+		mysqli_query($link, $sqli);
 		echo "<META http-equiv='refresh' content='0; url=index.php'>";	
 		}
 		else

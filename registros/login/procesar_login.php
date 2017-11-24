@@ -1,23 +1,24 @@
 <?php
 session_start();
 include('../conexion.php');
+global $conexion;
 $usu = addslashes($_POST['usu']);
 $pass = addslashes($_POST['pass']);
 $area = addslashes($_POST['area']);
 
-$usuario = mysql_query("SELECT * FROM usuario WHERE login = '$usu'");
-if(mysql_num_rows($usuario)<1){
+$usuario = mysqli_query($conexion, "SELECT * FROM usuario WHERE login = '$usu'");
+if(mysqli_num_rows($usuario)<1){
 	echo 'usuario';
 }else{
-	$area = mysql_query("SELECT * FROM usuario WHERE login = '$usu' AND idarea = '$area'");
-	if(mysql_num_rows($area)<1){
+	$area = mysqli_query($conexion, "SELECT * FROM usuario WHERE login = '$usu' AND idarea = '$area'");
+	if(mysqli_num_rows($area)<1){
 		echo 'area';
 	}else{
-		$consulta = mysql_query("SELECT * FROM usuario WHERE login = '$usu' AND clave = '".md5($pass)."'");
-		if(mysql_num_rows($consulta)<1){
+		$consulta = mysqli_query($conexion, "SELECT * FROM usuario WHERE login = '$usu' AND clave = '".md5($pass)."'");
+		if(mysqli_num_rows($consulta)<1){
 			echo 'password';
 		}else{
-			$consulta2 = mysql_fetch_array($consulta);
+			$consulta2 = mysqli_fetch_array($consulta);
 			$_SESSION['id_usu'] = $consulta2['idusuario'];
 			$_SESSION['id_area'] = $consulta2['idarea'];
 			$_SESSION['id_empresa'] = $consulta2['idempresa'];

@@ -7,11 +7,11 @@ $id = $_POST['id'];
 
 //ELIMINAMOS EL PRODUCTO
 
-mysql_query("DELETE FROM producto WHERE idproducto = '$id'");
+mysqli_query($link, "DELETE FROM producto WHERE idproducto = '$id'");
 
 //ACTUALIZAMOS LOS REGISTROS Y LOS OBTENEMOS
 
-$registro = mysql_query("SELECT * FROM producto p,categoria c,almacen a where p.idcategoria=c.idcategoria and p.idalmacen=a.idalmacen and p.idempresa='$idempresa' ORDER BY p.idproducto desc limit 15");
+$registro = mysqli_query($link, "SELECT * FROM producto p,categoria c,almacen a where p.idcategoria=c.idcategoria and p.idalmacen=a.idalmacen and p.idempresa='$idempresa' ORDER BY p.idproducto desc limit 15");
 
 //CREAMOS NUESTRA VISTA Y LA DEVOLVEMOS AL AJAX
 
@@ -28,7 +28,7 @@ echo '<table class="table table-striped table-condensed table-hover">
 							<th width="50">Almacen</th>
 			                <th width="50">Opciones</th>
 			            </tr>';
-	while($registro2 = mysql_fetch_array($registro)){
+	while($registro2 = mysqli_fetch_array($registro)){
 		echo '<tr>
 				<td>'.utf8_encode($registro2['producto']).'</td>
 							<td>'.$registro2['preciocompra'].'</td>

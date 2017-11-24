@@ -17,18 +17,18 @@ $idempresa = $_POST['idempresa'];
 
 switch($proceso){
 	case 'Registro':
-		mysql_query("INSERT INTO usuario (login,dni,nombres,apellidos,correo,clave,idtipousuario,idarea,idempresa)VALUES('$login','$dni','$nombres','$apellidos','$email','$clave','$idtipousuario','$idarea','$idempresa')");
+		mysqli_query($link, "INSERT INTO usuario (login,dni,nombres,apellidos,correo,clave,idtipousuario,idarea,idempresa)VALUES('$login','$dni','$nombres','$apellidos','$email','$clave','$idtipousuario','$idarea','$idempresa')");
 	break;
 	
 	case 'Edicion':
-		mysql_query("UPDATE usuario SET login='$login',dni='$dni',nombres = '$nombres',apellidos='$apellidos',correo='$email',clave='$clave',idtipousuario='$idtipousuario',idarea='$idarea',idempresa='$idempresa' WHERE idusuario = '$id'");
+		mysqli_query($link, "UPDATE usuario SET login='$login',dni='$dni',nombres = '$nombres',apellidos='$apellidos',correo='$email',clave='$clave',idtipousuario='$idtipousuario',idarea='$idarea',idempresa='$idempresa' WHERE idusuario = '$id'");
 	break;
 }
 
 
 //ACTUALIZAMOS LOS REGISTROS Y LOS OBTENEMOS
 
-$registro = mysql_query("SELECT * FROM usuario u,tipousuario tu,area a,empresa e where u.idtipousuario=tu.idtipousuario and u.idarea=a.idarea and u.idempresa=e.idempresa and u.idempresa='$idempresa' ORDER BY idusuario ASC");
+$registro = mysqli_query($link, "SELECT * FROM usuario u,tipousuario tu,area a,empresa e where u.idtipousuario=tu.idtipousuario and u.idarea=a.idarea and u.idempresa=e.idempresa and u.idempresa='$idempresa' ORDER BY idusuario ASC");
 
 //CREAMOS NUESTRA VISTA Y LA DEVOLVEMOS AL AJAX
 
@@ -44,7 +44,7 @@ echo '<table class="table table-striped table-condensed table-hover">
 							<th width="50">Empresa</th>
 			                <th width="50">Opciones</th>
 			            </tr>';
-	while($registro2 = mysql_fetch_array($registro)){
+	while($registro2 = mysqli_fetch_array($registro)){
 		echo '<tr>
 							<td>'.$registro2['login'].'</td>
 							<td>'.$registro2['dni'].'</td>

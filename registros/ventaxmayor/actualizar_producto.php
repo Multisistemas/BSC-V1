@@ -9,11 +9,11 @@ $x = $_POST['val'];
 
 //ELIMINAMOS EL PRODUCTO
 
-mysql_query("UPDATE temporal set precio = '$preventa' WHERE idproducto = '$id' and idusuario='$iduser'");
+mysqli_query($link, "UPDATE temporal set precio = '$preventa' WHERE idproducto = '$id' and idusuario='$iduser'");
 		
 //ACTUALIZAMOS LOS REGISTROS Y LOS OBTENEMOS
 
-$registro = mysql_query("select t.idproducto,p.producto,t.cantidad,t.precio from temporal t,producto p where t.idproducto=p.idproducto and t.idusuario='$iduser'");
+$registro = mysqli_query($link, "select t.idproducto,p.producto,t.cantidad,t.precio from temporal t,producto p where t.idproducto=p.idproducto and t.idusuario='$iduser'");
 
 //CREAMOS NUESTRA VISTA Y LA DEVOLVEMOS AL AJAX
 
@@ -26,7 +26,7 @@ echo '<table class="table table-striped table-condensed table-hover">
 							<th width="50">Sub Total</th>
 						</tr>';
 		$x=0;
-	while($registro2 = mysql_fetch_array($registro)){
+	while($registro2 = mysqli_fetch_array($registro)){
 	$subtotal=$registro2['cantidad']*$registro2['precio'];
 		echo '<tr>
 				<td><a href="javascript:eliminarproducto('.$registro2['idproducto'].');" class="glyphicon glyphicon-remove-circle"></a></td>

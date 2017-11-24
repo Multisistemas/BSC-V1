@@ -4,8 +4,8 @@
 		if ($dni!=""){
 		$link=OpenConexion();
 		$sql="SELECT * FROM usuario WHERE dni='".$dni."'";
-		$rs=mysql_query($sql,$link);
-		$fila =mysql_fetch_object($rs);
+		$rs=mysqli_query($link, $sql);
+		$fila =mysqli_fetch_object($rs);
 		$id = $fila->idusuario;
 		if ($id!=""){
 		echo "<META http-equiv='refresh' content='0; url=reset.php?iduser=".$id."'>";

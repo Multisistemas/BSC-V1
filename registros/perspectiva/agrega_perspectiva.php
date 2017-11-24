@@ -7,23 +7,23 @@ $perspectiva = $_POST['perspectiva'];
 
 switch($proceso){
 	case 'Registro':
-	$registro3 = mysql_query("SELECT nombre FROM perspectivas where nombre='$perspectiva'");
-	$val=mysql_num_rows($registro3);
-	if ($val>0){echo "<script language=’JavaScript’> 
+	$registro3 = mysqli_query($link, "SELECT nombre FROM perspectivas where nombre='$perspectiva'");
+	$val=mysqli_num_rows($registro3);
+	if ($val>0){echo "<script language=ï¿½JavaScriptï¿½> 
                 alert('Perspectiva ya existe'); 
                 </script>";} else {
-		mysql_query("INSERT INTO perspectivas (nombre)VALUES('$perspectiva')");}
+		mysqli_query($link, "INSERT INTO perspectivas (nombre)VALUES('$perspectiva')");}
 	break;
 	
 	case 'Edicion':
-		mysql_query("UPDATE perspectivas SET nombre = '$perspectiva' WHERE idperspectiva = '$id'");
+		mysqli_query($link, "UPDATE perspectivas SET nombre = '$perspectiva' WHERE idperspectiva = '$id'");
 	break;
 }
 
 
 //ACTUALIZAMOS LOS REGISTROS Y LOS OBTENEMOS
 
-$registro = mysql_query("SELECT * FROM perspectivas ORDER BY idperspectiva ASC");
+$registro = mysqli_query($link, "SELECT * FROM perspectivas ORDER BY idperspectiva ASC");
 
 //CREAMOS NUESTRA VISTA Y LA DEVOLVEMOS AL AJAX
 
@@ -32,7 +32,7 @@ echo '<table class="table table-striped table-condensed table-hover">
             	<th width="300">Perspectiva</th>
 				<th width="50">Opciones</th>
             </tr>';
-	while($registro2 = mysql_fetch_array($registro)){
+	while($registro2 = mysqli_fetch_array($registro)){
 		echo '<tr>
 				<td>'.utf8_encode($registro2['nombre']).'</td>
 				<td><a href="javascript:editarperspectiva('.$registro2['idperspectiva'].');" class="glyphicon glyphicon-edit"></a> <a href="javascript:eliminarperspectiva('.$registro2['idperspectiva'].');" class="glyphicon glyphicon-remove-circle"></a></td>

@@ -27,11 +27,11 @@ $pdf->Ln(8);
 $pdf->SetFont('Arial', '', 8);
 //CONSULTA
 if ($filtro!=""){
-$productos = mysql_query("SELECT * FROM categoria where categoria like '%$filtro%'");
+$productos = mysqli_query($link, "SELECT * FROM categoria where categoria like '%$filtro%'");
 } else {
-$productos = mysql_query("SELECT * FROM categoria");
+$productos = mysqli_query($link, "SELECT * FROM categoria");
 }
-while($productos2 = mysql_fetch_array($productos)){
+while($productos2 = mysqli_fetch_array($productos)){
 	$pdf->Cell(50, 8, $productos2['idcategoria'], 0);
 	$pdf->Cell(150, 8, $productos2['categoria'], 0);
 	$pdf->Ln(8);

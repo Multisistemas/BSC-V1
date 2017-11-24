@@ -19,7 +19,7 @@ if(isset($hasta)==false){
 
 //EJECUTAMOS LA CONSULTA DE BUSQUEDA
 
-$registro = mysql_query("SELECT * FROM documento_compra dv,persona p WHERE dv.idproveedor=p.idpersona and dv.idempresa='$idempresa' and fecha BETWEEN '$desde' AND '$hasta' ORDER BY iddocumento ASC limit 500");
+$registro = mysqli_query($link, "SELECT * FROM documento_compra dv,persona p WHERE dv.idproveedor=p.idpersona and dv.idempresa='$idempresa' and fecha BETWEEN '$desde' AND '$hasta' ORDER BY iddocumento ASC limit 500");
 
 //CREAMOS NUESTRA VISTA Y LA DEVOLVEMOS AL AJAX
 
@@ -30,8 +30,8 @@ echo '<table class="table table-striped table-condensed table-hover">
 				<th width="200">Total</th>
 				<th width="200">Ver Detalle</th>
             </tr>';
-if(mysql_num_rows($registro)>0){
-	while($registro2 = mysql_fetch_array($registro)){
+if(mysqli_num_rows($registro)>0){
+	while($registro2 = mysqli_fetch_array($registro)){
 		echo '<tr>
 				<td>'.utf8_encode($registro2['razonsocial']).'</td>
 				<td>'.$registro2['fecha'].'</td>

@@ -7,7 +7,7 @@ $dato = $_POST['dato'];
 
 //EJECUTAMOS LA CONSULTA DE BUSQUEDA
 
-$registro = mysql_query("SELECT * FROM empresa where idempresa='$idempresa' and razonsocial LIKE '%$dato%' ORDER BY idempresa ASC");
+$registro = mysqli_query($link, "SELECT * FROM empresa where idempresa='$idempresa' and razonsocial LIKE '%$dato%' ORDER BY idempresa ASC");
 
 //CREAMOS NUESTRA VISTA Y LA DEVOLVEMOS AL AJAX
 
@@ -21,8 +21,8 @@ echo '<table class="table table-striped table-condensed table-hover">
 							<th width="50">Correo</th>
 			                <th width="50">Opciones</th>
 			            </tr>';
-if(mysql_num_rows($registro)>0){
-	while($registro2 = mysql_fetch_array($registro)){
+if(mysqli_num_rows($registro)>0){
+	while($registro2 = mysqli_fetch_array($registro)){
 		echo '<tr>
 							<td>'.$registro2['ruc'].'</td>
 							<td>'.utf8_encode($registro2['razonsocial']).'</td>

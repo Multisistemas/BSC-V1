@@ -7,7 +7,7 @@ $dato = $_POST['dato'];
 
 //EJECUTAMOS LA CONSULTA DE BUSQUEDA
 
-$registro = mysql_query("SELECT * FROM producto p,categoria c WHERE p.idcategoria=c.idcategoria and p.idempresa='$idempresa' and producto like '%$dato%' limit 500");
+$registro = mysqli_query($link, "SELECT * FROM producto p,categoria c WHERE p.idcategoria=c.idcategoria and p.idempresa='$idempresa' and producto like '%$dato%' limit 500");
 
 //CREAMOS NUESTRA VISTA Y LA DEVOLVEMOS AL AJAX
 
@@ -18,8 +18,8 @@ echo '<table class="table table-striped table-condensed table-hover">
 				<th width="200">Categoria</th>
 				<th width="200">Ver Detalle</th>
             </tr>';
-if(mysql_num_rows($registro)>0){
-	while($registro2 = mysql_fetch_array($registro)){
+if(mysqli_num_rows($registro)>0){
+	while($registro2 = mysqli_fetch_array($registro)){
 		echo '<tr>
 				<td>'.utf8_encode($registro2['producto']).'</td>
 				<td>'.$registro2['stock'].'</td>

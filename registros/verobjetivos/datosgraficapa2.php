@@ -2,7 +2,7 @@
 	session_start();
 	$idempresa=$_SESSION['id_empresa'];
 	$idarea=$_SESSION['id_area'];
-	$conexion = new mysqli('localhost','root','','bdbalancedscore');
+	$conexion = new mysqli('localhost','root','toor','bsc');
 	
 	$total = array('TOTAL');
 	$area = array('MESES');

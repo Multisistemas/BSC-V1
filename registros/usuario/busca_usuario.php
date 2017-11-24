@@ -7,7 +7,7 @@ $dato = $_POST['dato'];
 
 //EJECUTAMOS LA CONSULTA DE BUSQUEDA
 
-$registro = mysql_query("SELECT * FROM usuario u,tipousuario tu,area a,empresa e where u.idtipousuario=tu.idtipousuario and u.idarea=a.idarea and u.idempresa=e.idempresa and u.idempresa='$idempresa' and login like '%$dato%' ORDER BY idusuario ASC");
+$registro = mysqli_query($link, "SELECT * FROM usuario u,tipousuario tu,area a,empresa e where u.idtipousuario=tu.idtipousuario and u.idarea=a.idarea and u.idempresa=e.idempresa and u.idempresa='$idempresa' and login like '%$dato%' ORDER BY idusuario ASC");
 
 //CREAMOS NUESTRA VISTA Y LA DEVOLVEMOS AL AJAX
 
@@ -23,8 +23,8 @@ echo '<table class="table table-striped table-condensed table-hover">
 							<th width="50">Empresa</th>
 			                <th width="50">Opciones</th>
 			            </tr>';
-if(mysql_num_rows($registro)>0){
-	while($registro2 = mysql_fetch_array($registro)){
+if(mysqli_num_rows($registro)>0){
+	while($registro2 = mysqli_fetch_array($registro)){
 		echo '<tr>
 							<td>'.$registro2['login'].'</td>
 							<td>'.$registro2['dni'].'</td>

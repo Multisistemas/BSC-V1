@@ -40,11 +40,11 @@ $pdf->Ln(8);
 $pdf->SetFont('Arial', '', 8);
 //CONSULTA
 if ($desde!=""){
-$productos = mysql_query("SELECT * FROM documento_venta dv,persona p WHERE dv.idcliente=p.idpersona and dv.idempresa='$idempresa' and fecha BETWEEN '$desde' AND '$hasta'");
+$productos = mysqli_query($link, "SELECT * FROM documento_venta dv,persona p WHERE dv.idcliente=p.idpersona and dv.idempresa='$idempresa' and fecha BETWEEN '$desde' AND '$hasta'");
 } else {
-$productos = mysql_query("SELECT * FROM documento_venta dv,persona p WHERE dv.idcliente=p.idpersona and dv.idempresa='$idempresa' and fecha BETWEEN '2015-01-01' AND CURDATE()");
+$productos = mysqli_query($link, "SELECT * FROM documento_venta dv,persona p WHERE dv.idcliente=p.idpersona and dv.idempresa='$idempresa' and fecha BETWEEN '2015-01-01' AND CURDATE()");
 }
-while($productos2 = mysql_fetch_array($productos)){
+while($productos2 = mysqli_fetch_array($productos)){
 	$pdf->Cell(100, 8, $productos2['razonsocial'], 0);
 	$pdf->Cell(70, 8, $productos2['fecha'], 0);
 	$pdf->Cell(70, 8, $productos2['total'], 0);

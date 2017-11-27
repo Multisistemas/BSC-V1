@@ -34,7 +34,7 @@ if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQU
 		if($file && move_uploaded_file($_FILES["file"]["tmp_name"], "uploadsperfil/".$file))
 		{
 			$link = mysqli_connect($CFG->dbhost, $CFG->dbuser, $CFG->dbpass);
-			mysqli_select_db($link $CFG->dbpass);
+			mysqli_select_db($link, $CFG->dbpass);
 			mysqli_query($link, "INSERT INTO uploadsperfil VALUES(null, '$file','$filetype','$filesize','$idusuario')");
 			mysqli_close($link);
 			//echo "<META http-equiv='refresh' content='0; url=intranet.php'>";

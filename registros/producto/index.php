@@ -345,7 +345,7 @@ function valida(e) {
         <div class="pull-right hidden-xs">
           <b>Versi&oacute;n</b> 1.0
         </div>
-        <strong>Copyright &copy; 2015 <a href="http://www.balancedscorecard.com">Jorge Mendieta</a>.</strong> Todos los derechos reservados.
+        <strong>Copyright &copy; 2017 <a href="https://multissitemas.com.sv">Multisistemas</a>.</strong> Todos los derechos reservados.
       </footer>
 
    

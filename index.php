@@ -1,5 +1,7 @@
 <?php
-include('registros/conexion.php');
+include('config.php');
+//include('registros/conexion.php');
+$idarea = 0;
 if(isset($_SESSION['id_usu'])==true){
 		header('Location: intranet.php');
 }

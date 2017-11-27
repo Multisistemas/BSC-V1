@@ -1,5 +1,5 @@
 <?php
-include('../conexion.php');
+include_once(dirname(__FILE__).'/../../config.php');
 $id = $_POST['idu'];
 $nombre = $_POST['nombrep'];
 $apellidos = $_POST['apellidosp'];

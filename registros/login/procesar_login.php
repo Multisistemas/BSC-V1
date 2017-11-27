@@ -1,7 +1,8 @@
 <?php
 session_start();
-include('../conexion.php');
+include_once('../../config.php');
 global $conexion;
+//debug_to_console($conexion);
 $usu = addslashes($_POST['usu']);
 $pass = addslashes($_POST['pass']);
 $area = addslashes($_POST['area']);

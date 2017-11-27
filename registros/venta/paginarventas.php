@@ -1,7 +1,7 @@
 <?php
 session_start();
 $iduser=$_SESSION['id_usu'];
-	include('../conexion.php');
+	include_once(dirname(__FILE__).'/../../config.php');
 	$paginaActual = $_POST['partida'];
 
     $nroProductos = mysqli_num_rows(mysqli_query($link, "select t.idproducto,p.producto,t.cantidad,p.precioventau from temporal t,producto p where t.idproducto=p.idproducto and t.idusuario='$iduser'"));

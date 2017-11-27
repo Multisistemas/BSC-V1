@@ -1,7 +1,7 @@
 <?php
 session_start();
 $iduser=$_SESSION['id_usu'];
-include('../conexion.php');
+include_once(dirname(__FILE__).'/../../config.php');
 $idpro = $_POST['idpro'];
 $can = $_POST['can'];
 //VERIFICAMOS EL PROCESO

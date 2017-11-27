@@ -14,9 +14,11 @@
 	$CFG->wwwroot   = 'http://bsc.dev';
 	
 	// Force a debugging mode regardless the settings in the site administration
+/*
 	@error_reporting(E_ALL | E_STRICT); // NOT FOR PRODUCTION SERVERS!
 	@ini_set('display_errors', '1');    // NOT FOR PRODUCTION SERVERS!
 	$CFG->debug = (E_ALL | E_STRICT);   // === DEBUG_DEVELOPER - NOT FOR PRODUCTION SERVERS!
 	$CFG->debugdisplay = 1;             // NOT FOR PRODUCTION SERVERS!
+*/
 	
-	require_once(dirname(__FILE__) . '/registros/conexion.php'); // Do not edit
+	require_once(dirname(__FILE__) . '/db.php'); // Do not edit

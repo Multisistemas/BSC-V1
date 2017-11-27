@@ -1,7 +1,7 @@
 <?php
 session_start();
 $idempresa=$_SESSION['id_empresa'];
-include('../conexion.php');
+include_once(dirname(__FILE__).'/../../config.php');
 $id = $_POST['id'];
 $proceso = $_POST['pro'];
 $producto = $_POST['producto'];

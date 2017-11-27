@@ -1,7 +1,7 @@
 <?php
 session_start();
 $idempresa=$_SESSION['id_empresa'];
-	include('../conexion.php');
+	include_once(dirname(__FILE__).'/../../config.php');
 	$paginaActual = $_POST['partida'];
 
     $nroProductos = mysqli_num_rows(mysqli_query($link, "SELECT idobjetivo,o.nombre as objetivo,p.nombre as perspectiva,area FROM objetivos o,perspectivas p,area a where o.idperspectiva=p.idperspectiva and o.idarea=a.idarea and idempresa='$idempresa'"));

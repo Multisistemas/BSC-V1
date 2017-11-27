@@ -2,21 +2,23 @@
 <!-- <LINK href="estilos.css" type=text/css rel=stylesheet> -->
 <!-- <link href="../css/forms.css" rel="stylesheet" type="text/css" /> -->
 <?php
+include_once(dirname(__FILE__).'../../config.php');
+global $CFG, $conexion, $link;
+
 function OpenConexion(){
-$host = "localhost";
-$base = "bsc";
-$link=mysqli_connect($host,"root","toor") or die("Error de conexion al servidor");
-$db=mysqli_select_db($base) or die("Error de conexion a la BD");
-return $link;
+	global $CFG;
+	$link=mysqli_connect($CFG->dbhost, $CFG->dbuser, $CFG->dbpass) or die("Error de conexion al servidor");
+	$db=mysqli_select_db($link, $CFG->dbname) or die("Error de conexion a la BD");
+	return $link;
 }
 
 function CloseConexion(){
-Global $link;
+	global $link;
 	mysqli_close($link);
 }
 
 function autogeneradolote($tabla,$campocodigo,$numcaracteres){
-Global $link;
+	Global $link;
 	$numcaracteres=$numcaracteres*(-1);
 	$rsTabla=mysqli_query($link, "select count($campocodigo) from $tabla");
 	$ATabla=mysqli_fetch_array($rsTabla);

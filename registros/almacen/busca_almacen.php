@@ -1,5 +1,5 @@
 <?php
-include('../conexion.php');
+include_once(dirname(__FILE__).'../../config.php');
 
 $dato = $_POST['dato'];
 

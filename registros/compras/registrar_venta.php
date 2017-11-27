@@ -2,7 +2,7 @@
 session_start();
 $idempresa=$_SESSION['id_empresa'];
 $iduser=$_SESSION['id_usu'];
-include('../conexion.php');
+include_once(dirname(__FILE__).'/../../config.php');
 $idper = $_POST['idpersona'];
 $fecha = $_POST['fecha'];
 //VERIFICAMOS EL PROCESO

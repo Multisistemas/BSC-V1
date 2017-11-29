@@ -32,7 +32,7 @@ if(isset($_SESSION['id_usu'])==true){
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
-  <?php 	include("registros/Function.php"); $link=OpenConexion();?>
+  <?php 	include("registros/Function.php"); $DB=OpenConexion();?>
   <script src="registros/js/jquery.js"></script>
 <script src="registros/js/myjavalogin.js"></script>
   <body class="hold-transition login-page">

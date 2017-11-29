@@ -6,15 +6,15 @@ $idpro = $_POST['idpro'];
 $can = $_POST['can'];
 //VERIFICAMOS EL PROCESO
 
-		mysqli_query($link, "INSERT INTO temporal (idproducto,idusuario,cantidad)VALUES('$idpro','$iduser','$can')");
-$registrop = mysqli_query($link, "select precioventa from producto where idproducto='$idpro'");
+		mysqli_query($DB, "INSERT INTO temporal (idproducto,idusuario,cantidad)VALUES('$idpro','$iduser','$can')");
+$registrop = mysqli_query($DB, "select precioventa from producto where idproducto='$idpro'");
 $arrayp=mysqli_fetch_array($registrop);
 $precio=$arrayp['precioventa'];
-		mysqli_query($link, "UPDATE temporal set precio='$precio' where idproducto='$idpro' and idusuario='$iduser'");
+		mysqli_query($DB, "UPDATE temporal set precio='$precio' where idproducto='$idpro' and idusuario='$iduser'");
 
 //ACTUALIZAMOS LOS REGISTROS Y LOS OBTENEMOS
 
-$registro = mysqli_query($link, "select t.idproducto,p.producto,t.cantidad,t.precio from temporal t,producto p where t.idproducto=p.idproducto and t.idusuario='$iduser'");
+$registro = mysqli_query($DB, "select t.idproducto,p.producto,t.cantidad,t.precio from temporal t,producto p where t.idproducto=p.idproducto and t.idusuario='$iduser'");
 
 //CREAMOS NUESTRA VISTA Y LA DEVOLVEMOS AL AJAX
 

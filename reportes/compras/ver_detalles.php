@@ -5,7 +5,7 @@ $id = $_POST['id'];
 
 //ACTUALIZAMOS LOS REGISTROS Y LOS OBTENEMOS
 
-$registro = mysqli_query($link, "SELECT * FROM detalle_documentocompra dv,producto p where dv.idproducto=p.idproducto and iddocumento='$id'");
+$registro = mysqli_query($DB, "SELECT * FROM detalle_documentocompra dv,producto p where dv.idproducto=p.idproducto and iddocumento='$id'");
 
 //CREAMOS NUESTRA VISTA Y LA DEVOLVEMOS AL AJAX
 

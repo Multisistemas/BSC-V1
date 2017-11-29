@@ -5,11 +5,11 @@ $id = $_POST['id'];
 
 //ELIMINAMOS EL PRODUCTO
 
-mysqli_query($link, "DELETE FROM categoria WHERE idcategoria = '$id'");
+mysqli_query($DB, "DELETE FROM categoria WHERE idcategoria = '$id'");
 
 //ACTUALIZAMOS LOS REGISTROS Y LOS OBTENEMOS
 
-$registro = mysqli_query($link, "SELECT * FROM categoria ORDER BY idcategoria ASC");
+$registro = mysqli_query($DB, "SELECT * FROM categoria ORDER BY idcategoria ASC");
 
 //CREAMOS NUESTRA VISTA Y LA DEVOLVEMOS AL AJAX
 

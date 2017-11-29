@@ -5,7 +5,7 @@ $dato = $_POST['dato'];
 
 //EJECUTAMOS LA CONSULTA DE BUSQUEDA
 
-$registro = mysqli_query($link, "SELECT * FROM perspectivas WHERE nombre LIKE '%$dato%' ORDER BY idperspectiva ASC");
+$registro = mysqli_query($DB, "SELECT * FROM perspectivas WHERE nombre LIKE '%$dato%' ORDER BY idperspectiva ASC");
 
 //CREAMOS NUESTRA VISTA Y LA DEVOLVEMOS AL AJAX
 

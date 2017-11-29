@@ -33,9 +33,9 @@ $pdf->Ln(8);
 $pdf->SetFont('Arial', '', 8);
 //CONSULTA
 if ($desde!=""){
-$productos = mysqli_query($link, "SELECT k.fecha,k.serie,k.nrodocumento,k.cantidad,k.idtipod,k.idtipoo FROM kardex k WHERE idproducto='$idpro' ORDER BY fecha,idkardex");
+$productos = mysqli_query($DB, "SELECT k.fecha,k.serie,k.nrodocumento,k.cantidad,k.idtipod,k.idtipoo FROM kardex k WHERE idproducto='$idpro' ORDER BY fecha,idkardex");
 } else {
-$productos = mysqli_query($link, "SELECT k.fecha,k.serie,k.nrodocumento,k.cantidad,k.idtipod,k.idtipoo FROM kardex k WHERE idproducto='$idpro' ORDER BY fecha,idkardex");
+$productos = mysqli_query($DB, "SELECT k.fecha,k.serie,k.nrodocumento,k.cantidad,k.idtipod,k.idtipoo FROM kardex k WHERE idproducto='$idpro' ORDER BY fecha,idkardex");
 }
 while($productos2 = mysqli_fetch_array($productos)){
 $fecha = $productos2['fecha'];

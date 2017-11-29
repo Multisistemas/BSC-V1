@@ -7,23 +7,23 @@ $area = $_POST['area'];
 
 switch($proceso){
 	case 'Registro':
-	$registro3 = mysqli_query($link, "SELECT area FROM area where area='$area'");
+	$registro3 = mysqli_query($DB, "SELECT area FROM area where area='$area'");
 	$val=mysqli_num_rows($registro3);
 	if ($val>0){echo "<script language=�JavaScript�> 
                 alert('Area ya existe'); 
                 </script>";} else {
-		mysqli_query($link, "INSERT INTO area (area)VALUES('$area')");}
+		mysqli_query($DB, "INSERT INTO area (area)VALUES('$area')");}
 	break;
 	
 	case 'Edicion':
-		mysqli_query($link, "UPDATE area SET area = '$area' WHERE idarea = '$id'");
+		mysqli_query($DB, "UPDATE area SET area = '$area' WHERE idarea = '$id'");
 	break;
 }
 
 
 //ACTUALIZAMOS LOS REGISTROS Y LOS OBTENEMOS
 
-$registro = mysqli_query($link, "SELECT * FROM area ORDER BY idarea ASC");
+$registro = mysqli_query($DB, "SELECT * FROM area ORDER BY idarea ASC");
 
 //CREAMOS NUESTRA VISTA Y LA DEVOLVEMOS AL AJAX
 

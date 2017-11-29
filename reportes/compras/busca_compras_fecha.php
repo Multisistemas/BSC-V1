@@ -19,7 +19,7 @@ if(isset($hasta)==false){
 
 //EJECUTAMOS LA CONSULTA DE BUSQUEDA
 
-$registro = mysqli_query($link, "SELECT * FROM documento_compra dv,persona p WHERE dv.idproveedor=p.idpersona and dv.idempresa='$idempresa' and fecha BETWEEN '$desde' AND '$hasta' ORDER BY iddocumento ASC limit 500");
+$registro = mysqli_query($DB, "SELECT * FROM documento_compra dv,persona p WHERE dv.idproveedor=p.idpersona and dv.idempresa='$idempresa' and fecha BETWEEN '$desde' AND '$hasta' ORDER BY iddocumento ASC limit 500");
 
 //CREAMOS NUESTRA VISTA Y LA DEVOLVEMOS AL AJAX
 

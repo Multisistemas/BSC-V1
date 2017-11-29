@@ -27,9 +27,9 @@ $pdf->Ln(8);
 $pdf->SetFont('Arial', '', 8);
 //CONSULTA
 if ($filtro!=""){
-$productos = mysqli_query($link, "SELECT * FROM categoria where categoria like '%$filtro%'");
+$productos = mysqli_query($DB, "SELECT * FROM categoria where categoria like '%$filtro%'");
 } else {
-$productos = mysqli_query($link, "SELECT * FROM categoria");
+$productos = mysqli_query($DB, "SELECT * FROM categoria");
 }
 while($productos2 = mysqli_fetch_array($productos)){
 	$pdf->Cell(50, 8, $productos2['idcategoria'], 0);

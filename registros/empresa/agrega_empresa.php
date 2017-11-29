@@ -1,7 +1,7 @@
 <?php
-session_start();
-$idempresa = $_SESSION['id_empresa'];
 include_once(dirname(__FILE__).'/../../config.php');
+$idempresa = $_SESSION['id_empresa'];
+
 $id = $_POST['id'];
 $proceso = $_POST['pro'];
 $ruc = $_POST['ruc'];
@@ -14,18 +14,18 @@ $correo = $_POST['correo'];
 
 switch($proceso){
 	case 'Registro':
-		mysqli_query($link, "INSERT INTO empresa (ruc,razonsocial,direccion,telefono,movil,email)VALUES('$ruc','$rsocial','$direccion','$telefono','$celular','$correo')");
+		mysqli_query($DB, "INSERT INTO empresa (ruc,razonsocial,direccion,telefono,movil,email)VALUES('$ruc','$rsocial','$direccion','$telefono','$celular','$correo')");
 	break;
-	
+
 	case 'Edicion':
-		mysqli_query($link, "UPDATE empresa SET ruc = '$ruc', razonsocial='$rsocial',direccion='$direccion',telefono='$telefono',movil='$celular',email='$correo' WHERE idempresa = '$id'");
+		mysqli_query($DB, "UPDATE empresa SET ruc = '$ruc', razonsocial='$rsocial',direccion='$direccion',telefono='$telefono',movil='$celular',email='$correo' WHERE idempresa = '$id'");
 	break;
 }
 
 
 //ACTUALIZAMOS LOS REGISTROS Y LOS OBTENEMOS
 
-$registro = mysqli_query($link, "SELECT * FROM empresa where idempresa='$idempresa' ORDER BY idempresa ASC");
+$registro = mysqli_query($DB, "SELECT * FROM empresa where idempresa='$idempresa' ORDER BY idempresa ASC");
 
 //CREAMOS NUESTRA VISTA Y LA DEVOLVEMOS AL AJAX
 

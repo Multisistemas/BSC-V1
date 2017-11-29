@@ -5,7 +5,7 @@ $dato = $_POST['dato'];
 
 //EJECUTAMOS LA CONSULTA DE BUSQUEDA
 
-$registro = mysqli_query($link, "SELECT * FROM almacen WHERE almacen LIKE '%$dato%' ORDER BY idalmacen ASC");
+$registro = mysqli_query($DB, "SELECT * FROM almacen WHERE almacen LIKE '%$dato%' ORDER BY idalmacen ASC");
 
 //CREAMOS NUESTRA VISTA Y LA DEVOLVEMOS AL AJAX
 

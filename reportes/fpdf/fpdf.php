@@ -53,7 +53,7 @@ var $ColorFlag;          // indicates whether fill and text colors are different
 var $ws;                 // word spacing
 var $images;             // array of used images
 var $PageLinks;          // array of links in pages
-var $links;              // array of internal links
+var $DBs;              // array of internal links
 var $AutoPageBreak;      // automatic page breaking
 var $PageBreakTrigger;   // threshold used to trigger page breaks
 var $InHeader;           // flag set when processing header
@@ -563,14 +563,14 @@ function AddLink()
 	return $n;
 }
 
-function SetLink($link, $y=0, $page=-1)
+function SetLink($DB, $y=0, $page=-1)
 {
 	// Set destination of internal link
 	if($y==-1)
 		$y = $this->y;
 	if($page==-1)
 		$page = $this->page;
-	$this->links[$link] = array($page, $y);
+	$this->links[$DB] = array($page, $y);
 }
 
 function Link($x, $y, $w, $h)
@@ -596,7 +596,7 @@ function AcceptPageBreak()
 	return $this->AutoPageBreak;
 }
 
-function Cell($w, $h=0, $txt='', $border=0, $ln=0, $align='', $fill=false, $link='')
+function Cell($w, $h=0, $txt='', $border=0, $ln=0, $align='', $fill=false, $DB='')
 {
 	// Output a cell
 	$k = $this->k;
@@ -658,7 +658,7 @@ function Cell($w, $h=0, $txt='', $border=0, $ln=0, $align='', $fill=false, $link
 			$s .= ' '.$this->_dounderline($this->x+$dx,$this->y+.5*$h+.3*$this->FontSize,$txt);
 		if($this->ColorFlag)
 			$s .= ' Q';
-		if($link)
+		if($DB)
 			$this->Link($this->x+$dx,$this->y+.5*$h-.5*$this->FontSize,$this->GetStringWidth($txt),$this->FontSize);
 	}
 	if($s)
@@ -788,7 +788,7 @@ function MultiCell($w, $h, $txt, $border=0, $align='J', $fill=false)
 	$this->x = $this->lMargin;
 }
 
-function Write($h, $txt, $link='')
+function Write($h, $txt, $DB='')
 {
 	// Output text in flowing mode
 	$cw = &$this->CurrentFont['cw'];
@@ -879,7 +879,7 @@ function Ln($h=null)
 		$this->y += $h;
 }
 
-function Image($file, $x=null, $y=null, $w=0, $h=0, $type='', $link='')
+function Image($file, $x=null, $y=null, $w=0, $h=0, $type='', $DB='')
 {
 	// Put an image on the page
 	if(!isset($this->images[$file]))
@@ -938,7 +938,7 @@ function Image($file, $x=null, $y=null, $w=0, $h=0, $type='', $link='')
 	if($x===null)
 		$x = $this->x;
 	$this->_out(sprintf('q %.2F 0 0 %.2F %.2F %.2F cm /I%d Do Q',$w*$this->k,$h*$this->k,$x*$this->k,($this->h-($y+$h))*$this->k,$info['i']));
-	if($link)
+	if($DB)
 		$this->Link($x,$y,$w,$h);
 }
 

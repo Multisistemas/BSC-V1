@@ -1,7 +1,7 @@
 <?php
-session_start();
-$idempresa=$_SESSION['id_empresa'];
 include_once(dirname(__FILE__).'/../../config.php');
+$idempresa=$_SESSION['id_empresa'];
+
 $id = $_POST['id'];
 $proceso = $_POST['pro'];
 $producto = $_POST['producto'];
@@ -17,18 +17,18 @@ $idalmacen = $_POST['idalmacen'];
 
 switch($proceso){
 	case 'Registro':
-		mysqli_query($link, "INSERT INTO producto (producto,preciocompra,precioventa,precioventau,stock,color,referencia,idcategoria,idalmacen,idempresa)VALUES('$producto','$precioc','$preciov','$preciovu','$stock','$color','$ref','$idcategoria','$idalmacen','$idempresa')");
+		mysqli_query($DB, "INSERT INTO producto (producto,preciocompra,precioventa,precioventau,stock,color,referencia,idcategoria,idalmacen,idempresa)VALUES('$producto','$precioc','$preciov','$preciovu','$stock','$color','$ref','$idcategoria','$idalmacen','$idempresa')");
 	break;
-	
+
 	case 'Edicion':
-		mysqli_query($link, "UPDATE producto SET producto = '$producto', preciocompra='$precioc',precioventa='$preciov',precioventau='$preciovu',stock='$stock',color='$color',referencia='$ref',idcategoria='$idcategoria',idalmacen='$idalmacen' WHERE idproducto = '$id'");
+		mysqli_query($DB, "UPDATE producto SET producto = '$producto', preciocompra='$precioc',precioventa='$preciov',precioventau='$preciovu',stock='$stock',color='$color',referencia='$ref',idcategoria='$idcategoria',idalmacen='$idalmacen' WHERE idproducto = '$id'");
 	break;
 }
 
 
 //ACTUALIZAMOS LOS REGISTROS Y LOS OBTENEMOS
 
-$registro = mysqli_query($link, "SELECT * FROM producto p,categoria c,almacen a where p.idcategoria=c.idcategoria and p.idalmacen=a.idalmacen and p.idempresa='$idempresa' ORDER BY p.idproducto desc limit 15");
+$registro = mysqli_query($DB, "SELECT * FROM producto p,categoria c,almacen a where p.idcategoria=c.idcategoria and p.idalmacen=a.idalmacen and p.idempresa='$idempresa' ORDER BY p.idproducto desc limit 15");
 
 //CREAMOS NUESTRA VISTA Y LA DEVOLVEMOS AL AJAX
 

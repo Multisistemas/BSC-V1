@@ -9,11 +9,11 @@ $x = $_POST['val'];
 
 //ELIMINAMOS EL PRODUCTO
 
-mysqli_query($link, "UPDATE temporal set precio = '$preventa' WHERE idproducto = '$id' and idusuario='$iduser'");
+mysqli_query($DB, "UPDATE temporal set precio = '$preventa' WHERE idproducto = '$id' and idusuario='$iduser'");
 		
 //ACTUALIZAMOS LOS REGISTROS Y LOS OBTENEMOS
 
-$registro = mysqli_query($link, "select t.idproducto,p.producto,t.cantidad,t.precio from temporal t,producto p where t.idproducto=p.idproducto and t.idusuario='$iduser'");
+$registro = mysqli_query($DB, "select t.idproducto,p.producto,t.cantidad,t.precio from temporal t,producto p where t.idproducto=p.idproducto and t.idusuario='$iduser'");
 
 //CREAMOS NUESTRA VISTA Y LA DEVOLVEMOS AL AJAX
 

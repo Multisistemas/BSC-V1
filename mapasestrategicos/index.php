@@ -1,10 +1,9 @@
-<?php session_start();?>
+<?php include("../registros/Function.php");?>
 <?php if ($_SESSION['id_usu']==""){header("location:index.php");}?>
 <?php
-   	include("../registros/Function.php");
-	$link=OpenConexion();
+	$DB=OpenConexion();
 	$idusuario=$_SESSION['id_usu'];
-	$rs=mysqli_query($link, "SELECT * FROM usuario u,area a,empresa e WHERE u.idarea=a.idarea and e.idempresa=u.idempresa and idusuario='$idusuario'");
+	$rs=mysqli_query($DB, "SELECT * FROM usuario u,area a,empresa e WHERE u.idarea=a.idarea and e.idempresa=u.idempresa and idusuario='$idusuario'");
 	$filas =mysqli_fetch_object($rs);
 	$nombres=$filas->nombres;
 	$apellidos=$filas->apellidos;
@@ -14,10 +13,10 @@
 	$area=$filas->area;
 	$razon=$filas->razonsocial;
 	$direccion=$filas->direccion;
-	$rsf=mysqli_query($link, "SELECT * FROM uploadsperfil WHERE idusuario='$idusuario' order by id desc limit 1");
+	$rsf=mysqli_query($DB, "SELECT * FROM uploadsperfil WHERE idusuario='$idusuario' order by id desc limit 1");
 	$filasf =mysqli_fetch_object($rsf);
 	$foto=$filasf->name;
-/*	$rsp=mysqli_query($link, "SELECT count(*) as cantidad FROM inmueble WHERE idusuario='$idusuario'");
+/*	$rsp=mysqli_query($DB, "SELECT count(*) as cantidad FROM inmueble WHERE idusuario='$idusuario'");
 	$filasp =mysqli_fetch_object($rsp);
 	$numpubli=$filasp->cantidad;*/
 	?>
@@ -59,7 +58,7 @@
         <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-	<!-- slitslider 
+	<!-- slitslider
     <link rel="stylesheet" type="text/css" href="assets/slitslider/css/style.css" />
     <link rel="stylesheet" type="text/css" href="assets/slitslider/css/custom.css" />
     <script type="text/javascript" src="assets/slitslider/js/modernizr.custom.79639.js"></script>
@@ -86,7 +85,7 @@
           </a>
           <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
-               
+
               <!-- User Account: style can be found in dropdown.less -->
               <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -249,7 +248,7 @@ $idarea=$_SESSION['id_area'];?>
         <section class="content-header">
           <h1>
             Mapa Estrat&eacute;gico - &Aacute;rea: <?php
-	$rsa=mysqli_query($link, "SELECT * from area where idarea='$idarea'");
+	$rsa=mysqli_query($DB, "SELECT * from area where idarea='$idarea'");
 	$filaa=mysqli_fetch_array($rsa);
 	echo $filaa[1];
 	?>
@@ -264,7 +263,7 @@ $idarea=$_SESSION['id_area'];?>
         <section class="content">
 
 <div class="">
-    
+
 
             <div id="slider" class="sl-slider-wrapper">
 
@@ -449,7 +448,7 @@ $idarea=$_SESSION['id_area'];?>
       <div class="control-sidebar-bg"></div>
     </div><!-- ./wrapper -->
 
-    <!-- jQuery 2.1.4 
+    <!-- jQuery 2.1.4
     <script src="plugins/jQuery/jQuery-2.1.4.min.js"></script>-->
     <!-- jQuery UI 1.11.4 -->
     <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>

@@ -5,28 +5,28 @@
 -->
 <?php
 include_once(dirname(__FILE__).'../../config.php');
-global $CFG, $conexion, $link;
+global $CFG, $DB, $DB;
 
 function OpenConexion(){
 	global $CFG;
-	$link=mysqli_connect($CFG->dbhost, $CFG->dbuser, $CFG->dbpass) or die("Error de conexion al servidor");
-	$db=mysqli_select_db($link, $CFG->dbname) or die("Error de conexion a la BD");
-	return $link;
+	$DB=mysqli_connect($CFG->dbhost, $CFG->dbuser, $CFG->dbpass) or die("Error de conexion al servidor");
+	$db=mysqli_select_db($DB, $CFG->dbname) or die("Error de conexion a la BD");
+	return $DB;
 }
 
 function CloseConexion(){
-	global $link;
-	mysqli_close($link);
+	global $DB;
+	mysqli_close($DB);
 }
 
 function autogeneradolote($tabla,$campocodigo,$numcaracteres){
-Global $link;
+Global $DB;
 	$numcaracteres=$numcaracteres*(-1);
-	$rsTabla=mysqli_query($link, "select count($campocodigo) from $tabla");
+	$rsTabla=mysqli_query($DB, "select count($campocodigo) from $tabla");
 	$ATabla=mysqli_fetch_array($rsTabla);
 	$nreg=$ATabla[0];
 	if($nreg>0)	{
-		$rsTabla=mysqli_query($link, "select $campocodigo from $tabla");
+		$rsTabla=mysqli_query($DB, "select $campocodigo from $tabla");
 		mysqli_data_seek($rsTabla,$nreg-1);
 		$ATabla=mysqli_fetch_array($rsTabla);
 	}
@@ -38,13 +38,13 @@ Global $link;
 }
 
 function autogenerado($tabla,$campocodigo,$numcaracteres){
-Global $link;
+Global $DB;
 	$numcaracteres=$numcaracteres*(-1);
-	$rsTabla=mysqli_query($link, "select count($campocodigo) from $tabla");
+	$rsTabla=mysqli_query($DB, "select count($campocodigo) from $tabla");
 	$ATabla=mysqli_fetch_array($rsTabla);
 	$nreg=$ATabla[0];
 	if($nreg>0)	{
-		$rsTabla=mysqli_query($link, "select $campocodigo from $tabla");
+		$rsTabla=mysqli_query($DB, "select $campocodigo from $tabla");
 		mysqli_data_seek($rsTabla,$nreg-1);
 		$ATabla=mysqli_fetch_array($rsTabla);
 	}
@@ -72,11 +72,11 @@ Global $ordenactual;
 Global $sentido;
 Global $pagina;
 	$limite=6;
-	$rs=mysqli_query($link, $sql) or die("Error en la consulta");
-	$totalfilas = mysqli_num_rows($rs); 
-	if(empty($pagina))$pagina = 1; 
+	$rs=mysqli_query($DB, $sql) or die("Error en la consulta");
+	$totalfilas = mysqli_num_rows($rs);
+	if(empty($pagina))$pagina = 1;
 	$filainicial =  $pagina*$limite-($limite);
-if(empty($ordenarpor))$ordenarpor = "1"; 
+if(empty($ordenarpor))$ordenarpor = "1";
 if($ordenactual==$ordenarpor){
 	if($sentido=="Desc")		{
 		$sentido="Asc";
@@ -86,26 +86,26 @@ if($ordenactual==$ordenarpor){
 }else{
 		$sentido="Asc";
 }
-$ordenactual=$ordenarpor; 
-	$rs_lim=mysqli_query($link, "$sql Order By $ordenarpor $sentido Limit $filainicial, $limite") or die ("Error en el ordenamiento...");
-	MostrarTabla($rs_lim,$tabla,$pagina,$ordenactual,$sentido);	
-	
-	if($pagina != 1) { 
-		$paginaprevia= $pagina - 1; 
-	} 
+$ordenactual=$ordenarpor;
+	$rs_lim=mysqli_query($DB, "$sql Order By $ordenarpor $sentido Limit $filainicial, $limite") or die ("Error en el ordenamiento...");
+	MostrarTabla($rs_lim,$tabla,$pagina,$ordenactual,$sentido);
+
+	if($pagina != 1) {
+		$paginaprevia= $pagina - 1;
+	}
 	echo "<table border=0 cellpadding=0 cellspacing=0 width=100%><tr align=center><td>";
 	echo "<font class=text>P&aacute;ginas:&nbsp;</b></font>";
-	$numpaginas = ceil($totalfilas/$limite); 
+	$numpaginas = ceil($totalfilas/$limite);
 	for($i=1; $i <= $numpaginas; $i++) {
 		if($i!=$pagina){
-			echo "<font color=#006699 size=2><b><A HREF=".$PHP_SELF."?pagina=".$i."&ordenarpor=".$ordenarpor."&ordenacual=".$ordenactual."&sentido=".$sentido.">".$i."</A></b></font>&nbsp;";  
+			echo "<font color=#006699 size=2><b><A HREF=".$PHP_SELF."?pagina=".$i."&ordenarpor=".$ordenarpor."&ordenacual=".$ordenactual."&sentido=".$sentido.">".$i."</A></b></font>&nbsp;";
 		}else{
-			echo "<font color=red size=2><b>$i</b></font>&nbsp;";  
+			echo "<font color=red size=2><b>$i</b></font>&nbsp;";
 		}
-	} 
+	}
 	echo "</td></tr></table>";
-	if(($totalfilas-($limite*$pagina)) > 0){ 
-		$paginasgte = $pagina + 1; 
+	if(($totalfilas-($limite*$pagina)) > 0){
+		$paginasgte = $pagina + 1;
 	}
 mysqli_free_result($rs);
 }
@@ -115,7 +115,7 @@ function Title($title){
   echo "<tr align=center><td><font class=text><b>$title</b></td></tr>";
 }
 
-function MostrarTabla($rs,$tabla,$pagina,$ordenactual,$sentido){	
+function MostrarTabla($rs,$tabla,$pagina,$ordenactual,$sentido){
 	$campos=mysqli_num_fields($rs);
 	$numfilas=mysqli_num_rows($rs);
 	$ancho='580';if($campos<=3)$ancho='580';
@@ -147,7 +147,7 @@ function MostrarTabla($rs,$tabla,$pagina,$ordenactual,$sentido){
 		for($i=0;$i<$campos;$i++){
 			$campo=mysqli_field_name($rs,$i);
 			echo "<td ><a href=".$PHP_SELF."?pagina=".$pagina."&ordenarpor=".($i+1)."&ordenactual=".$ordenactual."&sentido=".$sentido." title='Ordenar por ".$campo."'>".$campo."</a></td>";
-		} 
+		}
 	echo "</tr>";
 	while($filas=mysqli_fetch_array($rs)){
 		echo "<tr>";
@@ -176,8 +176,8 @@ function MostrarTabla($rs,$tabla,$pagina,$ordenactual,$sentido){
 }
 
 function llenarcombo($tabla,$campos,$condicion,$seleccionado,$parametroselect,$name){
-Global $link;
-$rs = mysqli_query($link, "select $campos from $tabla".$condicion);
+Global $DB;
+$rs = mysqli_query($DB, "select $campos from $tabla".$condicion);
 echo "<select name=".$name." ".$parametroselect." class=form-control id=".$name.">";
 echo "<option value=''>Seleccione</option>";
 	while($cur = mysqli_fetch_array($rs)){
@@ -190,8 +190,8 @@ mysqli_free_result($rs);
 }
 
 function llenarchecks($tabla,$campos){
-Global $link;
-$rsc = mysqli_query($link, "select $campos from $tabla".$condicion);
+Global $DB;
+$rsc = mysqli_query($DB, "select $campos from $tabla".$condicion);
 	while($curc = mysqli_fetch_array($rsc)){
 		echo "<input type='checkbox' value=".$curc[0]." name='chkservicio[]' checked='checked' class='inputcheck ng-pristine ng-valid' ng-model='checked'><span>".$curc[1]."</span>&nbsp;";
 	}

@@ -5,7 +5,7 @@ $id = $_POST['id'];
 
 //ACTUALIZAMOS LOS REGISTROS Y LOS OBTENEMOS
 
-$registro = mysqli_query($link, "SELECT k.fecha,k.serie,k.nrodocumento,k.cantidad,k.idtipod,k.idtipoo FROM kardex k WHERE idproducto='$id' ORDER BY fecha,idkardex");
+$registro = mysqli_query($DB, "SELECT k.fecha,k.serie,k.nrodocumento,k.cantidad,k.idtipod,k.idtipoo FROM kardex k WHERE idproducto='$id' ORDER BY fecha,idkardex");
 
 //CREAMOS NUESTRA VISTA Y LA DEVOLVEMOS AL AJAX
 

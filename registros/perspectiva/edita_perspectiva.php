@@ -5,7 +5,7 @@ $id = $_POST['id'];
 
 //OBTENEMOS LOS VALORES DEL PRODUCTO
 
-$valores = mysqli_query($link, "SELECT * FROM perspectivas WHERE idperspectiva = '$id'");
+$valores = mysqli_query($DB, "SELECT * FROM perspectivas WHERE idperspectiva = '$id'");
 $valores2 = mysqli_fetch_array($valores);
 
 $datos = array(

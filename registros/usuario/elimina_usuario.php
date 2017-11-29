@@ -1,17 +1,16 @@
 <?php
-session_start();
-$idempresa=$_SESSION['id_empresa'];
 include_once(dirname(__FILE__).'/../../config.php');
+$idempresa=$_SESSION['id_empresa'];
 
 $id = $_POST['id'];
 
 //ELIMINAMOS EL PRODUCTO
 
-mysqli_query($link, "DELETE FROM usuario WHERE idusuario = '$id'");
+mysqli_query($DB, "DELETE FROM usuario WHERE idusuario = '$id'");
 
 //ACTUALIZAMOS LOS REGISTROS Y LOS OBTENEMOS
 
-$registro = mysqli_query($link, "SELECT * FROM usuario u,tipousuario tu,area a,empresa e where u.idtipousuario=tu.idtipousuario and u.idarea=a.idarea and u.idempresa=e.idempresa and u.idempresa='$idempresa' ORDER BY idusuario ASC");
+$registro = mysqli_query($DB, "SELECT * FROM usuario u,tipousuario tu,area a,empresa e where u.idtipousuario=tu.idtipousuario and u.idarea=a.idarea and u.idempresa=e.idempresa and u.idempresa='$idempresa' ORDER BY idusuario ASC");
 
 //CREAMOS NUESTRA VISTA Y LA DEVOLVEMOS AL AJAX
 

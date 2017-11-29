@@ -1,9 +1,9 @@
 <?php
-	session_start();
+	include_once(dirname(__FILE__).'/../../config.php');
 	$idempresa=$_SESSION['id_empresa'];
 	$idarea=$_SESSION['id_area'];
-	$conexion = new mysqli('localhost','root','toor','bsc');
-	
+	$DB = new mysqli('localhost','root','toor','bsc');
+
 	$total = array('TOTAL');
 	$meses = array('MESES');
 	/*$enero = array('ENERO');
@@ -18,19 +18,19 @@
 	$octubre = array('OCTUBRE');
 	$noviembre = array('NOVIEMBRE');
 	$diciembre = array('DICIEMBRE');*/
-	
+
 	$consulta = "SELECT sum(total) as total,monthname(fecha) as mes FROM documento_venta where idempresa='$idempresa' group by month(fecha)";
-	$result = $conexion->query($consulta);
-	
+	$result = $DB->query($consulta);
+
 	while ($fila = $result->fetch_array()) {
 		$total[] = (double)$fila['total'];
 		$meses[] = $fila['mes'];
 	}
-	
+
 /*	$consulta = "SELECT * FROM objetivos where idempresa='$idempresa' and idarea='$idarea' and idperspectiva='4'";
-	$result = $conexion->query($consulta);
+	$result = $DB->query($consulta);
 	while($fila = $result->fetch_array()){
-	
+
 		if($fila['mes'] == 'ENERO')
 			$enero[] = (double)$fila['total'];
 		else if ($fila['mes'] == 'FEBRERO'){
@@ -40,5 +40,5 @@
 	}
 */
 	echo json_encode( array($meses,$total) );
-	
+
 ?>

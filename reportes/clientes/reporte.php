@@ -31,9 +31,9 @@ $pdf->Ln(8);
 $pdf->SetFont('Arial', '', 8);
 //CONSULTA
 if ($filtro!=""){
-$productos = mysqli_query($link, "SELECT * FROM persona where idempresa='$idempresa' and idtipopersona='1' and razonsocial like '%$filtro%'");
+$productos = mysqli_query($DB, "SELECT * FROM persona where idempresa='$idempresa' and idtipopersona='1' and razonsocial like '%$filtro%'");
 } else {
-$productos = mysqli_query($link, "SELECT * FROM persona where idempresa='$idempresa' and idtipopersona='1'");
+$productos = mysqli_query($DB, "SELECT * FROM persona where idempresa='$idempresa' and idtipopersona='1'");
 }
 while($productos2 = mysqli_fetch_array($productos)){
 	$pdf->Cell(20, 8, $productos2['ruc'], 0);

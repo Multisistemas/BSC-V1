@@ -1,18 +1,17 @@
 <?php
-session_start();
-$idempresa=$_SESSION['id_empresa'];
 include_once(dirname(__FILE__).'/../../config.php');
+$idempresa=$_SESSION['id_empresa'];
 
 $id = $_POST['id'];
 
 //ELIMINAMOS EL PRODUCTO
 
-mysqli_query($link, "DELETE FROM objetivos WHERE idobjetivo = '$id'");
-mysqli_query($link, "DELETE FROM detalle_objetivos WHERE idobjetivo = '$id'");
+mysqli_query($DB, "DELETE FROM objetivos WHERE idobjetivo = '$id'");
+mysqli_query($DB, "DELETE FROM detalle_objetivos WHERE idobjetivo = '$id'");
 
 //ACTUALIZAMOS LOS REGISTROS Y LOS OBTENEMOS
 
-$registro = mysqli_query($link, "SELECT idobjetivo,o.nombre as objetivo,p.nombre as perspectiva,area FROM objetivos o,perspectivas p,area a where o.idperspectiva=p.idperspectiva and o.idarea=a.idarea and idempresa='$idempresa' ORDER BY idobjetivo desc limit 15");
+$registro = mysqli_query($DB, "SELECT idobjetivo,o.nombre as objetivo,p.nombre as perspectiva,area FROM objetivos o,perspectivas p,area a where o.idperspectiva=p.idperspectiva and o.idarea=a.idarea and idempresa='$idempresa' ORDER BY idobjetivo desc limit 15");
 
 //CREAMOS NUESTRA VISTA Y LA DEVOLVEMOS AL AJAX
 

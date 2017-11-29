@@ -7,23 +7,23 @@ $perspectiva = $_POST['perspectiva'];
 
 switch($proceso){
 	case 'Registro':
-	$registro3 = mysqli_query($link, "SELECT nombre FROM perspectivas where nombre='$perspectiva'");
+	$registro3 = mysqli_query($DB, "SELECT nombre FROM perspectivas where nombre='$perspectiva'");
 	$val=mysqli_num_rows($registro3);
 	if ($val>0){echo "<script language=�JavaScript�> 
                 alert('Perspectiva ya existe'); 
                 </script>";} else {
-		mysqli_query($link, "INSERT INTO perspectivas (nombre)VALUES('$perspectiva')");}
+		mysqli_query($DB, "INSERT INTO perspectivas (nombre)VALUES('$perspectiva')");}
 	break;
 	
 	case 'Edicion':
-		mysqli_query($link, "UPDATE perspectivas SET nombre = '$perspectiva' WHERE idperspectiva = '$id'");
+		mysqli_query($DB, "UPDATE perspectivas SET nombre = '$perspectiva' WHERE idperspectiva = '$id'");
 	break;
 }
 
 
 //ACTUALIZAMOS LOS REGISTROS Y LOS OBTENEMOS
 
-$registro = mysqli_query($link, "SELECT * FROM perspectivas ORDER BY idperspectiva ASC");
+$registro = mysqli_query($DB, "SELECT * FROM perspectivas ORDER BY idperspectiva ASC");
 
 //CREAMOS NUESTRA VISTA Y LA DEVOLVEMOS AL AJAX
 

@@ -1,10 +1,10 @@
 <?php
-session_start();
+include_once(dirname(__FILE__).'/../../config.php');
 $iduser=$_SESSION['id_usu'];
-	include_once(dirname(__FILE__).'/../../config.php');
+
 	$paginaActual = $_POST['partida'];
 
-    $nroProductos = mysqli_num_rows(mysqli_query($link, "select t.idproducto,p.producto,t.cantidad,p.preciocompra from temporal t,producto p where t.idproducto=p.idproducto and t.idusuario='$iduser'"));
+    $nroProductos = mysqli_num_rows(mysqli_query($DB, "select t.idproducto,p.producto,t.cantidad,p.preciocompra from temporal t,producto p where t.idproducto=p.idproducto and t.idusuario='$iduser'"));
     $nroLotes = 10;
     $nroPaginas = ceil($nroProductos/$nroLotes);
     $lista = '';
@@ -23,14 +23,14 @@ $iduser=$_SESSION['id_usu'];
     if($paginaActual < $nroPaginas){
         $lista = $lista.'<li><a href="javascript:pagination('.($paginaActual+1).');">Siguiente</a></li>';
     }
-  
+
   	if($paginaActual <= 1){
   		$limit = 0;
   	}else{
   		$limit = $nroLotes*($paginaActual-1);
   	}
 
-  	$registro = mysqli_query($link, "select t.idproducto,p.producto,t.cantidad,t.precio from temporal t,producto p where t.idproducto=p.idproducto and t.idusuario='$iduser' LIMIT $limit, $nroLotes ");
+  	$registro = mysqli_query($DB, "select t.idproducto,p.producto,t.cantidad,t.precio from temporal t,producto p where t.idproducto=p.idproducto and t.idusuario='$iduser' LIMIT $limit, $nroLotes ");
 
 
   	$tabla = $tabla.'<table class="table table-striped table-condensed table-hover">
@@ -41,7 +41,7 @@ $iduser=$_SESSION['id_usu'];
 							<th width="50">Precio Venta</th>
 							<th width="50">Sub Total</th>
 						</tr>';
-		$x=0;		
+		$x=0;
 	while($registro2 = mysqli_fetch_array($registro)){
 		$subtotal=$registro2['cantidad']*$registro2['precio'];
 		$tabla = $tabla.'<tr>

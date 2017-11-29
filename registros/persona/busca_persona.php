@@ -1,13 +1,13 @@
 <?php
-session_start();
-$idempresa=$_SESSION['id_empresa'];
 include_once(dirname(__FILE__).'/../../config.php');
+$idempresa=$_SESSION['id_empresa'];
+
 
 $dato = $_POST['dato'];
 
 //EJECUTAMOS LA CONSULTA DE BUSQUEDA
 
-$registro = mysqli_query($link, "SELECT * FROM persona p,tipopersona tp where p.idtipopersona=tp.idtipopersona and idempresa='$idempresa' and razonsocial LIKE '%$dato%' ORDER BY idpersona ASC limit 15");
+$registro = mysqli_query($DB, "SELECT * FROM persona p,tipopersona tp where p.idtipopersona=tp.idtipopersona and idempresa='$idempresa' and razonsocial LIKE '%$dato%' ORDER BY idpersona ASC limit 15");
 
 //CREAMOS NUESTRA VISTA Y LA DEVOLVEMOS AL AJAX
 

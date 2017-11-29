@@ -1,4 +1,4 @@
-<?php session_start();?>
+<?php include_once(dirname(__FILE__).'/../../config.php');?>
 <link href="../css/misestilos.css" rel="stylesheet" type="text/css" />
 <link href="../css/style.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>

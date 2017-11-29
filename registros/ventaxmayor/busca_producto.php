@@ -7,7 +7,7 @@ $dato = $_POST['dato'];
 
 //EJECUTAMOS LA CONSULTA DE BUSQUEDA
 
-$registro = mysqli_query($link, "SELECT idproducto,producto FROM producto where idempresa='$idempresa' and producto LIKE '%$dato%' ORDER BY idproducto ASC limit 8");
+$registro = mysqli_query($DB, "SELECT idproducto,producto FROM producto where idempresa='$idempresa' and producto LIKE '%$dato%' ORDER BY idproducto ASC limit 8");
 
 //CREAMOS NUESTRA VISTA Y LA DEVOLVEMOS AL AJAX
 

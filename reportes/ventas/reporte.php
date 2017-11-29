@@ -1,5 +1,5 @@
 <?php
-session_start();
+include_once(dirname(__FILE__).'/../../config.php');
 $idempresa=$_SESSION['id_empresa'];
 $desde = $_GET['desde'];
 $hasta = $_GET['hasta'];
@@ -15,7 +15,6 @@ if(isset($hasta)==false){
 	$hasta = $desde;
 }
 require('../fpdf/fpdf.php');
-require('../conexion.php');
 
 $pdf = new FPDF();
 $pdf->AddPage();
@@ -40,9 +39,9 @@ $pdf->Ln(8);
 $pdf->SetFont('Arial', '', 8);
 //CONSULTA
 if ($desde!=""){
-$productos = mysqli_query($link, "SELECT * FROM documento_venta dv,persona p WHERE dv.idcliente=p.idpersona and dv.idempresa='$idempresa' and fecha BETWEEN '$desde' AND '$hasta'");
+$productos = mysqli_query($DB, "SELECT * FROM documento_venta dv,persona p WHERE dv.idcliente=p.idpersona and dv.idempresa='$idempresa' and fecha BETWEEN '$desde' AND '$hasta'");
 } else {
-$productos = mysqli_query($link, "SELECT * FROM documento_venta dv,persona p WHERE dv.idcliente=p.idpersona and dv.idempresa='$idempresa' and fecha BETWEEN '2015-01-01' AND CURDATE()");
+$productos = mysqli_query($DB, "SELECT * FROM documento_venta dv,persona p WHERE dv.idcliente=p.idpersona and dv.idempresa='$idempresa' and fecha BETWEEN '2015-01-01' AND CURDATE()");
 }
 while($productos2 = mysqli_fetch_array($productos)){
 	$pdf->Cell(100, 8, $productos2['razonsocial'], 0);

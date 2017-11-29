@@ -1,17 +1,16 @@
 <?php
-session_start();
-$iduser=$_SESSION['id_usu'];
 include_once(dirname(__FILE__).'/../../config.php');
+$iduser=$_SESSION['id_usu'];
 
 $id = $_POST['id'];
 
 //ELIMINAMOS EL PRODUCTO
 
-mysqli_query($link, "DELETE FROM temporal WHERE idusuario = '$iduser'");
+mysqli_query($DB, "DELETE FROM temporal WHERE idusuario = '$iduser'");
 
 //ACTUALIZAMOS LOS REGISTROS Y LOS OBTENEMOS
 
-$registro = mysqli_query($link, "select t.idproducto,p.producto,t.cantidad,p.preciocompra from temporal t,producto p where t.idproducto=p.idproducto and t.idusuario='$iduser'");
+$registro = mysqli_query($DB, "select t.idproducto,p.producto,t.cantidad,p.preciocompra from temporal t,producto p where t.idproducto=p.idproducto and t.idusuario='$iduser'");
 
 //CREAMOS NUESTRA VISTA Y LA DEVOLVEMOS AL AJAX
 

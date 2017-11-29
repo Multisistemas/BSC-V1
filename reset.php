@@ -4,10 +4,10 @@
 		$clave=$_REQUEST["txtreset"];
 		$user=$_REQUEST["txtuser"];
 		if ($clave!=""){
-		$link=OpenConexion();
+		$DB=OpenConexion();
 		$con=md5($clave);
 		$sqli="update usuario set clave='".$con."' where idusuario='".$user."'";
-		mysqli_query($link, $sqli);
+		mysqli_query($DB, $sqli);
 		echo "<META http-equiv='refresh' content='0; url=index.php'>";
 		}
 ?>

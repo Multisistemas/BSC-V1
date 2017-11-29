@@ -1,10 +1,9 @@
-<?php session_start();?>
+<?php include("../../registros/Function.php");?>
 <?php if ($_SESSION['id_usu']==""){header("location:index.php");}?>
 <?php
-   	include("../../registros/Function.php");
-	$link=OpenConexion();
+	$DB=OpenConexion();
 	$idusuario=$_SESSION['id_usu'];
-	$rs=mysqli_query($link, "SELECT * FROM usuario u,area a,empresa e WHERE u.idarea=a.idarea and e.idempresa=u.idempresa and idusuario='$idusuario'");
+	$rs=mysqli_query($DB, "SELECT * FROM usuario u,area a,empresa e WHERE u.idarea=a.idarea and e.idempresa=u.idempresa and idusuario='$idusuario'");
 	$filas =mysqli_fetch_object($rs);
 	$nombres=$filas->nombres;
 	$apellidos=$filas->apellidos;
@@ -14,7 +13,7 @@
 	$area=$filas->area;
 	$razon=$filas->razonsocial;
 	$direccion=$filas->direccion;
-	$rsf=mysqli_query($link, "SELECT * FROM uploadsperfil WHERE idusuario='$idusuario' order by id desc limit 1");
+	$rsf=mysqli_query($DB, "SELECT * FROM uploadsperfil WHERE idusuario='$idusuario' order by id desc limit 1");
 	$filasf =mysqli_fetch_object($rsf);
 	$foto=$filasf->name;
 	?>
@@ -77,7 +76,7 @@
           </a>
           <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
-               
+
               <!-- User Account: style can be found in dropdown.less -->
               <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -287,7 +286,7 @@
                     </tr>
                 </table>
             </div>
-            
+
             <div class="modal-footer">
             	<input type="submit" value="Registrar" class="btn btn-success" id="reg"/>
                 <input type="submit" value="Editar" class="btn btn-warning"  id="edi"/>
@@ -307,7 +306,7 @@
         <strong>Copyright &copy; 2017 <a href="https://multissitemas.com.sv">Multisistemas</a>.</strong> Todos los derechos reservados.
       </footer>
 
-   
+
       <!-- Add the sidebar's background. This div must be placed
            immediately after the control sidebar -->
       <div class="control-sidebar-bg"></div>

@@ -1,10 +1,9 @@
-<?php session_start();?>
+<?php include("../../registros/Function.php");?>
 <?php if ($_SESSION['id_usu']==""){header("location:index.php");}?>
 <?php
-   	include("../../registros/Function.php");
-	$link=OpenConexion();
+	$DB=OpenConexion();
 	$idusuario=$_SESSION['id_usu'];
-	$rs=mysqli_query($link, "SELECT * FROM usuario u,area a,empresa e WHERE u.idarea=a.idarea and e.idempresa=u.idempresa and idusuario='$idusuario'");
+	$rs=mysqli_query($DB, "SELECT * FROM usuario u,area a,empresa e WHERE u.idarea=a.idarea and e.idempresa=u.idempresa and idusuario='$idusuario'");
 	$filas =mysqli_fetch_object($rs);
 	$nombres=$filas->nombres;
 	$apellidos=$filas->apellidos;
@@ -14,7 +13,7 @@
 	$area=$filas->area;
 	$razon=$filas->razonsocial;
 	$direccion=$filas->direccion;
-	$rsf=mysqli_query($link, "SELECT * FROM uploadsperfil WHERE idusuario='$idusuario' order by id desc limit 1");
+	$rsf=mysqli_query($DB, "SELECT * FROM uploadsperfil WHERE idusuario='$idusuario' order by id desc limit 1");
 	$filasf =mysqli_fetch_object($rsf);
 	$foto=$filasf->name;
 	?>
@@ -267,7 +266,7 @@ overflow: hidden;
 			<h1>Venta por mayor</h1>
 		</div>
 		<div class="row">
-			<div class="col-md-3">	
+			<div class="col-md-3">
 				<div><label>Empresa: </label> <label><?php echo $razon;?></label>
 				</div>
 			</div>
@@ -283,7 +282,7 @@ overflow: hidden;
 			</div>
 		</div>
  		<div class="row">
-			<div class="col-md-5">	
+			<div class="col-md-5">
 				<div><label>Producto:</label> <input id="busca" name="busca" type="text" class="col-md-2 form-control" placeholder="Ingresar Producto.." autocomplete="on" /><input type="text" id="idpro" name="idpro" style="visibility:hidden; height:1px;"/>
 				<div id="agrega-registros"></div>
 				</div>

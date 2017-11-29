@@ -1,10 +1,10 @@
-<?php session_start();?>
+<?php include("registros/Function.php");?>
 <?php if ($_SESSION['id_usu']==""){header("location:index.php");}?>
 <?php
-   	include("registros/Function.php");
-	$link=OpenConexion();
+
+	$DB=OpenConexion();
 	$idusuario=$_SESSION['id_usu'];
-	$rs=mysqli_query($link, "SELECT * FROM usuario u,area a,empresa e WHERE u.idarea=a.idarea and e.idempresa=u.idempresa and idusuario='$idusuario'");
+	$rs=mysqli_query($DB, "SELECT * FROM usuario u,area a,empresa e WHERE u.idarea=a.idarea and e.idempresa=u.idempresa and idusuario='$idusuario'");
 	$filas =mysqli_fetch_object($rs);
 	$nombres=$filas->nombres;
 	$apellidos=$filas->apellidos;
@@ -14,7 +14,7 @@
 	$area=$filas->area;
 	$razon=$filas->razonsocial;
 	$direccion=$filas->direccion;
-	$rsf=mysqli_query($link, "SELECT * FROM uploadsperfil WHERE idusuario='$idusuario' order by id desc limit 1");
+	$rsf=mysqli_query($DB, "SELECT * FROM uploadsperfil WHERE idusuario='$idusuario' order by id desc limit 1");
 	$filasf =mysqli_fetch_object($rsf);
 	$foto=$filasf->name;
 	?>
@@ -329,8 +329,8 @@
 						if(json.res == true)
 						{
 							var element;
-							(element = file.previewElement) != null ? 
-							element.parentNode.removeChild(file.previewElement) : 
+							(element = file.previewElement) != null ?
+							element.parentNode.removeChild(file.previewElement) :
 							false;
 							location='intranet.php';
 						}
@@ -397,13 +397,13 @@
         <strong>Copyright &copy; 2017 <a href="https://multissitemas.com.sv">Multisistemas</a>.</strong> Todos los derechos reservados.
       </footer>
 
- 
+
       <!-- Add the sidebar's background. This div must be placed
            immediately after the control sidebar -->
       <div class="control-sidebar-bg"></div>
     </div><!-- ./wrapper -->
 
-    <!-- jQuery 2.1.4 
+    <!-- jQuery 2.1.4
     <script src="plugins/jQuery/jQuery-2.1.4.min.js"></script>-->
     <!-- jQuery UI 1.11.4 -->
     <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>

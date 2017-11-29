@@ -2,9 +2,9 @@
   	include("registros/Function.php");
 		$dni=$_REQUEST["txtdni"];
 		if ($dni!=""){
-		$link=OpenConexion();
+		$DB=OpenConexion();
 		$sql="SELECT * FROM usuario WHERE dni='".$dni."'";
-		$rs=mysqli_query($link, $sql);
+		$rs=mysqli_query($DB, $sql);
 		$fila =mysqli_fetch_object($rs);
 		$id = $fila->idusuario;
 		if ($id!=""){

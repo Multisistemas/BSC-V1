@@ -7,23 +7,23 @@ $almacen = $_POST['almacen'];
 
 switch($proceso){
 	case 'Registro':
-	$registro3 = mysqli_query($link, "SELECT almacen FROM almacen where almacen='$almacen'");
+	$registro3 = mysqli_query($DB, "SELECT almacen FROM almacen where almacen='$almacen'");
 	$val=mysqli_num_rows($registro3);
 	if ($val>0){echo "<script language=�JavaScript�> 
                 alert('Almacen ya existe'); 
                 </script>";} else {
-		mysqli_query($link, "INSERT INTO almacen (almacen)VALUES('$almacen')");}
+		mysqli_query($DB, "INSERT INTO almacen (almacen)VALUES('$almacen')");}
 	break;
 	
 	case 'Edicion':
-		mysqli_query($link, "UPDATE almacen SET almacen = '$almacen' WHERE idalmacen = '$id'");
+		mysqli_query($DB, "UPDATE almacen SET almacen = '$almacen' WHERE idalmacen = '$id'");
 	break;
 }
 
 
 //ACTUALIZAMOS LOS REGISTROS Y LOS OBTENEMOS
 
-$registro = mysqli_query($link, "SELECT * FROM almacen ORDER BY idalmacen ASC");
+$registro = mysqli_query($DB, "SELECT * FROM almacen ORDER BY idalmacen ASC");
 
 //CREAMOS NUESTRA VISTA Y LA DEVOLVEMOS AL AJAX
 

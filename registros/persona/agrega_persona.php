@@ -1,5 +1,4 @@
 <?php
-session_start();
 include_once(dirname(__FILE__).'/../../config.php');
 $idempresa = $_SESSION['id_empresa'];
 $id = $_POST['id'];
@@ -16,18 +15,18 @@ $idtipopersona = $_POST['idtipopersona'];
 
 switch($proceso){
 	case 'Registro':
-		mysqli_query($link, "INSERT INTO persona (ruc,razonsocial,direccion,telefono,movil,email,fecharegistro,idtipopersona,idempresa)VALUES('$ruc','$rsocial','$direccion','$telefono','$celular','$correo','$fechar','$idtipopersona','$idempresa')");
+		mysqli_query($DB, "INSERT INTO persona (ruc,razonsocial,direccion,telefono,movil,email,fecharegistro,idtipopersona,idempresa)VALUES('$ruc','$rsocial','$direccion','$telefono','$celular','$correo','$fechar','$idtipopersona','$idempresa')");
 	break;
-	
+
 	case 'Edicion':
-		mysqli_query($link, "UPDATE persona SET ruc = '$ruc', razonsocial='$rsocial',direccion='$direccion',telefono='$telefono',movil='$celular',email='$correo',fecharegistro='$fechar',idtipopersona='$idtipopersona',idempresa='$idempresa' WHERE idpersona = '$id'");
+		mysqli_query($DB, "UPDATE persona SET ruc = '$ruc', razonsocial='$rsocial',direccion='$direccion',telefono='$telefono',movil='$celular',email='$correo',fecharegistro='$fechar',idtipopersona='$idtipopersona',idempresa='$idempresa' WHERE idpersona = '$id'");
 	break;
 }
 
 
 //ACTUALIZAMOS LOS REGISTROS Y LOS OBTENEMOS
 
-$registro = mysqli_query($link, "SELECT * FROM persona p,tipopersona tp where p.idtipopersona=tp.idtipopersona and idempresa='$idempresa' ORDER BY idpersona desc limit 15");
+$registro = mysqli_query($DB, "SELECT * FROM persona p,tipopersona tp where p.idtipopersona=tp.idtipopersona and idempresa='$idempresa' ORDER BY idpersona desc limit 15");
 
 //CREAMOS NUESTRA VISTA Y LA DEVOLVEMOS AL AJAX
 

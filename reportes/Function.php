@@ -3,28 +3,28 @@
 <!-- <link href="../css/forms.css" rel="stylesheet" type="text/css" /> -->
 <?php
 include_once(dirname(__FILE__).'../../config.php');
-global $CFG, $conexion, $link;
+global $CFG, $DB, $DB;
 
 function OpenConexion(){
 	global $CFG;
-	$link=mysqli_connect($CFG->dbhost, $CFG->dbuser, $CFG->dbpass) or die("Error de conexion al servidor");
-	$db=mysqli_select_db($link, $CFG->dbname) or die("Error de conexion a la BD");
-	return $link;
+	$DB=mysqli_connect($CFG->dbhost, $CFG->dbuser, $CFG->dbpass) or die("Error de conexion al servidor");
+	$db=mysqli_select_db($DB, $CFG->dbname) or die("Error de conexion a la BD");
+	return $DB;
 }
 
 function CloseConexion(){
-	global $link;
-	mysqli_close($link);
+	global $DB;
+	mysqli_close($DB);
 }
 
 function autogeneradolote($tabla,$campocodigo,$numcaracteres){
-	Global $link;
+	Global $DB;
 	$numcaracteres=$numcaracteres*(-1);
-	$rsTabla=mysqli_query($link, "select count($campocodigo) from $tabla");
+	$rsTabla=mysqli_query($DB, "select count($campocodigo) from $tabla");
 	$ATabla=mysqli_fetch_array($rsTabla);
 	$nreg=$ATabla[0];
 	if($nreg>0)	{
-		$rsTabla=mysqli_query($link, "select $campocodigo from $tabla");
+		$rsTabla=mysqli_query($DB, "select $campocodigo from $tabla");
 		mysqli_data_seek($rsTabla,$nreg-1);
 		$ATabla=mysqli_fetch_array($rsTabla);
 	}
@@ -36,13 +36,13 @@ function autogeneradolote($tabla,$campocodigo,$numcaracteres){
 }
 
 function autogenerado($tabla,$campocodigo,$numcaracteres){
-Global $link;
+Global $DB;
 	$numcaracteres=$numcaracteres*(-1);
-	$rsTabla=mysqli_query($link, "select count($campocodigo) from $tabla");
+	$rsTabla=mysqli_query($DB, "select count($campocodigo) from $tabla");
 	$ATabla=mysqli_fetch_array($rsTabla);
 	$nreg=$ATabla[0];
 	if($nreg>0)	{
-		$rsTabla=mysqli_query($link, "select $campocodigo from $tabla");
+		$rsTabla=mysqli_query($DB, "select $campocodigo from $tabla");
 		mysqli_data_seek($rsTabla,$nreg-1);
 		$ATabla=mysqli_fetch_array($rsTabla);
 	}
@@ -70,7 +70,7 @@ Global $ordenactual;
 Global $sentido;
 Global $pagina;
 	$limite=6;
-	$rs=mysqli_query($link, $sql) or die("Error en la consulta");
+	$rs=mysqli_query($DB, $sql) or die("Error en la consulta");
 	$totalfilas = mysqli_num_rows($rs);
 	if(empty($pagina))$pagina = 1;
 	$filainicial =  $pagina*$limite-($limite);
@@ -85,7 +85,7 @@ if($ordenactual==$ordenarpor){
 		$sentido="Asc";
 }
 $ordenactual=$ordenarpor;
-	$rs_lim=mysqli_query($link, "$sql Order By $ordenarpor $sentido Limit $filainicial, $limite") or die ("Error en el ordenamiento...");
+	$rs_lim=mysqli_query($DB, "$sql Order By $ordenarpor $sentido Limit $filainicial, $limite") or die ("Error en el ordenamiento...");
 	MostrarTabla($rs_lim,$tabla,$pagina,$ordenactual,$sentido);
 
 	if($pagina != 1) {
@@ -174,8 +174,8 @@ function MostrarTabla($rs,$tabla,$pagina,$ordenactual,$sentido){
 }
 
 function llenarcombo($tabla,$campos,$condicion,$seleccionado,$parametroselect,$name){
-Global $link;
-$rs = mysqli_query($link, "select $campos from $tabla".$condicion);
+Global $DB;
+$rs = mysqli_query($DB, "select $campos from $tabla".$condicion);
 echo "<select name=".$name." ".$parametroselect." class=form-control id=".$name.">";
 echo "<option value=''>Seleccione</option>";
 	while($cur = mysqli_fetch_array($rs)){
@@ -188,8 +188,8 @@ mysqli_free_result($rs);
 }
 
 function llenarchecks($tabla,$campos){
-Global $link;
-$rsc = mysqli_query($link, "select $campos from $tabla".$condicion);
+Global $DB;
+$rsc = mysqli_query($DB, "select $campos from $tabla".$condicion);
 	while($curc = mysqli_fetch_array($rsc)){
 		echo "<input type='checkbox' value=".$curc[0]." name='chkservicio[]' checked='checked' class='inputcheck ng-pristine ng-valid' ng-model='checked'><span>".$curc[1]."</span>&nbsp;";
 	}

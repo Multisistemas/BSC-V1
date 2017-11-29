@@ -1,10 +1,10 @@
 <?php
-session_start();
+include_once(dirname(__FILE__).'/../../config.php');
 $idempresa=$_SESSION['id_empresa'];
-	include_once(dirname(__FILE__).'/../../config.php');
+
 	$paginaActual = $_POST['partida'];
 
-    $nroProductos = mysqli_num_rows(mysqli_query($link, "SELECT * FROM producto p,categoria c,almacen a where p.idcategoria=c.idcategoria and p.idalmacen=a.idalmacen and p.idempresa='$idempresa'"));
+    $nroProductos = mysqli_num_rows(mysqli_query($DB, "SELECT * FROM producto p,categoria c,almacen a where p.idcategoria=c.idcategoria and p.idalmacen=a.idalmacen and p.idempresa='$idempresa'"));
     $nroLotes = 15;
     $nroPaginas = ceil($nroProductos/$nroLotes);
     $lista = '';
@@ -23,14 +23,14 @@ $idempresa=$_SESSION['id_empresa'];
     if($paginaActual < $nroPaginas){
         $lista = $lista.'<li><a href="javascript:pagination('.($paginaActual+1).');">Siguiente</a></li>';
     }
-  
+
   	if($paginaActual <= 1){
   		$limit = 0;
   	}else{
   		$limit = $nroLotes*($paginaActual-1);
   	}
 
-  	$registro = mysqli_query($link, "SELECT * FROM producto p,categoria c,almacen a where p.idcategoria=c.idcategoria and p.idalmacen=a.idalmacen and p.idempresa='$idempresa' LIMIT $limit, $nroLotes ");
+  	$registro = mysqli_query($DB, "SELECT * FROM producto p,categoria c,almacen a where p.idcategoria=c.idcategoria and p.idalmacen=a.idalmacen and p.idempresa='$idempresa' LIMIT $limit, $nroLotes ");
 
 
   	$tabla = $tabla.'<table class="table table-striped table-condensed table-hover">
@@ -46,7 +46,7 @@ $idempresa=$_SESSION['id_empresa'];
 							<th width="50">Almacen</th>
 			                <th width="50">Opciones</th>
 			            </tr>';
-				
+
 	while($registro2 = mysqli_fetch_array($registro)){
 		$tabla = $tabla.'<tr>
 							<td>'.utf8_encode($registro2['producto']).'</td>
@@ -59,9 +59,9 @@ $idempresa=$_SESSION['id_empresa'];
 							<td>'.$registro2['categoria'].'</td>
 							<td>'.$registro2['almacen'].'</td>
 							<td><a href="javascript:editarproducto('.$registro2['idproducto'].');" class="glyphicon glyphicon-edit"></a> <a href="javascript:eliminarproducto('.$registro2['idproducto'].');" class="glyphicon glyphicon-remove-circle"></a></td>
-						  </tr>';		
+						  </tr>';
 	}
-        
+
 
     $tabla = $tabla.'</table>';
 

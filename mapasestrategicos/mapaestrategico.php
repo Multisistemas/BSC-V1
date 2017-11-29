@@ -1,5 +1,5 @@
-<?php session_start();?>
-    <style> 
+<?php include_once(dirname(__FILE__).'/../../config.php');?>
+    <style>
         .captionOrange, .captionBlack
         {
             color: #fff;
@@ -170,7 +170,7 @@
             <!-- Thumbnail Item Skin End -->
         </div>
         <!-- ThumbnailNavigator Skin End -->
-        
+
         <!-- Bullet Navigator Skin Begin -->
         <!-- jssor slider bullet navigator skin 01 -->
         <style>
@@ -200,7 +200,7 @@
             <div u="prototype" style="POSITION: absolute; WIDTH: 12px; HEIGHT: 12px;"></div>
         </div>
         <!-- Bullet Navigator Skin End -->
-        
+
         <!-- Arrow Navigator Skin Begin -->
         <style>
             /* jssor slider arrow navigator skin 05 css */
@@ -235,7 +235,7 @@
         </span>
     </div><?php } else { ?><img src="images/areaoperaciones.png"><?php } } } ?></td></tr>
 	   </table>
-	   
+
 	   <form action="ficheroExcel.php" method="post" target="_blank" id="FormularioExportacion">
 <p align="center"><a href='#' onClick='window.print();'><img src="../images/imprimir.png" border='0' title='Imprimir' width='30' height='30'></a></p>
 <input type="hidden" id="datos_a_enviar" name="datos_a_enviar" />

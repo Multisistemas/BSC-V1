@@ -4,7 +4,7 @@ $iduser=$_SESSION['id_usu'];
 	include_once(dirname(__FILE__).'/../../config.php');
 	$paginaActual = $_POST['partida'];
 
-    $nroProductos = mysqli_num_rows(mysqli_query($link, "select t.idproducto,p.producto,t.cantidad,p.precioventa from temporal t,producto p where t.idproducto=p.idproducto and t.idusuario='$iduser'"));
+    $nroProductos = mysqli_num_rows(mysqli_query($DB, "select t.idproducto,p.producto,t.cantidad,p.precioventa from temporal t,producto p where t.idproducto=p.idproducto and t.idusuario='$iduser'"));
     $nroLotes = 10;
     $nroPaginas = ceil($nroProductos/$nroLotes);
     $lista = '';
@@ -30,7 +30,7 @@ $iduser=$_SESSION['id_usu'];
   		$limit = $nroLotes*($paginaActual-1);
   	}
 
-  	$registro = mysqli_query($link, "select t.idproducto,p.producto,t.cantidad,t.precio from temporal t,producto p where t.idproducto=p.idproducto and t.idusuario='$iduser' LIMIT $limit, $nroLotes ");
+  	$registro = mysqli_query($DB, "select t.idproducto,p.producto,t.cantidad,t.precio from temporal t,producto p where t.idproducto=p.idproducto and t.idusuario='$iduser' LIMIT $limit, $nroLotes ");
 
 
   	$tabla = $tabla.'<table class="table table-striped table-condensed table-hover">

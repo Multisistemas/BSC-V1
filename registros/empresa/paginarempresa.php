@@ -1,10 +1,10 @@
 <?php
-session_start();
+include_once(dirname(__FILE__).'/../../config.php');
 $idempresa = $_SESSION['id_empresa'];
-	include_once(dirname(__FILE__).'/../../config.php');
+
 	$paginaActual = $_POST['partida'];
 
-    $nroProductos = mysqli_num_rows(mysqli_query($link, "SELECT * FROM empresa where idempresa='$idempresa'"));
+    $nroProductos = mysqli_num_rows(mysqli_query($DB, "SELECT * FROM empresa where idempresa='$idempresa'"));
     $nroLotes = 15;
     $nroPaginas = ceil($nroProductos/$nroLotes);
     $lista = '';
@@ -23,14 +23,14 @@ $idempresa = $_SESSION['id_empresa'];
     if($paginaActual < $nroPaginas){
         $lista = $lista.'<li><a href="javascript:pagination('.($paginaActual+1).');">Siguiente</a></li>';
     }
-  
+
   	if($paginaActual <= 1){
   		$limit = 0;
   	}else{
   		$limit = $nroLotes*($paginaActual-1);
   	}
 
-  	$registro = mysqli_query($link, "SELECT * FROM empresa where idempresa='$idempresa' LIMIT $limit, $nroLotes ");
+  	$registro = mysqli_query($DB, "SELECT * FROM empresa where idempresa='$idempresa' LIMIT $limit, $nroLotes ");
 
 
   	$tabla = $tabla.'<table class="table table-striped table-condensed table-hover">
@@ -43,7 +43,7 @@ $idempresa = $_SESSION['id_empresa'];
 							<th width="50">Correo</th>
 			                <th width="50">Opciones</th>
 			            </tr>';
-				
+
 	while($registro2 = mysqli_fetch_array($registro)){
 		$tabla = $tabla.'<tr>
 							<td>'.$registro2['ruc'].'</td>
@@ -53,9 +53,9 @@ $idempresa = $_SESSION['id_empresa'];
 							<td>'.$registro2['movil'].'</td>
 							<td>'.$registro2['email'].'</td>
 							<td><a href="javascript:editarempresa('.$registro2['idempresa'].');" class="glyphicon glyphicon-edit"></a> <a href="javascript:eliminarempresa('.$registro2['idempresa'].');" class="glyphicon glyphicon-remove-circle"></a></td>
-						  </tr>';		
+						  </tr>';
 	}
-        
+
 
     $tabla = $tabla.'</table>';
 

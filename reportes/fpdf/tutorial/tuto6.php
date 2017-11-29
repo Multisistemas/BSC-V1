@@ -110,12 +110,12 @@ $pdf->AddPage();
 $pdf->SetFont('Arial','',20);
 $pdf->Write(5,'Para saber qu� hay de nuevo en este tutorial, pulse ');
 $pdf->SetFont('','U');
-$link = $pdf->AddLink();
+$DB = $pdf->AddLink();
 $pdf->Write(5,'aqu�');
 $pdf->SetFont('');
 // Segunda p�gina
 $pdf->AddPage();
-$pdf->SetLink($link);
+$pdf->SetLink($DB);
 $pdf->Image('logo.png',10,12,30,0,'','http://www.fpdf.org');
 $pdf->SetLeftMargin(45);
 $pdf->SetFontSize(14);

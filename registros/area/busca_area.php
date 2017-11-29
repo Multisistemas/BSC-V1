@@ -5,7 +5,7 @@ $dato = $_POST['dato'];
 
 //EJECUTAMOS LA CONSULTA DE BUSQUEDA
 
-$registro = mysqli_query($link, "SELECT * FROM area WHERE area LIKE '%$dato%' ORDER BY idarea ASC");
+$registro = mysqli_query($DB, "SELECT * FROM area WHERE area LIKE '%$dato%' ORDER BY idarea ASC");
 
 //CREAMOS NUESTRA VISTA Y LA DEVOLVEMOS AL AJAX
 

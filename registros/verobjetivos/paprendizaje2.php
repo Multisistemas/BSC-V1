@@ -1,4 +1,4 @@
-<?php session_start();?>
+<?php include_once(dirname(__FILE__).'/../../config.php');?>
 <link href="../css/misestilos.css" rel="stylesheet" type="text/css" />
 <link href="../css/style.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
@@ -8,13 +8,13 @@
     		url:'datosgraficapa2.php',
     		type:'post',
     		dataType:'json',
-    		async:false    		
+    		async:false
     	}).responseText;
-    	
+
     	datos = JSON.parse(datos);
     	google.load("visualization", "1", {packages:["corechart"]});
       	google.setOnLoadCallback(dibujarGrafico);
-      
+
       	function dibujarGrafico() {
         	var data = google.visualization.arrayToDataTable(datos);
 

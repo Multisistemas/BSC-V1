@@ -7,23 +7,23 @@ $tipou = $_POST['tipou'];
 
 switch($proceso){
 	case 'Registro':
-	$registro3 = mysqli_query($link, "SELECT tipousuario FROM tipousuario where tipousuario='$tipou'");
+	$registro3 = mysqli_query($DB, "SELECT tipousuario FROM tipousuario where tipousuario='$tipou'");
 	$val=mysqli_num_rows($registro3);
 	if ($val>0){echo "<script language=�JavaScript�> 
                 alert('Tipo de Usuario ya existe'); 
                 </script>";} else {
-		mysqli_query($link, "INSERT INTO tipousuario (tipousuario)VALUES('$tipou')");}
+		mysqli_query($DB, "INSERT INTO tipousuario (tipousuario)VALUES('$tipou')");}
 	break;
 	
 	case 'Edicion':
-		mysqli_query($link, "UPDATE tipousuario SET tipousuario = '$tipou' WHERE idtipousuario = '$id'");
+		mysqli_query($DB, "UPDATE tipousuario SET tipousuario = '$tipou' WHERE idtipousuario = '$id'");
 	break;
 }
 
 
 //ACTUALIZAMOS LOS REGISTROS Y LOS OBTENEMOS
 
-$registro = mysqli_query($link, "SELECT * FROM tipousuario ORDER BY idtipousuario ASC");
+$registro = mysqli_query($DB, "SELECT * FROM tipousuario ORDER BY idtipousuario ASC");
 
 //CREAMOS NUESTRA VISTA Y LA DEVOLVEMOS AL AJAX
 

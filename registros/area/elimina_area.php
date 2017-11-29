@@ -5,11 +5,11 @@ $id = $_POST['id'];
 
 //ELIMINAMOS EL PRODUCTO
 
-mysqli_query($link, "DELETE FROM area WHERE idarea = '$id'");
+mysqli_query($DB, "DELETE FROM area WHERE idarea = '$id'");
 
 //ACTUALIZAMOS LOS REGISTROS Y LOS OBTENEMOS
 
-$registro = mysqli_query($link, "SELECT * FROM area ORDER BY idarea ASC");
+$registro = mysqli_query($DB, "SELECT * FROM area ORDER BY idarea ASC");
 
 //CREAMOS NUESTRA VISTA Y LA DEVOLVEMOS AL AJAX
 

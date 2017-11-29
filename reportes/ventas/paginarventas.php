@@ -1,10 +1,10 @@
 <?php
-session_start();
+include_once(dirname(__FILE__).'/../../config.php');
 $idempresa=$_SESSION['id_empresa'];
-	include_once(dirname(__FILE__).'/../../config.php');
+
 	$paginaActual = $_POST['partida'];
 
-    $nroProductos = mysqli_num_rows(mysqli_query($link, "SELECT * FROM documento_venta dv,persona p WHERE dv.idcliente=p.idpersona and dv.idempresa='$idempresa'"));
+    $nroProductos = mysqli_num_rows(mysqli_query($DB, "SELECT * FROM documento_venta dv,persona p WHERE dv.idcliente=p.idpersona and dv.idempresa='$idempresa'"));
     $nroLotes = 80;
     $nroPaginas = ceil($nroProductos/$nroLotes);
     $lista = '';
@@ -23,14 +23,14 @@ $idempresa=$_SESSION['id_empresa'];
     if($paginaActual < $nroPaginas){
         $lista = $lista.'<li><a href="javascript:pagination('.($paginaActual+1).');">Siguiente</a></li>';
     }
-  
+
   	if($paginaActual <= 1){
   		$limit = 0;
   	}else{
   		$limit = $nroLotes*($paginaActual-1);
   	}
 
-  	$registro = mysqli_query($link, "SELECT * FROM documento_venta dv,persona p WHERE dv.idcliente=p.idpersona and dv.idempresa='$idempresa' LIMIT $limit, $nroLotes ");
+  	$registro = mysqli_query($DB, "SELECT * FROM documento_venta dv,persona p WHERE dv.idcliente=p.idpersona and dv.idempresa='$idempresa' LIMIT $limit, $nroLotes ");
 
 
   	$tabla = $tabla.'<table class="table table-striped table-condensed table-hover">
@@ -40,16 +40,16 @@ $idempresa=$_SESSION['id_empresa'];
 				<th width="200">Total</th>
 				<th width="200">Ver Detalle</th>
             </tr>';
-				
+
 	while($registro2 = mysqli_fetch_array($registro)){
 		$tabla = $tabla.'<tr>
 				<td>'.utf8_encode($registro2['razonsocial']).'</td>
 				<td>'.$registro2['fecha'].'</td>
 				<td>'.$registro2['total'].'</td>
 				<td><button onclick="javascript:verdetalle('.utf8_encode($registro2['iddocumento']).');" class="btn btn-block btn-primary btn-ls"><i class="glyphicon glyphicon-eye-open"></i> Ver detalle</button></td>
-				</tr>';		
+				</tr>';
 	}
-        
+
 
     $tabla = $tabla.'</table>';
 

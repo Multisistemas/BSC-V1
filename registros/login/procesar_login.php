@@ -1,21 +1,21 @@
 <?php
-session_start();
 include_once('../../config.php');
-global $conexion;
-//debug_to_console($conexion);
+global $DB;
+//debug_to_console($DB);
 $usu = addslashes($_POST['usu']);
 $pass = addslashes($_POST['pass']);
 $area = addslashes($_POST['area']);
 
-$usuario = mysqli_query($conexion, "SELECT * FROM usuario WHERE login = '$usu'");
+$usuario = mysqli_query($DB, "SELECT * FROM usuario WHERE login = '$usu'");
 if(mysqli_num_rows($usuario)<1){
 	echo 'usuario';
+	var_dump(json_encode($DB));
 }else{
-	$area = mysqli_query($conexion, "SELECT * FROM usuario WHERE login = '$usu' AND idarea = '$area'");
+	$area = mysqli_query($DB, "SELECT * FROM usuario WHERE login = '$usu' AND idarea = '$area'");
 	if(mysqli_num_rows($area)<1){
 		echo 'area';
 	}else{
-		$consulta = mysqli_query($conexion, "SELECT * FROM usuario WHERE login = '$usu' AND clave = '".md5($pass)."'");
+		$consulta = mysqli_query($DB, "SELECT * FROM usuario WHERE login = '$usu' AND clave = '".md5($pass)."'");
 		if(mysqli_num_rows($consulta)<1){
 			echo 'password';
 		}else{

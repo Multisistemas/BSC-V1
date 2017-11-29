@@ -2,9 +2,9 @@
   	include("registros/Function.php");
 		$dni=$_REQUEST["txtdni"];
 		if ($dni!=""){
-		$link=OpenConexion();
+		$DB=OpenConexion();
 		$sql="SELECT * FROM usuario WHERE dni='".$dni."'";
-		$rs=mysqli_query($link, $sql);
+		$rs=mysqli_query($DB, $sql);
 		$fila =mysqli_fetch_object($rs);
 		$id = $fila->idusuario;
 		if ($id!=""){
@@ -12,7 +12,7 @@
 		$tipo=$_REQUEST["tipo"];
 		$opc=$_REQUEST["opc"];
 		$sqli="insert into asistencia(fecha,tipo,opcion,idusuario) values('".$fecha."','".$tipo."','".$opc."','".$id."')";
-		mysqli_query($link, $sqli);
+		mysqli_query($DB, $sqli);
 		echo "<META http-equiv='refresh' content='0; url=index.php'>";	
 		}
 		else

@@ -1701,7 +1701,7 @@ var $JssorSlider$ = window.$JssorSlider$ = function (elmt, options) {
             ResetCaptionSlider(true);
 
             _SelfSlideItem.$Image = _ImageItem;
-            _SelfSlideItem.$Link = _LinkItem;
+            _SelfSlideItem.$DB = _LinkItem;
 
             _SelfSlideItem.$Item = slideElmt;
 
@@ -1750,8 +1750,8 @@ var $JssorSlider$ = window.$JssorSlider$ = function (elmt, options) {
 
             $Jssor$.$Empty(_LinkContainer);
 
-            if (_ShowLink && _IsSlideshowRunning && slideItem.$Link) {
-                $Jssor$.$AppendChild(_LinkContainer, slideItem.$Link);
+            if (_ShowLink && _IsSlideshowRunning && slideItem.$DB) {
+                $Jssor$.$AppendChild(_LinkContainer, slideItem.$DB);
             }
 
             $Jssor$.$ShowElement(_LinkContainer, !_IsSlideshowRunning && slideItem.$Image);

@@ -14,6 +14,7 @@ $(document).ready(function() {
  <?php
 	$idempresa=$_SESSION['id_empresa'];
 	$idarea=$_SESSION['id_area'];
+	$k = 0;
 ?>
 
 	<?php if($idarea==4){?>
@@ -136,6 +137,7 @@ $n=$n+1;
 	} else {
 	$rs=mysqli_query($DB, "SELECT * FROM objetivos o,perspectivas p,area a where o.idperspectiva=p.idperspectiva and o.idarea=a.idarea and idempresa='$idempresa' and o.idarea='$idarea' order by area");
 	}
+	$n = 0;
 	while ($fila=mysqli_fetch_array($rs)){
 $n=$n+1;
 	$total=0;

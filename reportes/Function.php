@@ -1,6 +1,3 @@
-<LINK href="dist/css/AdminLTE.min.css" type=text/css rel=stylesheet>
-<!-- <LINK href="estilos.css" type=text/css rel=stylesheet> -->
-<!-- <link href="../css/forms.css" rel="stylesheet" type="text/css" /> -->
 <?php
 include_once(dirname(__FILE__).'../../config.php');
 global $CFG, $DB, $DB;
@@ -54,7 +51,7 @@ Global $DB;
 }
 
 function Msg($title,$message){
-	echo "<html><head><title>Message</title><link href='../estilos/style.css' rel=stylesheet type='text/css'></head><body>";
+	echo "<html><head><title>Message</title><link href='../estilos/style.css' rel=stylesheet type='text/css'><LINK href='{$CFG->wwwroot}/dist/css/AdminLTE.min.css' type=text/css rel=stylesheet></head><body>";
 	echo "<div align=center><br><br><br>";
 	echo "<table width=40% border=0 cellspacing=0 cellpadding=2>";
 	echo "<br><br><br><br><br><br><br><br><br><tr class=T><td align=center height=30>$title</td></tr>";

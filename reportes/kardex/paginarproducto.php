@@ -1,7 +1,7 @@
 <?php
-session_start();
+include_once(dirname(__FILE__).'/../../config.php');
 $idempresa=$_SESSION['id_empresa'];
-	include_once(dirname(__FILE__).'/../../config.php');
+
 	$paginaActual = $_POST['partida'];
 
     $nroProductos = mysqli_num_rows(mysqli_query($DB, "SELECT * FROM producto p,categoria c WHERE p.idcategoria=c.idcategoria and p.idempresa='$idempresa'"));
@@ -23,7 +23,7 @@ $idempresa=$_SESSION['id_empresa'];
     if($paginaActual < $nroPaginas){
         $lista = $lista.'<li><a href="javascript:pagination('.($paginaActual+1).');">Siguiente</a></li>';
     }
-  
+
   	if($paginaActual <= 1){
   		$limit = 0;
   	}else{
@@ -40,16 +40,16 @@ $idempresa=$_SESSION['id_empresa'];
 				<th width="200">Categoria</th>
 				<th width="200">Ver Detalle</th>
             </tr>';
-				
+
 	while($registro2 = mysqli_fetch_array($registro)){
 		$tabla = $tabla.'<tr>
 				<td>'.utf8_encode($registro2['producto']).'</td>
 				<td>'.$registro2['stock'].'</td>
 				<td>'.$registro2['categoria'].'</td>
 				<td><button onclick="javascript:verdetalle('.utf8_encode($registro2['idproducto']).');" class="btn btn-block btn-primary btn-ls"><i class="glyphicon glyphicon-eye-open"></i> Ver detalle</button></td>
-				</tr>';		
+				</tr>';
 	}
-        
+
 
     $tabla = $tabla.'</table>';
 

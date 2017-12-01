@@ -1,5 +1,5 @@
 <?php
-session_start();
+include_once(dirname(__FILE__).'/../../config.php');
 $idempresa=$_SESSION['id_empresa'];
 $desde = $_GET['desde'];
 $hasta = $_GET['hasta'];

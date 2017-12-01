@@ -30,14 +30,15 @@ $idempresa=$_SESSION['id_empresa'];
   		$limit = $nroLotes*($paginaActual-1);
   	}
 
-  	$registro = mysqli_query($DB, "SELECT idobjetivo,o.nombre as objetivo,p.nombre as perspectiva,area FROM objetivos o,perspectivas p,area a where o.idperspectiva=p.idperspectiva and o.idarea=a.idarea and idempresa='$idempresa' LIMIT $limit, $nroLotes ");
+  	$registro = mysqli_query($DB, "SELECT idobjetivo,o.nombre as objetivo,p.nombre as perspectiva,area, anio FROM objetivos o,perspectivas p,area a where o.idperspectiva=p.idperspectiva and o.idarea=a.idarea and idempresa='$idempresa' LIMIT $limit, $nroLotes ");
 
 
   	$tabla = $tabla.'<table class="table table-striped table-condensed table-hover">
 			            <tr>
-            	<th width="300">Objetivo</th>
+            	<th width="250">Objetivo</th>
 				<th width="100">Perspectiva</th>
 				<th width="100">Area</th>
+				<th width="50">A&ntilde;o</th>
 				<th width="50">Opciones</th>
             </tr>';
 
@@ -46,6 +47,7 @@ $idempresa=$_SESSION['id_empresa'];
 				<td>'.utf8_encode($registro2['objetivo']).'</td>
 				<td>'.utf8_encode($registro2['perspectiva']).'</td>
 				<td>'.utf8_encode($registro2['area']).'</td>
+				<td>'.utf8_encode($registro2['anio']).'</td>
 				<td><a href="javascript:editarobjetivos('.$registro2['idobjetivo'].');" class="glyphicon glyphicon-edit"></a> <a href="javascript:eliminarobjetivos('.$registro2['idobjetivo'].');" class="glyphicon glyphicon-remove-circle"></a></td>
 				</tr>';
 	}

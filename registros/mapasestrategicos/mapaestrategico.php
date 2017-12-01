@@ -237,6 +237,6 @@
 	   </table>
 
 	   <form action="ficheroExcel.php" method="post" target="_blank" id="FormularioExportacion">
-<p align="center"><a href='#' onClick='window.print();'><img src="../images/imprimir.png" border='0' title='Imprimir' width='30' height='30'></a></p>
+<p align="center"><a href='#' onClick='window.print();'><img src="../../images/imprimir.png" border='0' title='Imprimir' width='30' height='30'></a></p>
 <input type="hidden" id="datos_a_enviar" name="datos_a_enviar" />
 </form>

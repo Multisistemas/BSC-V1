@@ -1,7 +1,6 @@
 <?php
-session_start();
+include_once(dirname(__FILE__).'/../../config.php');
 $idempresa=$_SESSION['id_empresa'];
-	include_once(dirname(__FILE__).'/../../config.php');
 	$paginaActual = $_POST['partida'];
 
     $nroProductos = mysqli_num_rows(mysqli_query($DB, "SELECT * FROM producto p,categoria c where p.idcategoria=c.idcategoria and p.idempresa='$idempresa'"));
@@ -23,7 +22,7 @@ $idempresa=$_SESSION['id_empresa'];
     if($paginaActual < $nroPaginas){
         $lista = $lista.'<li><a href="javascript:pagination('.($paginaActual+1).');">Siguiente</a></li>';
     }
-  
+
   	if($paginaActual <= 1){
   		$limit = 0;
   	}else{
@@ -44,7 +43,7 @@ $idempresa=$_SESSION['id_empresa'];
 							<th width="50">Referencia</th>
 							<th width="50">Categoria</th>
 			            </tr>';
-				
+
 	while($registro2 = mysqli_fetch_array($registro)){
 		$tabla = $tabla.'<tr>
 							<td>'.utf8_encode($registro2['producto']).'</td>
@@ -55,9 +54,9 @@ $idempresa=$_SESSION['id_empresa'];
 							<td>'.utf8_encode($registro2['color']).'</td>
 							<td>'.utf8_encode($registro2['referencia']).'</td>
 							<td>'.$registro2['categoria'].'</td>
-						  </tr>';		
+						  </tr>';
 	}
-        
+
 
     $tabla = $tabla.'</table>';
 

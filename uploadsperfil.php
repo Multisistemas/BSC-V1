@@ -1,6 +1,6 @@
 <?php
-session_start();
-include('config.php');
+include_once(dirname(__FILE__).'/../../config.php');
+//include('config.php');
 global $CFG;
 $idusuario=$_SESSION['id_usu'];
 if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest')

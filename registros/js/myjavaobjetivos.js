@@ -1,6 +1,6 @@
 $(document).ready(pagination(1));
 $(function(){
-	
+
 	$('#nuevo-objetivos').on('click',function(){
 		$('#formulario')[0].reset();
 		$('#pro').val('Registro');
@@ -11,7 +11,7 @@ $(function(){
 			backdrop:'static'
 		});
 	});
-	
+
 	$('#busca').on('keyup',function(){
 		var dato = $('#busca').val();
 		var url = '../objetivos/busca_objetivos.php';
@@ -25,7 +25,7 @@ $(function(){
 	});
 	return false;
 	});
-	
+
 });
 
 function agregaRegistro(){
@@ -87,6 +87,7 @@ function editarobjetivos(id){
 				$('#objetivos').val(datos[0]);
 				$('#idperspectiva').val(datos[1]);
 				$('#idarea').val(datos[2]);
+				$('#anio').val(datos[3]);
 				$('#registra-objetivos').modal({
 					show:true,
 					backdrop:'static'

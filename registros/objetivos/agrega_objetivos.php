@@ -9,6 +9,7 @@ $idperspectiva = $_POST['idperspectiva'];
 $idarea = $_POST['idarea'];
 $chkmes = $_POST['chkmes'];
 $can = $_POST['can'];
+$anio = $_POST['anio'];
 //VERIFICAMOS EL PROCESO
 
 switch($proceso){
@@ -19,7 +20,7 @@ switch($proceso){
 		$idobjetivo=$registro2['maxi'];
 		$numreg=count($chkmes);
 		for ($i=0;$i<=$numreg-1;$i++){
-		mysqli_query($DB, "insert into detalle_objetivos(idobjetivo,cantidad,mes) values('$idobjetivo','$can[$i]','$chkmes[$i]')");
+		mysqli_query($DB, "insert into detalle_objetivos(idobjetivo,cantidad,mes,anio) values('$idobjetivo','$can[$i]','$chkmes[$i]','$anio')");
 		}
 	break;
 

@@ -1,6 +1,8 @@
-<?php include("../../registros/Function.php");?>
-<?php if ($_SESSION['id_usu']==""){header("location:index.php");}?>
 <?php
+  include_once("../../registros/Function.php");
+  if ($_SESSION['id_usu']=="") {
+		header("location:index.php");
+	}
 	$DB=OpenConexion();
 	$idusuario=$_SESSION['id_usu'];
 	$rs=mysqli_query($DB, "SELECT * FROM usuario u,area a,empresa e WHERE u.idarea=a.idarea and e.idempresa=u.idempresa and idusuario='$idusuario'");
@@ -26,28 +28,28 @@
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.5 -->
-    <link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="<?php echo $CFG->wwwroot;?>/bootstrap/css/bootstrap.min.css">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <!-- Theme style -->
-    <link rel="stylesheet" href="../../dist/css/AdminLTE.min.css">
+    <link rel="stylesheet" href="<?php echo $CFG->wwwroot;?>/dist/css/AdminLTE.min.css">
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
-    <link rel="stylesheet" href="../../dist/css/skins/_all-skins.min.css">
+    <link rel="stylesheet" href="<?php echo $CFG->wwwroot;?>/dist/css/skins/_all-skins.min.css">
     <!-- iCheck -->
-    <link rel="stylesheet" href="../../plugins/iCheck/flat/blue.css">
+    <link rel="stylesheet" href="<?php echo $CFG->wwwroot;?>/plugins/iCheck/flat/blue.css">
     <!-- Morris chart -->
-    <link rel="stylesheet" href="../../plugins/morris/morris.css">
+    <link rel="stylesheet" href="<?php echo $CFG->wwwroot;?>/plugins/morris/morris.css">
     <!-- jvectormap -->
-    <link rel="stylesheet" href="../../plugins/jvectormap/jquery-jvectormap-1.2.2.css">
+    <link rel="stylesheet" href="<?php echo $CFG->wwwroot;?>/plugins/jvectormap/jquery-jvectormap-1.2.2.css">
     <!-- Date Picker -->
-    <link rel="stylesheet" href="../../plugins/datepicker/datepicker3.css">
+    <link rel="stylesheet" href="<?php echo $CFG->wwwroot;?>/plugins/datepicker/datepicker3.css">
     <!-- Daterange picker -->
-    <link rel="stylesheet" href="../../plugins/daterangepicker/daterangepicker-bs3.css">
+    <link rel="stylesheet" href="<?php echo $CFG->wwwroot;?>/plugins/daterangepicker/daterangepicker-bs3.css">
     <!-- bootstrap wysihtml5 - text editor -->
-    <link rel="stylesheet" href="../../plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
+    <link rel="stylesheet" href="<?php echo $CFG->wwwroot;?>/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -62,7 +64,7 @@
 
       <header class="main-header">
         <!-- Logo -->
-        <a href="../../intranet.php" class="logo">
+        <a href="<?php echo $CFG->wwwroot;?>/intranet.php" class="logo">
           <!-- mini logo for sidebar mini 50x50 pixels -->
           <span class="logo-mini"><b>A</b>BSC</span>
           <!-- logo for regular state and mobile devices -->
@@ -95,10 +97,10 @@
                   <!-- Menu Footer-->
                   <li class="user-footer">
                     <div class="pull-left">
-                      <a href="../../intranet.php" class="btn btn-default btn-flat">Perfil</a>
+                      <a href="<?php echo $CFG->wwwroot;?>/intranet.php" class="btn btn-default btn-flat">Perfil</a>
                     </div>
                     <div class="pull-right">
-                      <a href="../../Cerrar_Sesion.php" class="btn btn-default btn-flat">Cerrar Sesion</a>
+                      <a href="<?php echo $CFG->wwwroot;?>/Cerrar_Sesion.php" class="btn btn-default btn-flat">Cerrar Sesion</a>
                     </div>
                   </li>
                 </ul>
@@ -131,26 +133,26 @@
               </a>
               <ul class="treeview-menu">
 			  <?php if($_SESSION['id_area']==5) { ?>
-			  	<li><a href="../../registros/empresa"><i class="fa fa-circle-o"></i> Empresa</a></li>
-                <li><a href="../../registros/usuario"><i class="fa fa-circle-o"></i> Usuarios</a></li>
-                <li><a href="../../registros/tipousuario"><i class="fa fa-circle-o"></i> Tipo Usuarios</a></li>
-				<li><a href="../../registros/persona"><i class="fa fa-circle-o"></i> Cliente / Proveedor</a></li>
-				<li><a href="../../registros/tipopersona"><i class="fa fa-circle-o"></i> Tipo Cliente / Proveedor</a></li>
-				<li><a href="../../registros/producto"><i class="fa fa-circle-o"></i> Producto</a></li>
-				<li class="active"><a href="../../registros/almacen"><i class="fa fa-circle-o"></i> Almac&eacute;n</a></li>
-				<li><a href="../../registros/area"><i class="fa fa-circle-o"></i> Area</a></li>
-				<li><a href="../../registros/categoria"><i class="fa fa-circle-o"></i> Categor&iacute;a</a></li>
-				<li><a href="../../registros/perspectiva"><i class="fa fa-circle-o"></i> Perspectiva</a></li>
-				<li><a href="../../registros/objetivos"><i class="fa fa-circle-o"></i> Objetivos</a></li>
+			  	<li><a href="<?php echo $CFG->wwwroot;?>/registros/empresa"><i class="fa fa-circle-o"></i> Empresa</a></li>
+                <li><a href="<?php echo $CFG->wwwroot;?>/registros/usuario"><i class="fa fa-circle-o"></i> Usuarios</a></li>
+                <li><a href="<?php echo $CFG->wwwroot;?>/registros/tipousuario"><i class="fa fa-circle-o"></i> Tipo Usuarios</a></li>
+				<li><a href="<?php echo $CFG->wwwroot;?>/registros/persona"><i class="fa fa-circle-o"></i> Cliente / Proveedor</a></li>
+				<li><a href="<?php echo $CFG->wwwroot;?>/registros/tipopersona"><i class="fa fa-circle-o"></i> Tipo Cliente / Proveedor</a></li>
+				<li><a href="<?php echo $CFG->wwwroot;?>/registros/producto"><i class="fa fa-circle-o"></i> Producto</a></li>
+				<li class="active"><a href="<?php echo $CFG->wwwroot;?>/registros/almacen"><i class="fa fa-circle-o"></i> Almac&eacute;n</a></li>
+				<li><a href="<?php echo $CFG->wwwroot;?>/registros/area"><i class="fa fa-circle-o"></i> Area</a></li>
+				<li><a href="<?php echo $CFG->wwwroot;?>/registros/categoria"><i class="fa fa-circle-o"></i> Categor&iacute;a</a></li>
+				<li><a href="<?php echo $CFG->wwwroot;?>/registros/perspectiva"><i class="fa fa-circle-o"></i> Perspectiva</a></li>
+				<li><a href="<?php echo $CFG->wwwroot;?>/registros/objetivos"><i class="fa fa-circle-o"></i> Objetivos</a></li>
 				<?php } else {if($_SESSION['id_area']==3){ ?>
-				<li><a href="../../registros/producto"><i class="fa fa-circle-o"></i> Producto</a></li>
-				<li class="active"><a href="../../registros/almacen"><i class="fa fa-circle-o"></i> Almac&eacute;n</a></li>
-				<li><a href="../../registros/categoria"><i class="fa fa-circle-o"></i> Categor&iacute;a</a></li>
+				<li><a href="<?php echo $CFG->wwwroot;?>/registros/producto"><i class="fa fa-circle-o"></i> Producto</a></li>
+				<li class="active"><a href="<?php echo $CFG->wwwroot;?>/registros/almacen"><i class="fa fa-circle-o"></i> Almac&eacute;n</a></li>
+				<li><a href="<?php echo $CFG->wwwroot;?>/registros/categoria"><i class="fa fa-circle-o"></i> Categor&iacute;a</a></li>
 				<?php } else { ?>
-				<li><a href="../../registros/persona"><i class="fa fa-circle-o"></i> Cliente / Proveedor</a></li>
-				<li><a href="../../registros/tipopersona"><i class="fa fa-circle-o"></i> Tipo Cliente / Proveedor</a></li>
-				<li><a href="../../registros/producto"><i class="fa fa-circle-o"></i> Producto</a></li>
-				<li><a href="../../registros/categoria"><i class="fa fa-circle-o"></i> Categor&iacute;a</a></li>
+				<li><a href="<?php echo $CFG->wwwroot;?>/registros/persona"><i class="fa fa-circle-o"></i> Cliente / Proveedor</a></li>
+				<li><a href="<?php echo $CFG->wwwroot;?>/registros/tipopersona"><i class="fa fa-circle-o"></i> Tipo Cliente / Proveedor</a></li>
+				<li><a href="<?php echo $CFG->wwwroot;?>/registros/producto"><i class="fa fa-circle-o"></i> Producto</a></li>
+				<li><a href="<?php echo $CFG->wwwroot;?>/registros/categoria"><i class="fa fa-circle-o"></i> Categor&iacute;a</a></li>
 				<?php }}?>
               </ul>
             </li>
@@ -160,16 +162,16 @@
               </a>
               <ul class="treeview-menu">
 			  <?php if($_SESSION['id_area']==5) { ?>
-                <li><a href="../../registros/venta"><i class="fa fa-circle-o"></i> Venta por Menor</a></li>
-				<li><a href="../../registros/ventaxmayor"><i class="fa fa-circle-o"></i> Venta por Mayor</a></li>
-                <li><a href="../../registros/compras"><i class="fa fa-circle-o"></i> Registrar Compras</a></li>
-				<li><a href="../../reportes/kardex"><i class="fa fa-circle-o"></i> Ver Kardex</a></li>
+                <li><a href="<?php echo $CFG->wwwroot;?>/registros/venta"><i class="fa fa-circle-o"></i> Venta por Menor</a></li>
+				<li><a href="<?php echo $CFG->wwwroot;?>/registros/ventaxmayor"><i class="fa fa-circle-o"></i> Venta por Mayor</a></li>
+                <li><a href="<?php echo $CFG->wwwroot;?>/registros/compras"><i class="fa fa-circle-o"></i> Registrar Compras</a></li>
+				<li><a href="<?php echo $CFG->wwwroot;?>/reportes/kardex"><i class="fa fa-circle-o"></i> Ver Kardex</a></li>
 				<?php } else {if($_SESSION['id_area']==3){ ?>
-				<li><a href="../../reportes/kardex"><i class="fa fa-circle-o"></i> Ver Kardex</a></li>
+				<li><a href="<?php echo $CFG->wwwroot;?>/reportes/kardex"><i class="fa fa-circle-o"></i> Ver Kardex</a></li>
 				<?php } else { ?>
-				<li><a href="../../registros/venta"><i class="fa fa-circle-o"></i> Venta por Menor</a></li>
-				<li><a href="../../registros/ventaxmayor"><i class="fa fa-circle-o"></i> Venta por Mayor</a></li>
-                <li><a href="../../registros/compras"><i class="fa fa-circle-o"></i> Registrar Compras</a></li>
+				<li><a href="<?php echo $CFG->wwwroot;?>/registros/venta"><i class="fa fa-circle-o"></i> Venta por Menor</a></li>
+				<li><a href="<?php echo $CFG->wwwroot;?>/registros/ventaxmayor"><i class="fa fa-circle-o"></i> Venta por Mayor</a></li>
+                <li><a href="<?php echo $CFG->wwwroot;?>/registros/compras"><i class="fa fa-circle-o"></i> Registrar Compras</a></li>
 				<?php }}?>
               </ul>
             </li>
@@ -181,24 +183,24 @@
               </a>
               <ul class="treeview-menu">
 			  <?php if($_SESSION['id_area']==5) { ?>
-                <li><a href="../../reportes/producto"><i class="fa fa-circle-o"></i> Productos</a></li>
-                <li><a href="../../reportes/categoria"><i class="fa fa-circle-o"></i> Categor&iacute;as</a></li>
-                <li class="active"><a href="../../reportes/clientes"><i class="fa fa-circle-o"></i> Clientes</a></li>
-                <li><a href="../../reportes/proveedores"><i class="fa fa-circle-o"></i> Proveedores</a></li>
-				<li><a href="../../reportes/ventas"><i class="fa fa-circle-o"></i> Ventas</a></li>
-				<li><a href="../../reportes/compras"><i class="fa fa-circle-o"></i> Compras</a></li>
+                <li><a href="<?php echo $CFG->wwwroot;?>/reportes/producto"><i class="fa fa-circle-o"></i> Productos</a></li>
+                <li><a href="<?php echo $CFG->wwwroot;?>/reportes/categoria"><i class="fa fa-circle-o"></i> Categor&iacute;as</a></li>
+                <li class="active"><a href="<?php echo $CFG->wwwroot;?>/reportes/clientes"><i class="fa fa-circle-o"></i> Clientes</a></li>
+                <li><a href="<?php echo $CFG->wwwroot;?>/reportes/proveedores"><i class="fa fa-circle-o"></i> Proveedores</a></li>
+				<li><a href="<?php echo $CFG->wwwroot;?>/reportes/ventas"><i class="fa fa-circle-o"></i> Ventas</a></li>
+				<li><a href="<?php echo $CFG->wwwroot;?>/reportes/compras"><i class="fa fa-circle-o"></i> Compras</a></li>
 				<?php } else {if($_SESSION['id_area']==3){ ?>
-				<li><a href="../../reportes/producto"><i class="fa fa-circle-o"></i> Productos</a></li>
-                <li><a href="../../reportes/categoria"><i class="fa fa-circle-o"></i> Categor&iacute;as</a></li>
-				<li><a href="../../reportes/proveedores"><i class="fa fa-circle-o"></i> Proveedores</a></li>
-				<li><a href="../../reportes/compras"><i class="fa fa-circle-o"></i> Compras</a></li>
+				<li><a href="<?php echo $CFG->wwwroot;?>/reportes/producto"><i class="fa fa-circle-o"></i> Productos</a></li>
+                <li><a href="<?php echo $CFG->wwwroot;?>/reportes/categoria"><i class="fa fa-circle-o"></i> Categor&iacute;as</a></li>
+				<li><a href="<?php echo $CFG->wwwroot;?>/reportes/proveedores"><i class="fa fa-circle-o"></i> Proveedores</a></li>
+				<li><a href="<?php echo $CFG->wwwroot;?>/reportes/compras"><i class="fa fa-circle-o"></i> Compras</a></li>
 				<?php } else { ?>
-				<li><a href="../../reportes/producto"><i class="fa fa-circle-o"></i> Productos</a></li>
-                <li><a href="../../reportes/categoria"><i class="fa fa-circle-o"></i> Categor&iacute;as</a></li>
-                <li class="active"><a href="../../reportes/clientes"><i class="fa fa-circle-o"></i> Clientes</a></li>
-                <li><a href="../../reportes/proveedores"><i class="fa fa-circle-o"></i> Proveedores</a></li>
-				<li><a href="../../reportes/ventas"><i class="fa fa-circle-o"></i> Ventas</a></li>
-				<li><a href="../../reportes/compras"><i class="fa fa-circle-o"></i> Compras</a></li>
+				<li><a href="<?php echo $CFG->wwwroot;?>/reportes/producto"><i class="fa fa-circle-o"></i> Productos</a></li>
+                <li><a href="<?php echo $CFG->wwwroot;?>/reportes/categoria"><i class="fa fa-circle-o"></i> Categor&iacute;as</a></li>
+                <li class="active"><a href="<?php echo $CFG->wwwroot;?>/reportes/clientes"><i class="fa fa-circle-o"></i> Clientes</a></li>
+                <li><a href="<?php echo $CFG->wwwroot;?>/reportes/proveedores"><i class="fa fa-circle-o"></i> Proveedores</a></li>
+				<li><a href="<?php echo $CFG->wwwroot;?>/reportes/ventas"><i class="fa fa-circle-o"></i> Ventas</a></li>
+				<li><a href="<?php echo $CFG->wwwroot;?>/reportes/compras"><i class="fa fa-circle-o"></i> Compras</a></li>
 				<?php }}?>
               </ul>
             </li>
@@ -207,21 +209,21 @@
                 <i class="fa fa-map-marker"></i> <span>Ver Cuadro de Mando</span> <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li class="active"><a href="../../registros/verobjetivos"><i class="fa fa-circle-o"></i> Objetivos</a></li>
-                <li><a href="../../registros/mapasestrategicos"><i class="fa fa-circle-o"></i> Mapas Estrategicos</a></li>
+                <li class="active"><a href="<?php echo $CFG->wwwroot;?>/registros/verobjetivos"><i class="fa fa-circle-o"></i> Objetivos</a></li>
+                <li><a href="<?php echo $CFG->wwwroot;?>/registros/mapasestrategicos"><i class="fa fa-circle-o"></i> Mapas Estrategicos</a></li>
 				<li><a href="#"><i class="fa fa-circle-o"></i> Cuadro de Mando</a>
 				<ul class="treeview-menu">
 				<?php if($_SESSION['id_area']==5) { ?>
-                <li class="active"><a href="../../perspectivas/pgenerala"><i class="fa fa-circle-o"></i> Almac&eacute;n</a></li>
-				<li class="active"><a href="../../perspectivas/pgeneralo"><i class="fa fa-circle-o"></i> Operaciones</a></li>
-				<li class="active"><a href="../../perspectivas/pgeneralrh"><i class="fa fa-circle-o"></i> Recursos Humanos</a></li>
-				<li class="active"><a href="../../perspectivas/pgeneral"><i class="fa fa-circle-o"></i> Perspectiva General</a></li>
+                <li class="active"><a href="<?php echo $CFG->wwwroot;?>/perspectivas/pgenerala"><i class="fa fa-circle-o"></i> Almac&eacute;n</a></li>
+				<li class="active"><a href="<?php echo $CFG->wwwroot;?>/perspectivas/pgeneralo"><i class="fa fa-circle-o"></i> Operaciones</a></li>
+				<li class="active"><a href="<?php echo $CFG->wwwroot;?>/perspectivas/pgeneralrh"><i class="fa fa-circle-o"></i> Recursos Humanos</a></li>
+				<li class="active"><a href="<?php echo $CFG->wwwroot;?>/perspectivas/pgeneral"><i class="fa fa-circle-o"></i> Perspectiva General</a></li>
 				<?php } else {if($_SESSION['id_area']==3){ ?>
-				<li class="active"><a href="../../perspectivas/pgenerala"><i class="fa fa-circle-o"></i> Almac&eacute;n</a></li>
+				<li class="active"><a href="<?php echo $CFG->wwwroot;?>/perspectivas/pgenerala"><i class="fa fa-circle-o"></i> Almac&eacute;n</a></li>
 				<?php } else {if($_SESSION['id_area']==4){ ?>
-				<li class="active"><a href="../../perspectivas/pgeneralrh"><i class="fa fa-circle-o"></i> Recursos Humanos</a></li>
+				<li class="active"><a href="<?php echo $CFG->wwwroot;?>/perspectivas/pgeneralrh"><i class="fa fa-circle-o"></i> Recursos Humanos</a></li>
 				<?php } else {?>
-				<li class="active"><a href="../../perspectivas/pgeneralo"><i class="fa fa-circle-o"></i> Operaciones</a></li>
+				<li class="active"><a href="<?php echo $CFG->wwwroot;?>/perspectivas/pgeneralo"><i class="fa fa-circle-o"></i> Operaciones</a></li>
 				<?php }}} ?>
 				</ul>
 				</li>

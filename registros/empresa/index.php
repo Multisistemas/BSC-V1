@@ -277,8 +277,8 @@
                         <td colspan="2"><input type="text" required="required" id="id" name="id" readonly="readonly" style="visibility:hidden; height:1px;"/><input type="text" required="required" readonly="readonly" id="pro" name="pro" style="visibility:hidden; height:1px;"/></td>
                     </tr>
                 	<tr>
-                    	<td>RUC: </td>
-                        <td><input type="text" required="required" name="ruc" id="ruc" maxlength="11" class="form-control" onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;"/>								</td>
+                    	<td>NIT: </td>
+                        <td><input type="text" required="required" name="nit" id="nit" maxlength="11" class="form-control" onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;"/>								</td>
                     </tr>
 					                	<tr>
                     	<td>Razon Social: </td>

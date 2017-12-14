@@ -9,7 +9,7 @@ $valores = mysqli_query($DB, "SELECT * FROM empresa WHERE idempresa = '$id'");
 $valores2 = mysqli_fetch_array($valores);
 
 $datos = array(
-				0 => $valores2['ruc'],
+				0 => $valores2['nit'],
 				1 => utf8_encode($valores2['razonsocial']),
 				2 => utf8_encode($valores2['direccion']),
 				3 => $valores2['telefono'],

@@ -12,6 +12,7 @@
 	$CFG->prefix    = 'bsc_';      // prefix to use for all table names
 
 	$CFG->wwwroot   = 'http://bsc.dev';
+	$CFG->dirroot   = dirname(__FILE__);
 
 	// Force a debugging mode regardless the settings in the site administration
 

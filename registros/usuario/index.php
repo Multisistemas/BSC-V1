@@ -1,7 +1,14 @@
-<?php include("../../registros/Function.php");?>
-<?php if ($_SESSION['id_usu']==""){header("location:index.php");}?>
-<?php
+<?php 
+	include("../../registros/Function.php");
+
+	if ($_SESSION['id_usu']==""){
+		header("location:index.php");
+	}
+		
 	$DB=OpenConexion();
+	$idtipousuario = "";
+	$idarea = "";
+	$idempresa = "";
 	$idusuario=$_SESSION['id_usu'];
 	$rs=mysqli_query($DB, "SELECT * FROM usuario u,area a,empresa e WHERE u.idarea=a.idarea and e.idempresa=u.idempresa and idusuario='$idusuario'");
 	$filas =mysqli_fetch_object($rs);
@@ -289,8 +296,8 @@ function valida(e) {
                         <td><input type="text" required="required" name="login" id="login" maxlength="100" class="form-control"/>								</td>
                     </tr>
 					<tr>
-                    	<td>DNI: </td>
-                        <td><input type="text" required="required" name="dni" id="dni" maxlength="8" class="form-control" onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;"/>								</td>
+                    	<td>DUI: </td>
+                        <td><input type="text" required="required" name="dui" id="dui" maxlength="8" class="form-control" onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;"/>								</td>
                     </tr>
                 	<tr>
                     	<td>Nombres: </td>

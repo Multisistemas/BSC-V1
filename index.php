@@ -31,6 +31,9 @@ if(isset($_SESSION['id_usu'])==true){
         <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+<!-- GOOGLE LOGIN BUTTON REQUIRED -->
+	<meta name="google-signin-client_id" content="1072044933752-uon5ggg95c89e7l2q0uv8jqmgena397n.apps.googleusercontent.com">
+<!-- GOOGLE LOGIN BUTTON REQUIRED -->
   </head>
   <?php 	include("registros/Function.php"); $DB=OpenConexion();?>
   <script src="registros/js/jquery.js"></script>
@@ -70,6 +73,58 @@ if(isset($_SESSION['id_usu'])==true){
         <a href="recuperarclave.php">A olvidado su contraseña</a><br>
         <a href="registrarasistencia.php" class="text-center">Registrar Marcaci&oacute;n</a>
 	  <!--</form>-->
+	  <!-- GOOGLE BUTTON -->
+	    <div class="gbutton" style="text-align: -webkit-center;margin-top: 30px;margin-bottom: 10px;">
+		  <div id="my-signin2"></div>
+		  <script>
+		    function onSuccess(googleUser) {
+		      console.log('Logged in as: ' + googleUser.getBasicProfile().getEmail());
+		      var email = googleUser.getBasicProfile().getEmail();
+		      var url = 'registros/login/procesar_login.php';
+			  $.ajax({
+				type: 'POST',
+				url: url,
+				data: 'email='+email,
+				success: function(valor) {
+					if(valor == 'usuario'){
+						$('#mensaje').addClass('error').html('El usuario ingresado no existe').show(300).delay(3000).hide(300);
+						$('#usu').focus();
+						return false;
+					}else if(valor == 'area'){
+						$('#mensaje').addClass('error').html('Usted no pertenece al area seleccionada').show(300).delay(3000).hide(300);
+						$('#area').focus();
+						return false;
+					}else if(valor == 'password'){
+						$('#mensaje').addClass('error').html('Su password es incorrecto').show(300).delay(3000).hide(300);
+						$('#pass').focus();
+						return false;
+					}else if(valor == 'ventas'){
+						document.location.href = 'intranet.php';
+					}else if(valor == 'almacen'){
+						document.location.href = 'intranet.php';
+					}
+				}
+			  });
+		    }
+		    function onFailure(error) {
+		      console.log(error);
+		    }
+		    function renderButton() {
+		      gapi.signin2.render('my-signin2', {
+		        'scope': 'profile email',
+		        'width': 240,
+		        'height': 50,
+		        'longtitle': true,
+		        'theme': 'dark',
+		        'onsuccess': onSuccess,
+		        'onfailure': onFailure
+		      });
+		    }
+		  </script>
+		
+		  <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
+	    </div>
+	  <!-- GOOGLE BUTTON -->
       </div><!-- /.login-box-body -->
     </div><!-- /.login-box -->
 

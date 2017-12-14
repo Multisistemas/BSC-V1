@@ -5,7 +5,7 @@ $idempresa=$_SESSION['id_empresa'];
 $id = $_POST['id'];
 $proceso = $_POST['pro'];
 $login = $_POST['login'];
-$dni = $_POST['dni'];
+$dui = $_POST['dui'];
 $nombres = $_POST['nombres'];
 $apellidos = $_POST['apellidos'];
 $email = $_POST['email'];
@@ -17,11 +17,11 @@ $idempresa = $_POST['idempresa'];
 
 switch($proceso){
 	case 'Registro':
-		mysqli_query($DB, "INSERT INTO usuario (login,dni,nombres,apellidos,correo,clave,idtipousuario,idarea,idempresa)VALUES('$login','$dni','$nombres','$apellidos','$email','$clave','$idtipousuario','$idarea','$idempresa')");
+		mysqli_query($DB, "INSERT INTO usuario (login,dui,nombres,apellidos,correo,clave,idtipousuario,idarea,idempresa)VALUES('$login','$dui','$nombres','$apellidos','$email','$clave','$idtipousuario','$idarea','$idempresa')");
 	break;
 
 	case 'Edicion':
-		mysqli_query($DB, "UPDATE usuario SET login='$login',dni='$dni',nombres = '$nombres',apellidos='$apellidos',correo='$email',clave='$clave',idtipousuario='$idtipousuario',idarea='$idarea',idempresa='$idempresa' WHERE idusuario = '$id'");
+		mysqli_query($DB, "UPDATE usuario SET login='$login',dui='$dui',nombres = '$nombres',apellidos='$apellidos',correo='$email',clave='$clave',idtipousuario='$idtipousuario',idarea='$idarea',idempresa='$idempresa' WHERE idusuario = '$id'");
 	break;
 }
 
@@ -35,7 +35,7 @@ $registro = mysqli_query($DB, "SELECT * FROM usuario u,tipousuario tu,area a,emp
 echo '<table class="table table-striped table-condensed table-hover">
         	<tr>
 			                <th width="50">Login</th>
-							<th width="50">DNI</th>
+							<th width="50">DUI</th>
 							<th width="50">Nombres</th>
 							<th width="50">Apellidos</th>
 							<th width="50">Email</th>
@@ -47,7 +47,7 @@ echo '<table class="table table-striped table-condensed table-hover">
 	while($registro2 = mysqli_fetch_array($registro)){
 		echo '<tr>
 							<td>'.$registro2['login'].'</td>
-							<td>'.$registro2['dni'].'</td>
+							<td>'.$registro2['dui'].'</td>
 							<td>'.$registro2['nombres'].'</td>
 							<td>'.$registro2['apellidos'].'</td>
 							<td>'.$registro2['correo'].'</td>

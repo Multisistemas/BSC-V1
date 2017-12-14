@@ -13,7 +13,7 @@ $registro = mysqli_query($DB, "SELECT * FROM usuario u,tipousuario tu,area a,emp
 echo '<table class="table table-striped table-condensed table-hover">
         	<tr>
 			                <th width="50">Login</th>
-							<th width="50">DNI</th>
+							<th width="50">DUI</th>
 							<th width="50">Nombres</th>
 							<th width="50">Apellidos</th>
 							<th width="50">Email</th>
@@ -26,7 +26,7 @@ if(mysqli_num_rows($registro)>0){
 	while($registro2 = mysqli_fetch_array($registro)){
 		echo '<tr>
 							<td>'.$registro2['login'].'</td>
-							<td>'.$registro2['dni'].'</td>
+							<td>'.$registro2['dui'].'</td>
 							<td>'.$registro2['nombres'].'</td>
 							<td>'.$registro2['apellidos'].'</td>
 							<td>'.$registro2['correo'].'</td>

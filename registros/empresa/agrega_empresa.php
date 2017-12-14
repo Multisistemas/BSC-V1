@@ -4,7 +4,7 @@ $idempresa = $_SESSION['id_empresa'];
 
 $id = $_POST['id'];
 $proceso = $_POST['pro'];
-$ruc = $_POST['ruc'];
+$nit = $_POST['nit'];
 $rsocial = $_POST['rsocial'];
 $direccion = $_POST['direccion'];
 $telefono = $_POST['telefono'];
@@ -14,11 +14,11 @@ $correo = $_POST['correo'];
 
 switch($proceso){
 	case 'Registro':
-		mysqli_query($DB, "INSERT INTO empresa (ruc,razonsocial,direccion,telefono,movil,email)VALUES('$ruc','$rsocial','$direccion','$telefono','$celular','$correo')");
+		mysqli_query($DB, "INSERT INTO empresa (nit,razonsocial,direccion,telefono,movil,email)VALUES('$nit','$rsocial','$direccion','$telefono','$celular','$correo')");
 	break;
 
 	case 'Edicion':
-		mysqli_query($DB, "UPDATE empresa SET ruc = '$ruc', razonsocial='$rsocial',direccion='$direccion',telefono='$telefono',movil='$celular',email='$correo' WHERE idempresa = '$id'");
+		mysqli_query($DB, "UPDATE empresa SET nit = '$nit', razonsocial='$rsocial',direccion='$direccion',telefono='$telefono',movil='$celular',email='$correo' WHERE idempresa = '$id'");
 	break;
 }
 
@@ -31,7 +31,7 @@ $registro = mysqli_query($DB, "SELECT * FROM empresa where idempresa='$idempresa
 
 echo '<table class="table table-striped table-condensed table-hover">
         	<tr>
-			                <th width="50">RUC</th>
+			                <th width="50">NIT</th>
 							<th width="50">Razon Social</th>
 							<th width="50">Direcci&oacute;n</th>
 							<th width="50">Tel&eacute;fono</th>
@@ -41,7 +41,7 @@ echo '<table class="table table-striped table-condensed table-hover">
 			            </tr>';
 	while($registro2 = mysqli_fetch_array($registro)){
 		echo '<tr>
-				<td>'.$registro2['ruc'].'</td>
+				<td>'.$registro2['nit'].'</td>
 							<td>'.utf8_encode($registro2['razonsocial']).'</td>
 							<td>'.utf8_encode($registro2['direccion']).'</td>
 							<td>'.$registro2['telefono'].'</td>

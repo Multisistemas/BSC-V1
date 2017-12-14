@@ -1,5 +1,6 @@
 $(function(){
 	$('#mensaje').hide(0);
+	// Regular login
 	$('#ingresar').on('click',function(){
 		var usu = $('#usu').val();
 		var pass = $('#pass').val();
@@ -35,6 +36,11 @@ $(function(){
 		}else{
 			$('#mensaje').addClass('error').html('Complete todos los campos').show(300).delay(3000).hide(300);
 		}
+	});
+	
+	// Google OAuth2 login
+	$('#my-signin2').on('click', function(){
+		console.log('IN');
 	});
 	
 });

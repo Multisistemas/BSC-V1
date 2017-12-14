@@ -1,13 +1,10 @@
 <?php
-	include_once("../../registros/Function.php");
-	if ($_SESSION['id_usu']=="") {
+	include("../registros/Function.php");
+	if ($_SESSION['id_usu']==""){
 		header("location:index.php");
 	}
-
+	
 	$DB=OpenConexion();
-	$idperspectiva = '';
-	$idarea = '';
-	$anio = '';
 	$idusuario=$_SESSION['id_usu'];
 	$rs=mysqli_query($DB, "SELECT * FROM usuario u,area a,empresa e WHERE u.idarea=a.idarea and e.idempresa=u.idempresa and idusuario='$idusuario'");
 	$filas =mysqli_fetch_object($rs);
@@ -22,7 +19,18 @@
 	$rsf=mysqli_query($DB, "SELECT * FROM uploadsperfil WHERE idusuario='$idusuario' order by id desc limit 1");
 	$filasf =mysqli_fetch_object($rsf);
 	$foto=$filasf->name;
-	?>
+	
+	if(isset($_REQUEST['id_area'])) {
+		$idarea = $_REQUEST['id_area'];
+	} else {
+		$idarea = $_SESSION['id_area'];
+	}
+	
+	$queryarea = "SELECT * FROM area WHERE idarea=$idarea";
+	$resultarea = mysqli_query($DB, $queryarea);
+	$rowarea = mysqli_fetch_assoc($resultarea);
+	
+?>
 <!DOCTYPE html>
 <html>
   <head>
@@ -60,8 +68,6 @@
         <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-	<script src="../js/jquery.js"></script>
-	<script src="../js/myjavaobjetivos.js"></script>
   </head>
   <body class="hold-transition skin-blue sidebar-mini">
     <div class="wrapper">
@@ -113,105 +119,28 @@
           </div>
         </nav>
       </header>
-
-	  <?php include_once($CFG->dirroot.'/lib/menu.php'); ?>
-
+<?php 
+	include_once($CFG->dirroot.'/lib/menu.php');
+	$idarea=$_SESSION['id_area'];?>
    <!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-          <h1>
-            Mantenimiento de objetivos
-          </h1>
-          <ol class="breadcrumb">
-            <li><a href="."><i class="fa fa-dashboard"></i> Inicio</a></li>
-            <li class="active">Mantenimiento de objetivos</li>
-          </ol>
+			<h1>Objetivos del Área <?php echo $rowarea['area'];?></h1>
+			<ol class="breadcrumb">
+				<li><a href="."><i class="fa fa-dashboard"></i> Inicio</a></li>
+				<li class="active">Perspectivas</li>
+			</ol>
         </section>
-
         <!-- Main content -->
         <section class="content">
-		<!-- Inicio Formulario -->
-          <section>
-    <table border="0" align="center" class="table table-striped table-condensed table-hover">
-    	<tr>
-        	<td width="555"><input type="text" class="form-control" placeholder="Busca un objetivos por: Nombre" id="busca"/></td>
-            <td width="100"><button id="nuevo-objetivos" class="btn btn-primary form-control">Nuevo Registro</button></td>
-        </tr>
-    </table>
-    </section>
-<?php 	//include("../Function.php"); $DB=OpenConexion();?>
-    <div class="table-responsive mailbox-messages"><div class="registros" id="agrega-registros"></div></div>
-    <center>
-        <ul class="pagination" id="pagination"></ul>
-    </center>
-	<script language="JavaScript">
-function valida(e) {
-    tecla = (document.all) ? e.keyCode : e.which;
-    if (tecla==8) return true;
-    patron =/[A-Za-z\s]/;
-    te = String.fromCharCode(tecla);
-    return patron.test(te);
-}
-</script>
-    <!-- MODAL PARA LA EDICION DE OBJETIVOS-->
-    <div class="modal fade" id="registra-objetivos" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-              <h4 class="modal-title" id="myModalLabel"><b>Registra o edita un objetivo</b></h4>
-            </div>
-            <form id="formulario" class="formulario" onSubmit="return agregaRegistro();">
-            <div class="modal-body">
-				<table border="0" width="100%">
-               		 <tr>
-                        <td colspan="2"><input type="text" required="required" id="id" name="id" readonly="readonly" style="visibility:hidden; height:1px;"/><input type="text" required="required" readonly="readonly" id="pro" name="pro" style="visibility:hidden; height:1px;"/></td>
-                    </tr>
-                	<tr>
-                    	<td>Objetivo: </td>
-                        <td><input type="text" required="required" name="objetivos" id="objetivos" maxlength="100" class="form-control" onKeyPress="return valida(event)"/></td>
-                    </tr>
-					<tr>
-                    	<td>Perspectiva: </td>
-                        <td><?php llenarcombo('perspectivas','idperspectiva, nombre',' ORDER BY 2', $idperspectiva, '','idperspectiva'); ?></td>
-                    </tr>
-					<tr>
-                    	<td>Area: </td>
-                        <td><?php llenarcombo('area','idarea, area',' ORDER BY 2', $idarea, '','idarea'); ?></td>
-                    </tr>
-					<tr>
-                    	<td>A&ntilde;o: </td>
-                        <td><?php llenaranios($anio); ?></td>
-                    </tr>
-
-					<tr>
-					<td>Mes: </td>
-					<td>
-					<?php
-	  for($i=1;$i<=12;$i++){?>
-	  <input type="checkbox" class="inputcheck ng-pristine ng-valid' ng-model='checked'" value="<?php if ($i<=9){echo "0".$i;} else {echo $i;} ?>" name="chkmes[]" checked="checked"><?php if ($i<=9){echo "0".$i;} else {echo $i;} ?><input name="can[]" id="can" class="form-control" size="20"><br />
-	  <?php } ?>
-	</td>
-     </tr>
-                    <tr>
-                    	<td colspan="2">
-                        	<div id="mensaje"></div>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-
-            <div class="modal-footer">
-            	<input type="submit" value="Registrar" class="btn btn-success" id="reg"/>
-                <input type="submit" value="Editar" class="btn btn-warning"  id="edi"/>
-            </div>
-            </form>
-          </div>
-        </div>
-      </div>
-	  <!--Fin formulario-->
-
+			<div class="">
+				<div id="slider" class="sl-slider-wrapper">
+					<div class="table-responsive mailbox-messages">
+						<?php include('general.php');?>
+					</div>
+				</div><!-- /slider-wrapper -->
+			</div>
         </section><!-- /.content -->
       </div><!-- /.content-wrapper -->
       <footer class="main-footer">
@@ -220,7 +149,6 @@ function valida(e) {
         </div>
         <strong>Copyright &copy; 2017 <a href="https://multissitemas.com.sv">Multisistemas</a>.</strong> Todos los derechos reservados.
       </footer>
-
 
       <!-- Add the sidebar's background. This div must be placed
            immediately after the control sidebar -->

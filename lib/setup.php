@@ -250,6 +250,7 @@ error_reporting(E_ALL | E_STRICT);
 //require_once($CFG->dirroot.'/cache/lib.php');       // Cache API
 
 require_once($CFG->dirroot.'/lib/db.php');       // DB connection
+require_once($CFG->dirroot.'/vendor/autoload.php');
 
 setup_DB();
 

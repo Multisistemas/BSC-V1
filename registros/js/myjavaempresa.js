@@ -84,7 +84,7 @@ function editarempresa(id){
 				$('#edi').show();
 				$('#pro').val('Edicion');
 				$('#id').val(id);
-				$('#ruc').val(datos[0]);
+				$('#nit').val(datos[0]);
 				$('#rsocial').val(datos[1]);
 				$('#direccion').val(datos[2]);
 				$('#telefono').val(datos[3]);

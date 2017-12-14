@@ -3,6 +3,7 @@
 <?php
 
 	$DB=OpenConexion();
+	$idpersona = '';
 	$idusuario=$_SESSION['id_usu'];
 	$rs=mysqli_query($DB, "SELECT * FROM usuario u,area a,empresa e WHERE u.idarea=a.idarea and e.idempresa=u.idempresa and idusuario='$idusuario'");
 	$filas =mysqli_fetch_object($rs);

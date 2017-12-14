@@ -12,7 +12,7 @@ $registro = mysqli_query($DB, "SELECT * FROM empresa where idempresa='$idempresa
 
 echo '<table class="table table-striped table-condensed table-hover">
         	<tr>
-            	<th width="50">RUC</th>
+            	<th width="50">NIT</th>
 							<th width="50">Razon Social</th>
 							<th width="50">Direcci&oacute;n</th>
 							<th width="50">Tel&eacute;fono</th>
@@ -23,7 +23,7 @@ echo '<table class="table table-striped table-condensed table-hover">
 if(mysqli_num_rows($registro)>0){
 	while($registro2 = mysqli_fetch_array($registro)){
 		echo '<tr>
-							<td>'.$registro2['ruc'].'</td>
+							<td>'.$registro2['nit'].'</td>
 							<td>'.utf8_encode($registro2['razonsocial']).'</td>
 							<td>'.utf8_encode($registro2['direccion']).'</td>
 							<td>'.$registro2['telefono'].'</td>

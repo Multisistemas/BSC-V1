@@ -195,7 +195,7 @@ mysqli_free_result($rsc);
 }
 
 function llenaranios($value, $desde=2015, $hasta=2025, $name = 'anio'){
-	echo "<select name=".$name." class=form-control id=".$name.">";
+	echo "<select name=".$name." class='form-control input-sm' id=".$name.">";
 	echo "<option value=''>Seleccione</option>";
 		for($i=$desde; $i<=$hasta; $i++) {
 			$seleccionar="";
@@ -205,6 +205,136 @@ function llenaranios($value, $desde=2015, $hasta=2025, $name = 'anio'){
 			echo "<option value=".$i." ".$seleccionar.">".utf8_encode($i)."</option>";
 		}
 	echo "</select>";
+}
+
+function tablaperspectiva($idempresa, $idarea, $idperspectiva, $anio, $mes){
+	global $DB;
+	
+	$np_result = mysqli_query($DB, "SELECT * FROM perspectivas WHERE idperspectiva = '$idperspectiva'");
+	$np_row = mysqli_fetch_assoc($np_result);
+	
+    echo "<div class='box'>
+                    <div class='box-header'>
+                      <h3 class='box-title'>Perspectiva $np_row[nombre]</h3>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class='box-body no-padding'>
+                      <table class='table table-condensed'>
+                        <tbody><tr>
+                          <th>Objetivo</th>
+                          <th>Meta</th>
+                          <th>Actual</th>
+                          <th>Delta %</th>
+                          <th>Indicador</th>
+                        </tr>";
+	if (!isset($mes)) {
+	    $mes = '01';
+	} else {
+	    if (isset($_REQUEST['mes'])) {
+	        $mes = $_REQUEST['mes'];
+	    }
+	}
+	if ($anio == '') {
+	    $anio = date('Y');
+	} else {
+	    if (isset($_REQUEST['anio'])) {
+	        $mes = $_REQUEST['anio'];
+	    }
+	}
+	if ($idarea == 5) {
+	    $rs = mysqli_query($DB, "SELECT * FROM objetivos o,detalle_objetivos do where o.idobjetivo=do.idobjetivo and anio = '$anio' and mes = '$mes' and idempresa='$idempresa' and (idarea=4 or idarea=2) and idperspectiva='$idperspectiva'");
+	} else {
+	    $rs = mysqli_query($DB, "SELECT * FROM objetivos o,detalle_objetivos do where o.idobjetivo=do.idobjetivo and anio = '$anio' and mes = '$mes' and idempresa='$idempresa' and (idarea='$idarea' or idarea=5) and idperspectiva='$idperspectiva'");
+	}
+	$o = 0;
+	while ($fila = mysqli_fetch_array($rs)) {
+	    $o        = $o + 1;
+	    //$fila=mysqli_fetch_array($rs);
+	    $objetivo = $fila[1];
+	    $meta     = $fila[6];
+
+	    echo "<tr><td>";
+	    echo utf8_encode($objetivo);
+		echo "</td>";
+	    echo "<td>";
+	    echo $meta;
+		echo "</td>";
+		
+	    if ($mes == '') {
+	        $mes = '01';
+	    } else {
+	        if (isset($_REQUEST['mes'])) {
+	            $mes = $_REQUEST['mes'];
+	        }
+	    }
+	    $totalv = 0;
+	    $totalc = 0;
+	    if ($o == 1 or $o == 4) {
+	        $rs2    = mysqli_query($DB, "select sum(total) as totalventas from documento_venta where year(fecha)='$anio' and month(fecha)='$mes' and idempresa='$idempresa'");
+	        $fila2  = mysqli_fetch_array($rs2);
+	        $totalv = $fila2[0];
+	        $rs3    = mysqli_query($DB, "select sum(total) as totalcompras from documento_compra where year(fecha)='$anio' and month(fecha)='$mes' and idempresa='$idempresa'");
+	        $fila3  = mysqli_fetch_array($rs3);
+	        $totalc = $fila3[0];
+	        if ($o == 4) {
+	            $actual = $totalv - $totalc - 500;
+	        } else {
+	            $actual = $totalv - $totalc;
+	        }
+	        if ($actual > 0) {
+	            $porc = (($actual * 100) / $meta);
+	        }
+	    } else {
+	        if ($o == 2) {
+	            $rs2    = mysqli_query($DB, "SELECT sum(cantidad) as cantidad FROM documento_venta d,detalle_documentoventa dv where d.iddocumento=dv.iddocumento and year(fecha)='$anio' and month(fecha)='$mes' and d.idempresa='$idempresa'");
+	            $fila3  = mysqli_fetch_array($rs2);
+	            $totalv = $fila3[0];
+	            $actual = $totalv;
+	            if ($actual > 0) {
+	                $porc = (($actual * 100) / $meta);
+	            }
+	        } else {
+	            if ($o == 5) {
+	                $rs2    = mysqli_query($DB, "select sum(cantidad) as totalventas from documento_venta d,detalle_documentoventa dv where d.iddocumento=dv.iddocumento and year(fecha)='$anio' and month(fecha)='$mes' and idempresa='$idempresa'");
+	                $fila2  = mysqli_fetch_array($rs2);
+	                $totalv = $fila2[0];
+	                $rs3    = mysqli_query($DB, "select sum(cantidad) as totalcompras from documento_compra d,detalle_documentocompra dc where d.iddocumento=dc.iddocumento and year(fecha)='$anio' and month(fecha)='$mes' and idempresa='$idempresa'");
+	                $fila3  = mysqli_fetch_array($rs3);
+	                $totalc = $fila3[0];
+	                $actual = $totalv + $totalc;
+	                if ($actual > 0) {
+	                    $porc = (($actual * 100) / $meta);
+	                }
+	            } else {
+	                $rs2    = mysqli_query($DB, "SELECT sum(cantidad) as cantidad FROM documento_compra d,detalle_documentocompra dv where d.iddocumento=dv.iddocumento and year(fecha)='$anio' and month(fecha)='$mes' and d.idempresa='$idempresa'");
+	                $fila3  = mysqli_fetch_array($rs2);
+	                $totalc = $fila3[0];
+	                $actual = $totalc;
+	                if ($actual > 0) {
+	                    $porc = (($actual * 100) / $meta);
+	                }
+	            }
+	        }
+	    }
+
+	   echo "<td>";
+	    if (isset($actual))
+	        echo $actual;
+       echo "</td>";
+	   echo "<td>";
+	    if (isset($porc))
+	        printf('%.1f', $porc);
+	   echo "</td>";
+	    echo "<td><img src='http://chart.apis.google.com/chart?chs=250x150&cht=gom&chd=t:";
+	    if (isset($porc))
+	        printf('%.2f', $porc);
+	echo "&chl=A' height='50' width='100'/></td></tr>";
+	   
+	}
+    echo "</tbody></table>
+	                    </div>
+	                    <!-- /.box-body -->
+	                    </div>";
 }
 
 ?>

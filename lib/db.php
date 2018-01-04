@@ -1,5 +1,6 @@
 <?php
-//	global $CFG;
+	// Using Medoo namespace
+	use Medoo\Medoo;
 
 	function fechaNormal($fecha){
 		$nfecha = date('d/m/Y',strtotime($fecha));
@@ -16,7 +17,7 @@
 	 * @return void|bool Returns true when finished setting up $DB. Returns void when $DB has already been set.
 	 */
 	function setup_DB() {
-	    global $CFG, $DB;
+	    global $CFG, $DB, $DB2;
 
 	    if (isset($DB)) {
 	        return;
@@ -69,11 +70,11 @@
 	    // }
 
 	    try {
-					$DB = $DB = $DB = mysqli_connect($CFG->dbhost, $CFG->dbuser, $CFG->dbpass);
+					$DB = mysqli_connect($CFG->dbhost, $CFG->dbuser, $CFG->dbpass);
 					mysqli_select_db($DB, $CFG->dbname);
 
 //	        $DB->connect($CFG->dbhost, $CFG->dbuser, $CFG->dbpass, $CFG->dbname, $CFG->prefix, $CFG->dboptions);
-			} catch (Exception $e) {
+		} catch (Exception $e) {
 	        if (empty($CFG->noemailever) and !empty($CFG->emailconnectionerrorsto)) {
 	            $body = "Connection error: ".$CFG->wwwroot.
 	                "\n\nInfo:".
@@ -104,6 +105,50 @@
 	        // rethrow the exception
 	        throw $e;
 	    }
+	    
+	    try {
+		    if($CFG->dbtype == 'mysqli') { $CFG->dbtype = 'mysql'; }
+			// Initialize
+			$DB2 = new Medoo([
+			    'database_type' => $CFG->dbtype,
+			    'database_name' => $CFG->dbname,
+			    'server' => $CFG->dbhost,
+			    'username' => $CFG->dbuser,
+			    'password' => $CFG->dbpass,
+			    'charset' => 'utf8',
+			]);
+	    } catch (Exception $e) {
+	        if (empty($CFG->noemailever) and !empty($CFG->emailconnectionerrorsto)) {
+	            $body = "Connection error: ".$CFG->wwwroot.
+	                "\n\nInfo:".
+	                "\n\tError code: ".$e->errorcode.
+	                "\n\tDebug info: ".$e->debuginfo.
+	                "\n\tServer: ".$_SERVER['SERVER_NAME']." (".$_SERVER['SERVER_ADDR'].")";
+	            if (file_exists($CFG->dataroot.'/emailcount')){
+	                $fp = @fopen($CFG->dataroot.'/emailcount', 'r');
+	                $content = @fread($fp, 24);
+	                @fclose($fp);
+	                if((time() - (int)$content) > 600){
+	                    //email directly rather than using messaging
+	                    @mail($CFG->emailconnectionerrorsto,
+	                        'WARNING: Database connection error: '.$CFG->wwwroot,
+	                        $body);
+	                    // $fp = @fopen($CFG->dataroot.'/emailcount', 'w');
+	                    // @fwrite($fp, time());
+	                }
+	            } else {
+	               //email directly rather than using messaging
+	               @mail($CFG->emailconnectionerrorsto,
+	                    'WARNING: Database connection error: '.$CFG->wwwroot,
+	                    $body);
+	               // $fp = @fopen($CFG->dataroot.'/emailcount', 'w');
+	               // @fwrite($fp, time());
+	            }
+	        }
+	        // rethrow the exception
+	        throw $e;
+
+		}
 
 //	    $CFG->dbfamily = $DB->get_dbfamily(); // TODO: BC only for now
 

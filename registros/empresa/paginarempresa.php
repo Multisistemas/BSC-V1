@@ -47,8 +47,8 @@ $idempresa = $_SESSION['id_empresa'];
 	while($registro2 = mysqli_fetch_array($registro)){
 		$tabla = $tabla.'<tr>
 							<td>'.$registro2['nit'].'</td>
-							<td>'.utf8_encode($registro2['razonsocial']).'</td>
-							<td>'.utf8_encode($registro2['direccion']).'</td>
+							<td>'.$registro2['razonsocial'].'</td>
+							<td>'.$registro2['direccion'].'</td>
 							<td>'.$registro2['telefono'].'</td>
 							<td>'.$registro2['movil'].'</td>
 							<td>'.$registro2['email'].'</td>

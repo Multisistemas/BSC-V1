@@ -43,7 +43,7 @@ $idempresa=$_SESSION['id_empresa'];
 
 	while($registro2 = mysqli_fetch_array($registro)){
 		$tabla = $tabla.'<tr>
-				<td>'.utf8_encode($registro2['razonsocial']).'</td>
+				<td>'.$registro2['razonsocial'].'</td>
 				<td>'.$registro2['fecha'].'</td>
 				<td>'.$registro2['total'].'</td>
 				<td><button onclick="javascript:verdetalle('.utf8_encode($registro2['iddocumento']).');" class="btn btn-block btn-primary btn-ls"><i class="glyphicon glyphicon-eye-open"></i> Ver detalle</button></td>

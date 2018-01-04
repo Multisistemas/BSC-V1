@@ -46,13 +46,13 @@ $idempresa=$_SESSION['id_empresa'];
 
 	while($registro2 = mysqli_fetch_array($registro)){
 		$tabla = $tabla.'<tr>
-							<td>'.utf8_encode($registro2['producto']).'</td>
+							<td>'.$registro2['producto'].'</td>
 							<td>'.$registro2['preciocompra'].'</td>
 							<td>'.$registro2['precioventa'].'</td>
 							<td>'.$registro2['precioventau'].'</td>
 							<td>'.$registro2['stock'].'</td>
-							<td>'.utf8_encode($registro2['color']).'</td>
-							<td>'.utf8_encode($registro2['referencia']).'</td>
+							<td>'.$registro2['color'].'</td>
+							<td>'.$registro2['referencia'].'</td>
 							<td>'.$registro2['categoria'].'</td>
 						  </tr>';
 	}

@@ -32,7 +32,7 @@ if(isset($_SESSION['id_usu'])==true){
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 <!-- GOOGLE LOGIN BUTTON REQUIRED -->
-	<meta name="google-signin-client_id" content="1072044933752-uon5ggg95c89e7l2q0uv8jqmgena397n.apps.googleusercontent.com">
+	<meta name="google-signin-client_id" content="<?php echo $CFG->googleid; ?>">
 <!-- GOOGLE LOGIN BUTTON REQUIRED -->
   </head>
   <?php 	include("registros/Function.php"); $DB=OpenConexion();?>
@@ -47,16 +47,18 @@ if(isset($_SESSION['id_usu'])==true){
 	  <!--<form method="post">-->
         <p class="login-box-msg">Ingrese sus datos para iniciar sesi&oacute;n</p>
           <div class="form-group has-feedback">
-            <input type="text" class="form-control" placeholder="Usuario" required="" id="usu">
-            <span class="glyphicon glyphicon-user form-control-feedback"></span>
+            <input type="text" class="form-control" placeholder="Correo" required="" id="usu">
+            <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
           </div>
           <div class="form-group has-feedback">
-            <input type="password" class="form-control" placeholder="Clave" required="" id="pass">
+            <input type="password" class="form-control" placeholder="Contrase&ntilde;a" required="" id="pass">
             <span class="glyphicon glyphicon-lock form-control-feedback"></span>
           </div>
+<!--
 		  <div class="form-group has-feedback">
 		  <?php llenarcombo('area','idarea, area',' ORDER BY 2', $idarea, '','area'); ?>
 		  </div>
+-->
           <div class="row">
             <div class="col-xs-8">
               <div class="checkbox icheck">
@@ -70,9 +72,11 @@ if(isset($_SESSION['id_usu'])==true){
             </div><!-- /.col -->
 			<div class="col-xs-12"><div id="mensaje" class="callout callout-danger"></div></div>
           </div>
-        <a href="recuperarclave.php">A olvidado su contraseña</a><br>
-        <a href="registrarasistencia.php" class="text-center">Registrar Marcaci&oacute;n</a>
+        <a href="recuperarclave.php">¿Restablecer contrase&ntilde;a?</a><br>
+        <a href="registrarasistencia.php" class="text-center">¿Registrar Marcaci&oacute;n?</a>
 	  <!--</form>-->
+	  
+	  <?php if($CFG->googlesso) { ?>
 	  <!-- GOOGLE BUTTON -->
 	    <div class="gbutton" style="text-align: -webkit-center;margin-top: 30px;margin-bottom: 10px;">
 		  <div id="my-signin2"></div>
@@ -90,12 +94,8 @@ if(isset($_SESSION['id_usu'])==true){
 						$('#mensaje').addClass('error').html('El usuario ingresado no existe').show(300).delay(3000).hide(300);
 						$('#usu').focus();
 						return false;
-					}else if(valor == 'area'){
-						$('#mensaje').addClass('error').html('Usted no pertenece al area seleccionada').show(300).delay(3000).hide(300);
-						$('#area').focus();
-						return false;
 					}else if(valor == 'password'){
-						$('#mensaje').addClass('error').html('Su password es incorrecto').show(300).delay(3000).hide(300);
+						$('#mensaje').addClass('error').html('Su contraseña es incorrecta').show(300).delay(3000).hide(300);
 						$('#pass').focus();
 						return false;
 					}else if(valor == 'ventas'){
@@ -125,6 +125,7 @@ if(isset($_SESSION['id_usu'])==true){
 		  <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
 	    </div>
 	  <!-- GOOGLE BUTTON -->
+	  <?php } ?>
       </div><!-- /.login-box-body -->
     </div><!-- /.login-box -->
 

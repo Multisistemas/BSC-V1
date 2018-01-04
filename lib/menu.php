@@ -107,15 +107,15 @@
 				<?php }}?>
               </ul>
             </li>
-            <li class="active treeview">
+            <li class="treeview">
               <a href="#">
                 <i class="fa fa-map-marker"></i> <span>Ver Cuadro de Mando</span> <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
                 <li><a href="<?php echo $CFG->wwwroot;?>/registros/verobjetivos"><i class="fa fa-circle-o"></i> Objetivos</a></li>
                 <li><a href="<?php echo $CFG->wwwroot;?>/registros/mapasestrategicos"><i class="fa fa-circle-o"></i> Mapas Estrategicos</a></li>
-				<li class="active"><a href="#"><i class="fa fa-circle-o"></i> Perspectivas por área</a>
-				<ul class="active treeview-menu">
+				<li class=""><a href="#"><i class="fa fa-circle-o"></i> Perspectivas por área</a>
+				<ul class="treeview-menu">
 				<?php
 					$query_areas = "SELECT * FROM area ORDER BY orden";
 					$result_areas = mysqli_query($DB, $query_areas);

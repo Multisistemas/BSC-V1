@@ -121,7 +121,7 @@
       </header>
 <?php 
 	include_once($CFG->dirroot.'/lib/menu.php');
-	$idarea=$_SESSION['id_area'];?>
+	$idarea=$_SESSION['id_area']; ?>
    <!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper">
         <!-- Content Header (Page header) -->

@@ -11,7 +11,7 @@
 	$CFG->dbpass    = 'toor';      // your database password
 	$CFG->prefix    = 'bsc_';      // prefix to use for all table names
 
-	$CFG->wwwroot   = 'http://bsc.dev';
+	$CFG->wwwroot   = 'http://bsc.localhost';
 	$CFG->dirroot   = dirname(__FILE__);
 
 	// Force a debugging mode regardless the settings in the site administration
@@ -20,6 +20,10 @@
 	@ini_set('display_errors', '1');    // NOT FOR PRODUCTION SERVERS!
 	$CFG->debug = (E_ALL | E_STRICT);   // === DEBUG_DEVELOPER - NOT FOR PRODUCTION SERVERS!
 	$CFG->debugdisplay = 1;             // NOT FOR PRODUCTION SERVERS!
+	
+	$CFG->googlesso = false;
+	$CFG->googleid = '1072044933752-uon5ggg95c89e7l2q0uv8jqmgena397n.apps.googleusercontent.com';
+	$CFG->googlesecret = 'ZfgLDRlFY3hSBR0xw54-cSY0';
 
 
-	require_once(dirname(__FILE__) . '/lib/setup.php'); // Do not edit
+	require_once(dirname(__FILE__) . '/lib/setup.php'); // Do not edit and always last line.

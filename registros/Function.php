@@ -178,7 +178,7 @@ echo "<option value=''>Seleccione</option>";
 	while($cur = mysqli_fetch_array($rs)){
 		$seleccionar="";
 		if($cur[0]==$seleccionado) $seleccionar="selected";
-		echo "<option value=".$cur[0]." ".$seleccionar.">".utf8_encode($cur[1])."</option>";
+		echo "<option value=".$cur[0]." ".$seleccionar.">".$cur[1]."</option>";
 	}
 echo "</select>";
 mysqli_free_result($rs);
@@ -202,7 +202,7 @@ function llenaranios($value, $desde=2015, $hasta=2025, $name = 'anio'){
 			if($i == $value) {
 				$seleccionar="selected";
 			}
-			echo "<option value=".$i." ".$seleccionar.">".utf8_encode($i)."</option>";
+			echo "<option value=".$i." ".$seleccionar.">".$i."</option>";
 		}
 	echo "</select>";
 }
@@ -254,7 +254,7 @@ function tablaperspectiva($idempresa, $idarea, $idperspectiva, $anio, $mes){
 	    $meta     = $fila[6];
 
 	    echo "<tr><td>";
-	    echo utf8_encode($objetivo);
+	    echo $objetivo;
 		echo "</td>";
 	    echo "<td>";
 	    echo $meta;

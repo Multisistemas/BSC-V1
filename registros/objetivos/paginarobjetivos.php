@@ -44,10 +44,10 @@ $idempresa=$_SESSION['id_empresa'];
 
 	while($registro2 = mysqli_fetch_array($registro)){
 		$tabla = $tabla.'<tr>
-				<td>'.utf8_encode($registro2['objetivo']).'</td>
-				<td>'.utf8_encode($registro2['perspectiva']).'</td>
-				<td>'.utf8_encode($registro2['area']).'</td>
-				<td>'.utf8_encode($registro2['anio']).'</td>
+				<td>'.$registro2['objetivo'].'</td>
+				<td>'.$registro2['perspectiva'].'</td>
+				<td>'.$registro2['area'].'</td>
+				<td>'.$registro2['anio'].'</td>
 				<td><a href="javascript:editarobjetivos('.$registro2['idobjetivo'].');" class="glyphicon glyphicon-edit"></a> <a href="javascript:eliminarobjetivos('.$registro2['idobjetivo'].');" class="glyphicon glyphicon-remove-circle"></a></td>
 				</tr>';
 	}

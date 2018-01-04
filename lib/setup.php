@@ -121,6 +121,7 @@ if(!defined('DEBUG_DEVELOPER')) {
  * @name $DB
  */
 global $DB;
+global $DB2; // Uses Medoo PHP DB Framework.
 
 /**
  * BSC's wrapper round PHP's $_SESSION.

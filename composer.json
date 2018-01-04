@@ -1,5 +1,6 @@
 {
     "require": {
-        "google/auth": "^1.1"
+        "google/auth": "^1.1",
+        "catfan/Medoo": "^1.5"
     }
 }

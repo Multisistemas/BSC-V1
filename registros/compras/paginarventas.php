@@ -46,7 +46,7 @@ $iduser=$_SESSION['id_usu'];
 		$subtotal=$registro2['cantidad']*$registro2['precio'];
 		$tabla = $tabla.'<tr>
 							<td><a href="javascript:eliminarproducto('.$registro2['idproducto'].');" class="glyphicon glyphicon-remove-circle"></a></td>
-							<td>'.utf8_encode($registro2['producto']).'</td>
+							<td>'.$registro2['producto'].'</td>
 							<td>'.$registro2['cantidad'].'</td>
 							<td><input type="number" class="col-xs-8" value='.$registro2['precio'].' id="preventa'.$x.'">&nbsp;<a href="javascript:actualizarproducto('.$registro2['idproducto'].','.$x.');" class="glyphicon glyphicon-refresh"></a></td>
 							<td>'.$subtotal.'</td>

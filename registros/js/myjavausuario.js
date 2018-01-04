@@ -85,7 +85,7 @@ function editarusuario(id){
 				$('#pro').val('Edicion');
 				$('#id').val(id);
 				$('#login').val(datos[0]);
-				$('#dni').val(datos[1]);
+				$('#dui').val(datos[1]);
 				$('#nombres').val(datos[2]);
 				$('#apellidos').val(datos[3]);
 				$('#email').val(datos[4]);

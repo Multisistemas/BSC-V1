@@ -29,7 +29,7 @@
   	}
 
   	$registro = mysqli_query($DB, "SELECT * FROM perspectivas LIMIT $limit, $nroLotes ");
-
+  	$registro = $DB2->select('perspectivas', '*', ["LIMIT" => [$limit, $nroLotes] ] );
 
   	$tabla = $tabla.'<table class="table table-striped table-condensed table-hover">
 			            <tr>
@@ -37,9 +37,10 @@
 			                <th width="50">Opciones</th>
 			            </tr>';
 				
-	while($registro2 = mysqli_fetch_array($registro)){
+	//while($registro2 = mysqli_fetch_array($registro)){
+	foreach($registro as $registro2) {
 		$tabla = $tabla.'<tr>
-							<td>'.utf8_encode($registro2['nombre']).'</td>
+							<td>'.$registro2['nombre'].'</td>
 							<td><a href="javascript:editarperspectiva('.$registro2['idperspectiva'].');" class="glyphicon glyphicon-edit"></a> <a href="javascript:eliminarperspectiva('.$registro2['idperspectiva'].');" class="glyphicon glyphicon-remove-circle"></a></td>
 						  </tr>';		
 	}

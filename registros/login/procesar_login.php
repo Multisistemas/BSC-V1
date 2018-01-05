@@ -16,7 +16,6 @@ if(isset($email) && !empty($email)) {
 }
 if(mysqli_num_rows($usuario)<1){
 	echo 'usuario';
-	var_dump(json_encode($DB));
 } else {
 	$row = mysqli_fetch_array($usuario);
 

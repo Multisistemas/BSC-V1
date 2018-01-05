@@ -112,8 +112,10 @@ function pagination(partida){
 		data:'partida='+partida,
 		success:function(data){
 			var array = eval(data);
-			$('#agrega-registros').html(array[0]);
-			$('#pagination').html(array[1]);
+			if(typeof array !== 'undefined'){
+				$('#agrega-registros').html(array[0]);
+				$('#pagination').html(array[1]);
+			}
 		}
 	});
 	return false;
